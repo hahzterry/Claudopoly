@@ -12,3 +12,8 @@ bench/blind/
 bench/video/
 bench/tmp/
 progress-site/
+
+# Content strategy stays private: drafts, audience analysis and the evaluator's
+# scoring of them are working documents, not part of the artefact.
+docs/linkedin-*.md
+bench/linkedin.json
