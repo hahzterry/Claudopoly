@@ -1,29 +1,29 @@
 {
   "project": "LANDLORD: LONDON 2026",
   "subtitle": "Three.js property board game \u2014 every price real, every source open",
-  "updatedIso": "2026-08-10T19:30:00Z",
+  "updatedIso": "2026-08-10T23:40:00Z",
   "round": 5,
-  "roundLabel": "Complete \u2014 blind win, awaiting deploy",
-  "liveUrl": null,
+  "roundLabel": "Live",
+  "liveUrl": "https://claudopoly.vercel.app",
   "benchmark": "Catan Universe (primary) / THE GAME OF LIFE 2 (secondary)",
   "spend": {
-    "note": "No numeric ceiling was set by the brief. The run ended on the blind win, not on a ceiling.",
-    "agentsLaunched": 46,
+    "note": "No numeric ceiling was set. The run ended on the blind win; the deployment followed.",
+    "agentsLaunched": 49,
     "roundsComplete": 5,
-    "subagentTokens": 6076071
+    "subagentTokens": 6247000
   },
-  "headline": "Blind win confirmed twice with the A/B positions flipped: desktop 2-1, mobile 3-0 unanimous, against real Catan Universe screenshots. Every gate passes. One thing is outstanding and it is not mine: the Vercel deploy.",
+  "headline": "Live at claudopoly.vercel.app. Played on the deployed build, not localhost: the integrity gate passes in production, sweeping 303 money values and 99 texture strings on every load.",
   "pieces": [
     {
       "id": "P0",
       "name": "Fact base \u2014 22 streets, real HMLR figures",
-      "status": "done",
+      "status": "won",
       "note": "22/22 sourced. Median price paid or UK HPI, per street, with transaction IDs."
     },
     {
       "id": "P1",
       "name": "Integrity gate \u2014 value + banned-words",
-      "status": "done",
+      "status": "won",
       "note": "Money provenance + load-time absence check + banned-word sweep + build-time source scanner."
     },
     {
@@ -54,31 +54,37 @@
       "id": "P6",
       "name": "Property data panel \u2014 FT standards",
       "status": "critic",
-      "note": "Still sent back by the FT desk, 71 against 82. The one piece that never won."
+      "note": "The one piece that never won. Last FT desk review: 71 against 82."
     },
     {
       "id": "P7",
       "name": "Event cards + modals",
-      "status": "done",
+      "status": "won",
       "note": "A card now opens every round \u2014 a critic played 15 rounds and never saw one."
     },
     {
       "id": "P8",
       "name": "First-run, onboarding, footer",
-      "status": "done",
+      "status": "won",
       "note": "Landscape fixed: sheets scroll 2,797px in a 331px viewport; round counter renders."
     },
     {
       "id": "P9",
       "name": "Game economy \u2014 stakes",
-      "status": "done",
+      "status": "won",
       "note": "You now win on annual rent roll, not net worth. Site assembly doubles a completed group. The levy fires every lap. Decisiveness went from a 5% margin to 39%."
     },
     {
       "id": "P10",
       "name": "Restart soft-lock",
-      "status": "done",
+      "status": "won",
       "note": "Generation guard: an in-flight turn abandons itself when superseded. Survives 5 mid-animation restarts, zero errors."
+    },
+    {
+      "id": "P11",
+      "name": "Deployed and verified live",
+      "status": "done",
+      "note": "claudopoly.vercel.app. Gate passes in production on desktop and phone. Source public at github.com/teddyjames1995/Claudopoly."
     }
   ],
   "facts": {
@@ -241,6 +247,18 @@
     {
       "time": "19:28",
       "text": "Full suite green: build gate, runtime gate under attack, 400-game engine sim, blockers, landscape, restart stress."
+    },
+    {
+      "time": "23:20",
+      "text": "Code pushed to github.com/teddyjames1995/Claudopoly \u2014 63 files, public, content strategy kept out."
+    },
+    {
+      "time": "23:35",
+      "text": "Deployed to Vercel. Production checks: gate passed, 303 money values swept, OGL attribution present, no console errors."
+    },
+    {
+      "time": "23:40",
+      "text": "Played a real game on the live URL: 6 rounds, 3 streets, \u00a376k net rent roll. Verified on production, never on localhost."
     }
   ]
 }
