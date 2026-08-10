@@ -1,0 +1,335 @@
+{
+ "cards": [
+  {
+   "id": "epc-domestic-current",
+   "title": "The E-Grade Sweep",
+   "body": "Council inspectors sweep the borough. Any rented home below EPC E is illegal to let \u2014 fix it or leave it empty.",
+   "category": "Energy & EPC",
+   "realEvent": "The current legal minimum energy efficiency standard for domestic private rented property in England and Wales is EPC band E, in force for all tenancies since 1 April 2020. This remains the law as at 2026 \u2014 nothing higher is yet in force.",
+   "sourceName": "GOV.UK \u2014 Domestic private rented property: minimum energy efficiency standard, landlord guidance (MHCLG/DESNZ)",
+   "sourceUrl": "https://www.gov.uk/guidance/domestic-private-rented-property-minimum-energy-efficiency-standard-landlord-guidance",
+   "sourceDate": "5 May 2026",
+   "verifiedQuote": "\"if they have an EPC rating below E, unless they have a valid exemption\"",
+   "effectSuggestion": "Any player holding a residential property tile marked EPC F or G cannot collect rent until they pay the retrofit cost.",
+   "licenceNote": "GOV.UK content, available under the Open Government Licence v3.0."
+  },
+  {
+   "id": "epc-domestic-2030",
+   "title": "One Deadline To Rule Them All",
+   "body": "Government confirms one deadline: every private rented home must hit the new standard by 1 October 2030. The clock starts.",
+   "category": "Energy & EPC",
+   "realEvent": "On 21 January 2026 the Government published its response to the 2025 consultation on the energy performance of privately rented homes, confirming a single compliance date of 1 October 2030 for a new higher standard (rather than the earlier proposal of staged 2028/2030 dates). Implementation still requires a statutory instrument, expected in 2027.",
+   "sourceName": "GOV.UK \u2014 Improving the energy performance of privately rented homes: 2025 update (consultation outcome)",
+   "sourceUrl": "https://www.gov.uk/government/consultations/improving-the-energy-performance-of-privately-rented-homes-2025-update",
+   "sourceDate": "21 January 2026",
+   "verifiedQuote": "\"introducing a single compliance date of 1 October 2030 for the new standard\"",
+   "effectSuggestion": "Set a countdown marker on the board; when it reaches 2030, all sub-standard residential tiles stop producing rent.",
+   "licenceNote": "GOV.UK content, available under the Open Government Licence v3.0."
+  },
+  {
+   "id": "epc-cost-cap-10k",
+   "title": "The \u00a310,000 Cap",
+   "body": "The retrofit cost cap trebles to \u00a310,000 per property. Budget for it, or register an exemption lasting ten years.",
+   "category": "Energy & EPC",
+   "realEvent": "The same January 2026 Government response confirmed the landlord cost cap for energy efficiency improvements will rise to \u00a310,000 per property, with exemptions valid for ten years. The current cap under the in-force regulations is \u00a33,500 including VAT.",
+   "sourceName": "GOV.UK \u2014 Improving the energy performance of privately rented homes: 2025 update (consultation outcome)",
+   "sourceUrl": "https://www.gov.uk/government/consultations/improving-the-energy-performance-of-privately-rented-homes-2025-update",
+   "sourceDate": "21 January 2026",
+   "verifiedQuote": "\"raising the cost-cap to \u00a310,000 with a 10-year validity period for exemptions\"",
+   "effectSuggestion": "All players with an EPC-exposed residential property pay a \u00a310,000 retrofit levy, or forfeit rent for two turns.",
+   "licenceNote": "GOV.UK content, available under the Open Government Licence v3.0."
+  },
+  {
+   "id": "epc-nondom-current",
+   "title": "Commercial Gets A Reprieve",
+   "body": "Your commercial unit needs only EPC E today \u2014 every tenancy, no exceptions. Tougher B and C targets remain unconfirmed consultation.",
+   "category": "Energy & EPC",
+   "realEvent": "For non-domestic (commercial) private rented property in England and Wales the legal minimum is EPC E, applying to all let properties since 1 April 2023 regardless of tenancy change. The much-cited EPC C by 2027 and EPC B by 2030 trajectory remains a consultation proposal and is NOT law.",
+   "sourceName": "GOV.UK \u2014 Non-domestic private rented property: minimum energy efficiency standard, landlord guidance",
+   "sourceUrl": "https://www.gov.uk/guidance/non-domestic-private-rented-property-minimum-energy-efficiency-standard-landlord-guidance",
+   "sourceDate": "5 May 2026",
+   "verifiedQuote": "\"all privately rented non-domestic properties (even where there has been no change in tenancy)\"",
+   "effectSuggestion": "Commercial property tiles are immune to this round's EPC penalty, but draw a Consultation Risk card.",
+   "licenceNote": "GOV.UK content, available under the Open Government Licence v3.0."
+  },
+  {
+   "id": "epc-reform-delay",
+   "title": "The Certificate Rewrite Slips",
+   "body": "EPC overhaul slips again. New headline metrics for homes now land in the second half of 2027 \u2014 planning stays murky.",
+   "category": "Energy & EPC",
+   "realEvent": "Reform of the Energy Performance of Buildings regime, which replaces the single domestic EPC headline rating with four new metrics, received a partial Government response on 21 January 2026. A 9 March 2026 update postponed the launch of the reforms to the second half of 2027.",
+   "sourceName": "GOV.UK \u2014 Reforms to the Energy Performance of Buildings regime (consultation)",
+   "sourceUrl": "https://www.gov.uk/government/consultations/reforms-to-the-energy-performance-of-buildings-regime",
+   "sourceDate": "9 March 2026",
+   "verifiedQuote": "\"move the launch of the reforms to the second half of 2027\"",
+   "effectSuggestion": "Freeze all EPC-band changes for one full round; no player may upgrade or be penalised on energy rating.",
+   "licenceNote": "GOV.UK content, available under the Open Government Licence v3.0."
+  },
+  {
+   "id": "bank-rate-375",
+   "title": "Rate Held At 3.75%",
+   "body": "The MPC holds Bank Rate at 3.75%, splitting six to three. Three members wanted a hike. No relief for borrowers.",
+   "category": "Interest Rates",
+   "realEvent": "At its meeting ending 29 July 2026 the Bank of England's Monetary Policy Committee voted 6\u20133 to maintain Bank Rate at 3.75%, with three members preferring a 0.25 percentage point rise to 4%. CPI inflation had fallen to 2.6%. The next decision is due 17 September 2026.",
+   "sourceName": "Bank of England \u2014 Monetary Policy Summary and minutes, July 2026",
+   "sourceUrl": "https://www.bankofengland.co.uk/monetary-policy-summary-and-minutes/2026/july-2026",
+   "sourceDate": "30 July 2026",
+   "verifiedQuote": "\"voted by a majority of 6\u20133 to maintain Bank Rate at 3.75%\"",
+   "effectSuggestion": "No change to mortgage payments this round, but every player rolls a die: on a six, next round's rate rises.",
+   "licenceNote": "Bank of England publication; cite source. Not OGL \u2014 quote briefly with attribution."
+  },
+  {
+   "id": "mortgage-effective-rate",
+   "title": "Refinancing Bites",
+   "body": "Actual interest paid on new mortgages climbs to 4.35%. Every refinancing this round costs more than the last.",
+   "category": "Interest Rates",
+   "realEvent": "Bank of England Money and Credit data for June 2026 show the effective interest rate on newly drawn mortgages rose to 4.35% in June, up from 4.22% in May. The rate on the outstanding stock of mortgages was 3.96%. Net mortgage approvals for house purchase were 58,200.",
+   "sourceName": "Bank of England \u2014 Money and Credit, June 2026",
+   "sourceUrl": "https://www.bankofengland.co.uk/statistics/money-and-credit/2026/june-2026",
+   "sourceDate": "29 July 2026",
+   "verifiedQuote": "\"newly drawn mortgages increased to 4.35% in June\"",
+   "effectSuggestion": "Every player refinancing a mortgage this round pays an extra 0.13% on the loan balance.",
+   "licenceNote": "Bank of England statistical release; cite source. Not OGL \u2014 quote briefly with attribution."
+  },
+  {
+   "id": "renters-s21-abolished",
+   "title": "No Fault, No More",
+   "body": "Section 21 is gone. From 1 May 2026 no landlord can evict without a valid ground. Vacant possession just got harder.",
+   "category": "Renting Reform",
+   "realEvent": "The Renters' Rights Act 2025 received Royal Assent on 27 October 2025. Under the Government's implementation roadmap, from 1 May 2026 landlords in the private rented sector can no longer use section 21 of the Housing Act 1988 to evict tenants; possession requires a valid section 8 ground.",
+   "sourceName": "GOV.UK \u2014 Implementing the Renters' Rights Act 2025: roadmap for reforming the Private Rented Sector (MHCLG)",
+   "sourceUrl": "https://www.gov.uk/government/publications/renters-rights-act-2025-implementation-roadmap/implementing-the-renters-rights-act-2025-our-roadmap-for-reforming-the-private-rented-sector",
+   "sourceDate": "13 November 2025",
+   "verifiedQuote": "\"landlords in the PRS will no longer be able to use section 21\"",
+   "effectSuggestion": "No player may evict a tenant to redevelop or sell unless they draw a valid Grounds card.",
+   "licenceNote": "GOV.UK content, available under the Open Government Licence v3.0."
+  },
+  {
+   "id": "renters-periodic-tenancies",
+   "title": "Fixed Terms Abolished",
+   "body": "Fixed terms vanish. Nearly every tenancy converts to an assured periodic tenancy \u2014 tenants stay as long as they like.",
+   "category": "Renting Reform",
+   "realEvent": "From 1 May 2026 the vast majority of new and existing private rented sector tenancies in England convert to Assured Periodic Tenancies under the Renters' Rights Act 2025. Rent increases are limited to once a year with at least two months' notice.",
+   "sourceName": "GOV.UK \u2014 Implementing the Renters' Rights Act 2025: roadmap for reforming the Private Rented Sector (MHCLG)",
+   "sourceUrl": "https://www.gov.uk/government/publications/renters-rights-act-2025-implementation-roadmap/implementing-the-renters-rights-act-2025-our-roadmap-for-reforming-the-private-rented-sector",
+   "sourceDate": "13 November 2025",
+   "verifiedQuote": "\"existing tenancies in the PRS will become Assured Periodic Tenancies\"",
+   "effectSuggestion": "Players may raise rent on any tenanted tile only once per year, and must wait two turns before it takes effect.",
+   "licenceNote": "GOV.UK content, available under the Open Government Licence v3.0."
+  },
+  {
+   "id": "renters-bidding-ban",
+   "title": "Bidding Wars Banned",
+   "body": "Rental bidding wars are outlawed. Advertise a rent and you cannot accept a penny more, however many applicants queue.",
+   "category": "Renting Reform",
+   "realEvent": "From 1 May 2026 the Renters' Rights Act 2025 prohibits landlords and letting agents in England from asking for, encouraging or accepting an offer above the advertised rent. Agents also cannot request more than one month's rent in advance.",
+   "sourceName": "GOV.UK \u2014 Implementing the Renters' Rights Act 2025: roadmap for reforming the Private Rented Sector (MHCLG)",
+   "sourceUrl": "https://www.gov.uk/government/publications/renters-rights-act-2025-implementation-roadmap/implementing-the-renters-rights-act-2025-our-roadmap-for-reforming-the-private-rented-sector",
+   "sourceDate": "13 November 2025",
+   "verifiedQuote": "\"accept an offer that is higher than the advertised rent\"",
+   "effectSuggestion": "Players must set rent at the tile's listed value; any player who overcharged this round refunds the difference.",
+   "licenceNote": "GOV.UK content, available under the Open Government Licence v3.0."
+  },
+  {
+   "id": "sdlt-standard-rates",
+   "title": "The Stamp Duty Toll",
+   "body": "Stamp duty bites from \u00a3125,000, and a 5% surcharge stacks on any additional home. Portfolio building just got pricier.",
+   "category": "Tax",
+   "realEvent": "SDLT residential thresholds reverted on 1 April 2025 and apply through 2026: nil rate to \u00a3125,000, 2% to \u00a3250,000, 5% to \u00a3925,000, 10% to \u00a31.5M and 12% above. A 5% surcharge applies where the buyer will own more than one residential property, plus a 2% non-UK resident surcharge.",
+   "sourceName": "GOV.UK \u2014 Stamp Duty Land Tax: Residential property rates (HMRC)",
+   "sourceUrl": "https://www.gov.uk/stamp-duty-land-tax/residential-property-rates",
+   "sourceDate": "1 April 2025",
+   "verifiedQuote": "\"pay 5% on top of SDLT rates if buying a new residential property\"",
+   "effectSuggestion": "Any player buying a second or subsequent property pays an extra 5% of the purchase price to the bank.",
+   "licenceNote": "GOV.UK content, available under the Open Government Licence v3.0."
+  },
+  {
+   "id": "sdlt-first-time-buyer",
+   "title": "First-Time Buyer Cliff Edge",
+   "body": "First-time buyers pay nothing below \u00a3300,000 \u2014 but cross \u00a3500,000 and the relief vanishes entirely. London maths is brutal.",
+   "category": "Tax",
+   "realEvent": "First-time buyers' relief gives a nil rate band to \u00a3300,000 and 5% on the portion from \u00a3300,000 to \u00a3500,000. If the purchase price exceeds \u00a3500,000 the relief is lost entirely and standard rates apply to the whole price \u2014 a hard cliff edge in a market where average London prices are around \u00a3545,000.",
+   "sourceName": "GOV.UK \u2014 Stamp Duty Land Tax: Residential property rates (HMRC)",
+   "sourceUrl": "https://www.gov.uk/stamp-duty-land-tax/residential-property-rates",
+   "sourceDate": "1 April 2025",
+   "verifiedQuote": "\"If the price is over \u00a3500,000, you cannot claim the relief.\"",
+   "effectSuggestion": "A first-time buyer player buying below \u00a3500,000 pays no stamp duty; above it, pay the full standard rate.",
+   "licenceNote": "GOV.UK content, available under the Open Government Licence v3.0."
+  },
+  {
+   "id": "hvcts-mansion-surcharge",
+   "title": "The High Value Surcharge",
+   "body": "A surcharge on homes worth \u00a32M-plus is consulted on: \u00a32,500 to \u00a37,500 yearly from April 2028, paid by owners.",
+   "category": "Tax",
+   "realEvent": "The High Value Council Tax Surcharge was announced at Budget 2025 and consulted on from 19 May 2026. It applies to English residential property worth \u00a32M or more from April 2028, charged at \u00a32,500 (\u00a32\u20132.5M) rising to \u00a37,500 (over \u00a35M), levied on owners not occupiers, raising around \u00a3430M a year. Revaluation every five years, next in 2033.",
+   "sourceName": "GOV.UK \u2014 High Value Council Tax Surcharge (consultation, MHCLG)",
+   "sourceUrl": "https://www.gov.uk/government/consultations/high-value-council-tax-surcharge/high-value-council-tax-surcharge",
+   "sourceDate": "19 May 2026",
+   "verifiedQuote": "\"fewer than 1% of residential properties in England will attract the HVCTS\"",
+   "effectSuggestion": "Any player owning a property valued over \u00a32M pays an annual surcharge scaled to its value band.",
+   "licenceNote": "GOV.UK content, available under the Open Government Licence v3.0."
+  },
+  {
+   "id": "business-rates-revaluation-2026",
+   "title": "Revaluation Day",
+   "body": "New rateable values bite from 1 April 2026, based on April 2024 rents. Two million properties repriced overnight.",
+   "category": "Business Rates",
+   "realEvent": "The 2026 business rates revaluation took effect on 1 April 2026 in England and Wales, using an antecedent valuation date of 1 April 2024. The Valuation Office Agency updated rateable values for over two million non-domestic properties, publishing draft values before 31 December 2025.",
+   "sourceName": "Valuation Office Agency blog (GOV.UK) \u2014 Revaluation 2026: everything you need to know",
+   "sourceUrl": "https://valuationoffice.blog.gov.uk/2025/09/29/revaluation-2026-everything-you-need-to-know/",
+   "sourceDate": "29 September 2025",
+   "verifiedQuote": "\"For the 2026 revaluation, that date is 1 April 2024.\"",
+   "effectSuggestion": "All commercial tiles are revalued: roll a die and adjust each tile's rates bill up or down accordingly.",
+   "licenceNote": "GOV.UK blog content, available under the Open Government Licence v3.0."
+  },
+  {
+   "id": "business-rates-high-value-multiplier",
+   "title": "The Prime Property Premium",
+   "body": "A 50.8p high-value multiplier hits every property rated \u00a3500,000 or more. Prime London offices and shops pay the premium.",
+   "category": "Business Rates",
+   "realEvent": "For 2026/27 England moved from two to five non-domestic rating multipliers. A new high-value multiplier of 50.8p applies to all hereditaments with a rateable value of \u00a3500,000 and above, funding lower retail, hospitality and leisure multipliers of 38.2p and 43.0p. The standard multiplier is 48.0p and the small business multiplier 43.2p.",
+   "sourceName": "GOV.UK \u2014 Business Rates Information Letter 2/2026: Notification of Non-Domestic Rating Multipliers for 2026/27 (MHCLG)",
+   "sourceUrl": "https://www.gov.uk/government/publications/22026-notification-of-non-domestic-rating-multipliers-for-202627/22026-notification-of-non-domestic-rating-multipliers-for-202627",
+   "sourceDate": "10 February 2026",
+   "verifiedQuote": "\"a high-value multiplier for properties with rateable values of \u00a3500,000 and above\"",
+   "effectSuggestion": "Owners of high-value commercial tiles pay the increased 50.8p rate; small retail and hospitality tiles pay less.",
+   "licenceNote": "GOV.UK content, available under the Open Government Licence v3.0."
+  },
+  {
+   "id": "cladding-remediation-deadlines",
+   "title": "The Cladding Clock",
+   "body": "Unsafe cladding on tall blocks must go by end-2029, mid-rise by end-2031. Miss it and face unlimited fines or prison.",
+   "category": "Building Safety",
+   "realEvent": "Government announced legal deadlines requiring landlords of buildings 18m or taller with unsafe cladding to complete remediation by the end of 2029, and buildings 11\u201318m by the end of 2031. Failure without reasonable excuse is a criminal offence carrying unlimited fines or imprisonment. Homes England and councils gain powers to remediate where landlords fail.",
+   "sourceName": "GOV.UK \u2014 Deadline set for unsafe cladding removal (MHCLG press release)",
+   "sourceUrl": "https://www.gov.uk/government/news/deadline-set-for-unsafe-cladding-removal",
+   "sourceDate": "17 July 2025",
+   "verifiedQuote": "\"complete remediation by the end of 2029\"",
+   "effectSuggestion": "Any player holding a tower block tile must pay remediation costs now or lose the tile to enforcement.",
+   "licenceNote": "GOV.UK content, available under the Open Government Licence v3.0."
+  },
+  {
+   "id": "building-safety-levy",
+   "title": "The Developer's Levy",
+   "body": "From 1 October 2026 developers pay a levy on new homes. Under ten dwellings escapes; brownfield sites get a discount.",
+   "category": "Building Safety",
+   "realEvent": "The Building Safety Levy comes into operation in England on 1 October 2026, charged on building control applications for works creating new dwellings, new purpose-built student accommodation bedspaces, or change of use to residential. Rates are weighted by local authority average house prices, with a 50% discount for previously developed land. Developments of fewer than 10 dwellings or 30 bedspaces are exempt.",
+   "sourceName": "GOV.UK \u2014 Building Safety Levy: Guidance, Section 1 Introduction (MHCLG)",
+   "sourceUrl": "https://www.gov.uk/guidance/building-safety-levy-guidance/section-1-introduction",
+   "sourceDate": "2 July 2026",
+   "verifiedQuote": "\"The levy will come into operation on 1 October 2026.\"",
+   "effectSuggestion": "Any player developing ten or more new homes pays a levy; halve it if the site is brownfield.",
+   "licenceNote": "GOV.UK content, available under the Open Government Licence v3.0."
+  },
+  {
+   "id": "commonhold-draft-bill",
+   "title": "Commonhold Comes Knocking",
+   "body": "Draft Bill published: leasehold banned for most new flats, ground rents capped at \u00a3250. Still draft, not law.",
+   "category": "Leasehold",
+   "realEvent": "The draft Commonhold and Leasehold Reform Bill was published on 27 January 2026. It proposes banning leasehold for most new flats, capping ground rents at \u00a3250 a year falling to a peppercorn after 40 years, abolishing forfeiture, and easing commonhold conversion where at least 50% of qualifying leaseholders agree. It remains in draft, undergoing pre-legislative scrutiny from 4 February 2026.",
+   "sourceName": "GOV.UK \u2014 Draft Commonhold and Leasehold Reform Bill (MHCLG)",
+   "sourceUrl": "https://www.gov.uk/government/publications/draft-commonhold-and-leasehold-reform-bill",
+   "sourceDate": "27 January 2026",
+   "verifiedQuote": "\"banning the use of leasehold for most new flats\"",
+   "effectSuggestion": "Ground rent income on all leasehold tiles is capped at \u00a3250 per turn; freeholders lose the excess.",
+   "licenceNote": "GOV.UK content, available under the Open Government Licence v3.0."
+  },
+  {
+   "id": "lfra-two-year-rule",
+   "title": "The Two-Year Wait Is Dead",
+   "body": "The two-year wait is abolished. Buy a flat today, extend the lease tomorrow. Enfranchisement claims accelerate across the capital.",
+   "category": "Leasehold",
+   "realEvent": "Section 27 of the Leasehold and Freehold Reform Act 2024 came into force on 31 January 2025, removing the requirement that a leaseholder must have owned their house or flat for two years before claiming a lease extension or buying the freehold.",
+   "sourceName": "legislation.gov.uk \u2014 The Leasehold and Freehold Reform Act 2024 (Commencement No. 2 and Transitional Provision) Regulations 2025, reg. 2",
+   "sourceUrl": "https://www.legislation.gov.uk/uksi/2025/57/regulation/2/made",
+   "sourceDate": "31 January 2025",
+   "verifiedQuote": "\"removal of qualifying period before enfranchisement and extension claims\"",
+   "effectSuggestion": "Any player may extend a lease or buy a freehold immediately on acquiring a leasehold tile, with no waiting turns.",
+   "licenceNote": "legislation.gov.uk content, available under the Open Government Licence v3.0."
+  },
+  {
+   "id": "london-house-prices",
+   "title": "London Slides",
+   "body": "London prices fall 3.7% over the year to May 2026 \u2014 the weakest English region. Inner London drops nearly 6%.",
+   "category": "Market Data",
+   "realEvent": "The UK House Price Index for May 2026 recorded average London house prices at around \u00a3545,000, down 3.7% over 12 months \u2014 the lowest annual change of any English region, against England overall at +2.3% and the North East strongest at +5.9%. Inner London fell 5.9%, Outer London 0.3%. It was London's ninth consecutive month of annual decline.",
+   "sourceName": "GOV.UK / HM Land Registry \u2014 UK House Price Index England: May 2026",
+   "sourceUrl": "https://www.gov.uk/government/statistics/uk-house-price-index-for-may-2026/uk-house-price-index-england-may-2026",
+   "sourceDate": "31 July 2026",
+   "verifiedQuote": "\"The lowest annual percentage change was in London, where prices decreased by 3.7%\"",
+   "effectSuggestion": "All London property tiles lose 3.7% of their value; Inner London zone tiles lose 5.9%.",
+   "licenceNote": "HM Land Registry / GOV.UK statistics, available under the Open Government Licence v3.0."
+  },
+  {
+   "id": "london-private-rents",
+   "title": "Rent Growth Runs Out Of Steam",
+   "body": "London rents hit \u00a32,302 but growth cools to 2.2% \u2014 the slowest in England. Yield compression squeezes leveraged landlords.",
+   "category": "Market Data",
+   "realEvent": "ONS Price Index of Private Rents data published 22 July 2026 show average London private rent at \u00a32,302 in June 2026, the highest of any English region, but annual rent inflation of just 2.2% \u2014 the lowest in England, against 6.3% in the North East. London rent inflation has fallen sharply from 11.5% in November 2024.",
+   "sourceName": "Office for National Statistics \u2014 Private rent and house prices, UK: July 2026",
+   "sourceUrl": "https://www.ons.gov.uk/economy/inflationandpriceindices/bulletins/privaterentandhousepricesuk/july2026",
+   "sourceDate": "22 July 2026",
+   "verifiedQuote": "\"Rent annual inflation remained lowest in London, at 2.2%\"",
+   "effectSuggestion": "London rental income rises only 2.2% this round, while mortgage costs rise faster \u2014 leveraged players lose margin.",
+   "licenceNote": "ONS content, available under the Open Government Licence v3.0."
+  }
+ ],
+ "rejected": [
+  {
+   "claim": "Private rented homes in England must reach EPC C for NEW tenancies from 2028, with all tenancies by 2030.",
+   "whyRejected": "This was the February 2025 CONSULTATION proposal and is still repeated widely by secondary sources, but the Government response of 21 January 2026 explicitly dropped the staged approach in favour of 'a single compliance date of 1 October 2030'. The 2028 date is wrong as at 2026."
+  },
+  {
+   "claim": "Commercial (non-domestic) property must reach EPC C by 2027 and EPC B by 2030 under MEES.",
+   "whyRejected": "Not law. The GOV.UK non-domestic MEES landlord guidance (updated 5 May 2026) confirms the in-force minimum is still EPC E. The EPC B trajectory exists only as an unresolved consultation ('Non-domestic Private Rented Sector minimum energy efficiency standards: EPC B implementation'). Widely misstated in the property press."
+  },
+  {
+   "claim": "The \u00a310,000 EPC cost cap and the 2030 standard are already law.",
+   "whyRejected": "The Government response confirms the policy decision but implementation requires new parliamentary powers and a statutory instrument expected in 2027. The in-force cap under current regulations remains \u00a33,500 including VAT. Card 'epc-cost-cap-10k' is written to reflect the confirmed decision, not an in-force rule."
+  },
+  {
+   "claim": "Ground rents are capped at \u00a3250 a year and leasehold is banned for new flats.",
+   "whyRejected": "Only a DRAFT Bill as at 2026. The Commonhold and Leasehold Reform Bill was published in draft on 27 January 2026 and entered pre-legislative scrutiny on 4 February 2026. Not enacted, so no in-force ground rent cap. Card 18 states the draft status explicitly."
+  },
+  {
+   "claim": "Commonhold is now the default tenure for new flats in England and Wales.",
+   "whyRejected": "Not verified as in force. The draft Bill proposes banning leasehold for most new flats, but the GOV.UK page did not confirm commonhold as an established mandatory default, and the Bill is not law."
+  },
+  {
+   "claim": "The Bank of England cut Bank Rate during 2026 / the current rate is below 3.75%.",
+   "whyRejected": "Could not verify any cut. The most recent decision (meeting ending 29 July 2026, published 30 July 2026) held Bank Rate at 3.75% on a 6\u20133 vote, with the three dissenters wanting an INCREASE to 4%. Next decision 17 September 2026."
+  },
+  {
+   "claim": "The Renters' Rights Act 2025 introduces rent controls or caps on the level of rent.",
+   "whyRejected": "Not supported by the source. The Act limits the FREQUENCY of increases (once a year, two months' notice) and bans bidding above the advertised rent. It does not cap rent levels. Conflating the two is a common error."
+  },
+  {
+   "claim": "Awaab's Law applies to the private rented sector from a specific date in 2026.",
+   "whyRejected": "Could not verify a confirmed PRS commencement date from a primary source within this research. Excluded rather than guess."
+  },
+  {
+   "claim": "Maximum civil penalty figures for breaching non-domestic MEES.",
+   "whyRejected": "The GOV.UK non-domestic landlord guidance states a financial penalty may be issued but does not state penalty amounts. Domestic penalties (\u00a35,000 maximum per property) are verified and could be used, but the non-domestic figures could not be, so no card asserts them."
+  },
+  {
+   "claim": "A general council tax revaluation of all English homes takes effect in 2026.",
+   "whyRejected": "No such revaluation verified. The only council tax valuation exercise confirmed is the targeted valuation of properties worth \u00a32M+ for the High Value Council Tax Surcharge, which starts April 2028 with five-yearly revaluations thereafter (next 2033)."
+  },
+  {
+   "claim": "Specific Building Safety Levy rates per London borough (\u00a3 per square metre).",
+   "whyRejected": "The guidance confirms rates are set by local authority and weighted to average house prices, with a 50% brownfield discount, but individual London borough rates were not verified from the primary source. The card states only the verified structure."
+  },
+  {
+   "claim": "London house price and rental forecasts for 2026-2027 from agency research houses.",
+   "whyRejected": "Excluded by the brief. Savills, CBRE, JLL and Knight Frank forecasts are proprietary research, and CoStar / Green Street / PitchBook / React News are subscription sources. Only HM Land Registry UK HPI and ONS PIPR actuals were used."
+  },
+  {
+   "claim": "The new four-metric EPC system is live and affecting ratings in 2026.",
+   "whyRejected": "Postponed. A 9 March 2026 update moved the launch of the Energy Performance of Buildings reforms to the second half of 2027, with a new launch date to be agreed with industry. Card 5 reflects the delay rather than a live change."
+  },
+  {
+   "claim": "Section 21 was abolished on 27 December 2025.",
+   "whyRejected": "A search snippet suggested tenancy reform measures commenced on 27 December 2025, but the MHCLG implementation roadmap and GOV.UK guidance both give 1 May 2026 as the date landlords can no longer use section 21, with valid section 21 notices servable until 30 April 2026. The December date could not be corroborated and was rejected in favour of the roadmap date."
+  }
+ ]
+}

@@ -1,0 +1,38 @@
+{
+  "note": "Corrections applied after the round-0 adversarial fact-check. All 21 cards were verdict CONFIRMED on the underlying fact; these seven had wording that overstated or misrepresented the cited source. The critic never edits — these are applied here, in the pipeline, and re-verified.",
+  "auditRef": "bench/round0/event-audit.json",
+  "corrections": {
+    "epc-domestic-2030": {
+      "body": "One compliance date confirmed: 1 October 2030 for the new standard. The statutory instrument is still to come.",
+      "why": "The original read as settled law. The regulations are expected in 2027; the date is a confirmed policy intention, not yet in force."
+    },
+    "epc-cost-cap-10k": {
+      "body": "The retrofit cost cap rises from £3,500 to £10,000 per property. Budget for it, or register a ten-year exemption.",
+      "why": "'Trebles' was imprecise — £3,500 to £10,000 is 2.9x. Both figures now stated."
+    },
+    "epc-nondom-current": {
+      "body": "Your commercial unit needs only EPC E today, unless a registered exemption applies. Tougher targets remain consultation.",
+      "why": "'Every tenancy, no exceptions' was contradicted by the cited source: registered exemptions exist and short and very long leases fall outside MEES."
+    },
+    "renters-periodic-tenancies": {
+      "body": "Fixed terms vanish. Nearly every tenancy converts to an assured periodic tenancy, ending on the tenant's notice.",
+      "why": "'Tenants stay as long as they like' overstated the reform — landlords retain every section 8 ground, including sale and moving in."
+    },
+    "sdlt-standard-rates": {
+      "body": "Stamp duty bites from £125,000, and a 5% surcharge stacks on any additional home. Portfolio building just got pricier.",
+      "extraSource": {
+        "name": "GOV.UK — Rates of Stamp Duty Land Tax for non-UK residents (HMRC)",
+        "url": "https://www.gov.uk/guidance/rates-of-stamp-duty-land-tax-for-non-uk-residents"
+      },
+      "why": "Body unchanged and correct; a second source added because the non-UK-resident surcharge is not on the originally cited page."
+    },
+    "london-house-prices": {
+      "quoteIsParaphrase": true,
+      "why": "The quotation was not verbatim, so it is relabelled as a paraphrase rather than shipped inside quotation marks."
+    },
+    "london-private-rents": {
+      "body": "London rents reach £2,302 but annual growth cools to 2.2%, the slowest in England. Leveraged landlords feel the squeeze.",
+      "why": "The 11.5% peak figure could not be pinned to a single authoritative vintage (the contemporaneous bulletin said 11.6%), so it is dropped rather than shipped uncertain."
+    }
+  }
+}

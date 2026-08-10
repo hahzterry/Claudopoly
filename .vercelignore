@@ -1,0 +1,6 @@
+bench/
+docs/
+scripts/
+progress-site/
+node_modules/
+dist/

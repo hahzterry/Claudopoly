@@ -1,0 +1,6 @@
+{
+ "A": "ours",
+ "B": "benchmark",
+ "ours": "bench/shots/r1/blind-desktop.png",
+ "bench": "bench/screenshots/catan_3.jpg"
+}

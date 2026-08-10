@@ -1,0 +1,1521 @@
+@charset "UTF-8";
+/* =============================================================================
+   LANDLORD: LONDON 2026 — styles.css
+   The single stylesheet. Serves the game HUD (hud.js) and the data panels
+   (panel.js).
+
+   An original homage to Elizabeth Magie's The Landlord's Game (1904,
+   US Patent 748,626, public domain).
+
+   ---------------------------------------------------------------------------
+   TWO REGISTERS, ONE SHEET
+   ---------------------------------------------------------------------------
+   This product speaks in two voices and they must never blur into each other:
+
+     GAME register  (--g-*)  A lit table, warm, physical, heavy type.
+                             Measured from the Catan Universe / GAME OF LIFE 2
+                             teardown. Every control is an object with an
+                             opaque plate, a bezel, a gradient face and a
+                             shadow. There is not one translucent black
+                             rectangle in this file, by design.
+
+     DATA register  (--ft-*) Financial Times graphics standards. Paper tint,
+                             warm grey ramp, regular-weight titles, no axis
+                             line, tabular figures. Used for anything that
+                             presents a number as evidence rather than as a
+                             game state.
+
+   Tokens never cross. A HUD element must not reach for --ft-primary; a chart
+   must not reach for --g-action-face-top.
+
+   ---------------------------------------------------------------------------
+   LIGHT AND DARK — the deliberate, documented choice
+   ---------------------------------------------------------------------------
+   The GAME does NOT follow the operating system theme. It is an authored,
+   photographed object: a board on a warm table under a pool of light. A
+   "dark mode board" would be a different board. So every --g-* token is fixed
+   in both themes, and the 3D environment supplies the background at all times.
+
+   The DATA PANELS DO respond, because they present evidence and evidence must
+   be legible wherever the reader is. Light is the default and canonical form:
+   FT paper #FFF1E5 with the warm black-mixed-over-paper grey ramp. Dark uses
+   FT's own socialframe variant (paper #333333, text ramp #8E9095, rules
+   #47494D) rather than an invented dark grey — the FT ships exactly one dark
+   surface and we use it.
+
+   Resolution order, unambiguous by construction (no specificity ties):
+     1. :root                                    → light data tokens
+     2. @media dark → :root:not([data-theme="light"])  → dark data tokens
+     3. :root[data-theme="dark"]                 → dark data tokens, forced
+   An explicit data-theme on <html> therefore wins in BOTH directions, and the
+   media query can never fight it.
+
+   ---------------------------------------------------------------------------
+   SPECIFICITY
+   ---------------------------------------------------------------------------
+   Cascade layers do the work so nothing has to be won with !important or with
+   escalating selectors. Order is declared once, immediately below, and every
+   rule in this file lives in exactly one layer. Within components, blocks and
+   modifiers are both single-class (equal specificity) and modifiers simply
+   come later; state lives in its own later layer, so `.is-active` can never be
+   cancelled by a modifier no matter how it is written.
+
+   ---------------------------------------------------------------------------
+   TYPE SIZES
+   ---------------------------------------------------------------------------
+   The scale is authored in px and expressed in rem so that the reader's own
+   browser font setting still counts (touch.json forbids html{font-size:Npx}).
+   Each token reads calc(<px/16>rem * var(--ui-scale)) with the px value in the
+   comment. --ui-scale is the in-game text toggle: 1 | 1.15 | 1.3.
+
+   No web fonts. No @import. No external URL of any kind — the sheet is
+   CSP-safe and works offline. Every family named below is either a real
+   system face on iOS/macOS/Windows/Android or a harmless local lookup that
+   falls through.
+   ========================================================================== */
+
+@layer reset, tokens, base, layout, components, chart, state, utilities;
+
+/* =============================================================================
+   RESET
+   ========================================================================== */
+@layer reset {
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html, body, h1, h2, h3, h4, p, figure, ul, ol, dl, dd, table, th, td {
+    margin: 0;
+    padding: 0;
+  }
+
+  ul, ol { list-style: none; }
+
+  button, input, select, textarea {
+    font: inherit;
+    color: inherit;
+    background: none;
+    border: 0;
+  }
+  /* NOTE ON SPELLING: this repository is written in British English without
+     exception. `color`, `center` and `gray` appear below only where they are
+     CSS grammar — property names and keywords defined by the specification,
+     which cannot be spelled any other way. Every word this file actually
+     authors — token names, class names, comments, copy — is British:
+     colour, centre, grey, analyse, organise, neighbourhood. */
+
+  img, canvas, svg, video { display: block; max-width: 100%; }
+  img, canvas { -webkit-user-drag: none; user-select: none; }
+  table { border-collapse: collapse; }
+  a { color: inherit; }
+}
+
+/* =============================================================================
+   TOKENS
+   ========================================================================== */
+@layer tokens {
+  :root {
+
+    /* ---------------------------------------------------------------------
+       GAME — ENVIRONMENT (measured from the teardown)
+       These are the table the board sits on. They are FIXED in both themes.
+       --------------------------------------------------------------------- */
+    --g-table-lit:        #BA6230;   /* centre of the light pool            */
+    --g-table-mid:        #A85B2A;
+    --g-table-shade:      #7A4520;
+    --g-table-corner:     #4A3328;   /* frame corners, 0.44 of centre luma  */
+    --g-table-void:       #241A12;   /* pre-paint colour; matches the        */
+                                     /* theme-color already in index.html    */
+    --g-tile-sand-rim:    #E8D2A8;
+    --g-token-ivory:      #F0DFC0;
+    --g-token-ivory-shade:#D8BFA0;
+
+    /* ---------------------------------------------------------------------
+       GAME — UI CHROME (measured)
+       --------------------------------------------------------------------- */
+    --g-panel-dark:       #2D2D2D;   /* stats plate                          */
+    --g-chrome-bezel:     #3E3438;   /* 4–8px dark frame on every button     */
+    --g-chrome-bezel-lit: #55474C;   /* bezel top edge, catches the key light*/
+    --g-plate-stroke-gold:#E8C13A;   /* 2px, top and bottom of a pennant     */
+    --g-active-glow:      #FFD34D;
+    --g-rail-face-top:    #F3C43E;
+    --g-rail-face-bottom: #D8862A;
+    --g-rail-glyph:       #8A4A15;
+    --g-action-face-top:  #F5C63A;
+    --g-action-face-bottom:#E8862C;
+    --g-dice-white:       #F1F1F1;
+    --g-dice-pip:         #1A1A1A;
+    --g-drawer-top:       #6B1F1C;
+    --g-drawer-bottom:    #3A0F0E;
+    --g-drawer-border:    #4A4442;
+
+    --g-text-primary:     #FFFFFF;
+    --g-text-on-plate:    #101010;
+    --g-text-disabled:    #8A8A8A;   /* "dim what is zero"                   */
+    --g-text-shadow:      0 2px 3px rgba(0, 0, 0, 0.55);
+
+    /* Composed faces. Every control face is a gradient on an opaque plate. */
+    --g-face-gold:   linear-gradient(180deg, var(--g-action-face-top)  0%, var(--g-action-face-bottom) 100%);
+    --g-face-rail:   linear-gradient(180deg, var(--g-rail-face-top)    0%, var(--g-rail-face-bottom)   100%);
+    --g-face-dark:   linear-gradient(180deg, #3A3A3A 0%, var(--g-panel-dark) 100%);
+    --g-face-cream:  linear-gradient(180deg, #FFFDF7 0%, #F2EDE4 100%);
+    --g-face-drawer: linear-gradient(180deg, var(--g-drawer-top) 0%, var(--g-drawer-bottom) 100%);
+
+    /* ---------------------------------------------------------------------
+       GAME — PLAYER COLOURS
+       Encoded on five surfaces minimum (plate, portrait, badge, pennant,
+       piece), never on one dot. Slots 1 and 2 are the engine's two players;
+       3 and 4 are held for the four playerSlots the fact base declares.
+       Identity is ALWAYS doubled by silhouette and glyph — colour alone is
+       never the signal (touch.json, accessibility).
+       --------------------------------------------------------------------- */
+    --p1-plate:   #C8102E;  --p1-piece:   #E0223F;  --p1-pennant: #5A2226;
+    --p2-plate:   #1B3A6B;  --p2-piece:   #4E90A8;  --p2-pennant: #1F4A63;
+    --p3-plate:   #BC7D1E;  --p3-piece:   #D08820;  --p3-pennant: #6B4712;
+    --p4-plate:   #9E299B;  --p4-piece:   #C21FC2;  --p4-pennant: #4E1450;
+
+    /* Per-element aliases, set on a player-scoped element by hud.js via
+       [data-player="1".."4"] — see the state layer. */
+    --player-plate:   var(--p1-plate);
+    --player-piece:   var(--p1-piece);
+    --player-pennant: var(--p1-pennant);
+
+    /* ---------------------------------------------------------------------
+       GAME — STREET GROUP COLOURS (from data/landlord-facts.json groups[])
+       --------------------------------------------------------------------- */
+    --grp-riverside:   #8C6A4F;
+    --grp-terminus:    #7FA9C9;
+    --grp-civic:       #B4708F;
+    --grp-theatreland: #D9843C;
+    --grp-chambers:    #B23A34;
+    --grp-square-mile: #D9B23C;
+    --grp-gallery:     #4E8A6E;
+    --grp-crown:       #2F5473;
+
+    /* ---------------------------------------------------------------------
+       SEMANTIC STATE
+       Game-side states are warm and physical; data-side direction uses the FT
+       pair. Neither is ever carried by colour alone.
+       --------------------------------------------------------------------- */
+    --state-active:    #FFD34D;   /* the player whose turn it is             */
+    --state-legal:     #7ED0A5;   /* a square you may act on                 */
+    --state-warning:   #FF8833;   /* levy due, covenant pressure (fill only) */
+    --state-danger:    #CC0000;   /* insolvency, forced sale                 */
+    --state-gain:      #00994D;   /* rent received                           */
+    --state-loss:      #CC0000;   /* rent paid, levy paid                    */
+    --state-neutral:   #B3A9A0;
+    --state-disabled:  #8A8A8A;
+
+    /* ---------------------------------------------------------------------
+       ELEVATION — physical objects, not blurred glass
+       Two-part shadows: a hard offset (the object's own thickness) plus a
+       soft cast (the pool of light). Contact shadows stay tight; the teardown
+       resolves them in ~6px and forbids soft grey blobs.
+       --------------------------------------------------------------------- */
+    --elev-0: none;
+    --elev-1: 0 1px 0 rgba(0, 0, 0, 0.22),
+              0 2px 4px rgba(26, 12, 4, 0.30);
+    --elev-2: 0 2px 0 rgba(0, 0, 0, 0.22),
+              0 5px 12px rgba(26, 12, 4, 0.34);
+    --elev-3: 0 4px 0 rgba(0, 0, 0, 0.20),
+              0 10px 24px rgba(20, 10, 4, 0.38);
+    --elev-4: 0 6px 0 rgba(0, 0, 0, 0.18),
+              0 18px 40px rgba(16, 8, 3, 0.46);
+    --elev-inset-face: inset 0 1px 0 rgba(255, 255, 255, 0.38),
+                       inset 0 -2px 0 rgba(0, 0, 0, 0.20);
+    --elev-inset-well: inset 0 2px 3px rgba(0, 0, 0, 0.45);
+    --glow-action: 0 0 22px rgba(255, 211, 77, 0.85);
+    /* For clipped shapes only. box-shadow is clipped away by clip-path, so a
+       pennant or a cut stat plate must cast its shadow through a filter,
+       which follows the cut outline instead of the border box. */
+    --drop-2: drop-shadow(0 2px 0 rgba(0, 0, 0, 0.22))
+              drop-shadow(0 4px 8px rgba(26, 12, 4, 0.34));
+    --drop-1: drop-shadow(0 1px 0 rgba(0, 0, 0, 0.22))
+              drop-shadow(0 2px 4px rgba(26, 12, 4, 0.30));
+
+    /* ---------------------------------------------------------------------
+       CORNER RADII — varied by element class, never one radius everywhere
+       --------------------------------------------------------------------- */
+    --r-plate:   4px;    /* name / stats plates                             */
+    --r-card:   10px;    /* portrait cards, dice                            */
+    --r-rail:   12px;    /* rail buttons (outer); inner face 8px            */
+    --r-drawer: 14px;    /* the holdings drawer, secondary buttons          */
+    --r-action: 18px;    /* the primary action control                      */
+    --r-shell:  28px;    /* the chunky mobile panel shell                   */
+    --r-banner: 34px;    /* the prompt banner                               */
+    --r-inner-offset: 4px; /* inner face radius = outer − this              */
+    --r-pill: 999px;
+
+    --bezel:      4px;   /* dark frame on a rail button                     */
+    --bezel-lg:   8px;   /* dark frame on the primary action                */
+    --pennant-notch: 14px;
+
+    /* ---------------------------------------------------------------------
+       FONT STACKS — system faces only, no loading, no network
+       --------------------------------------------------------------------- */
+
+    /* Game HUD: a heavy grotesque. SF Pro (via -apple-system) carries real
+       Heavy and Black weights on every iPhone and Mac, which is the audience;
+       Helvetica Neue is the genuine grotesque fallback that also ships on
+       Apple platforms; Segoe UI / Roboto cover Windows and Android. Arial
+       Black is deliberately NOT in the stack — naming it would force black
+       weight on every string rather than letting font-weight choose. */
+    --font-hud: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+                "Helvetica Neue", "Segoe UI", Roboto, "Helvetica", Arial,
+                sans-serif;
+
+    /* Data panels: the FT chart stack. MetricWeb and Metric are named first
+       so a licensed machine picks them up; they are local family lookups and
+       cost nothing when absent. Helvetica Neue is the closest system face to
+       Metric's tall x-height and open apertures. */
+    --font-data: MetricWeb, Metric, "Helvetica Neue", Helvetica, -apple-system,
+                 BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+
+    /* Antique: the 1935 board price, and only that. An old-style serif of the
+       Caslon/Times class, matching the numerals baked into the board tiles.
+       Iowan Old Style and Hoefler Text are on iOS and macOS. */
+    --font-antique: "Iowan Old Style", "Hoefler Text", "Palatino Linotype",
+                    Palatino, Georgia, "Times New Roman", Times, serif;
+
+    --font-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas,
+                 "Roboto Mono", monospace;
+
+    /* ---------------------------------------------------------------------
+       TYPE SCALE — px authored, rem expressed, --ui-scale honoured
+       Small frame (default, phone). Bumped at the two FT breakpoints below.
+       --------------------------------------------------------------------- */
+    --ui-scale: 1;
+
+    --fs-hud-name:    calc(1.1875rem * var(--ui-scale));  /* 19px  w800 */
+    --fs-hud-stat:    calc(0.9375rem * var(--ui-scale));  /* 15px  w700 */
+    --fs-action:      calc(1.0625rem * var(--ui-scale));  /* 17px  w800 */
+    --fs-panel-title: calc(1.25rem   * var(--ui-scale));  /* 20px  w400 */
+    --fs-panel-sub:   calc(1.125rem  * var(--ui-scale));  /* 18px  w400 */
+    --fs-figure:      calc(2.125rem  * var(--ui-scale));  /* 34px  w400 */
+    --fs-axis:        calc(0.875rem  * var(--ui-scale));  /* 14px       */
+    --fs-annotation:  calc(0.875rem  * var(--ui-scale));  /* 14px       */
+    --fs-source:      calc(0.75rem   * var(--ui-scale));  /* 12px       */
+    /* FT rule: axis = annotation = direct label = legend, always one value. */
+    --fs-label:       var(--fs-axis);
+    --fs-legend:      var(--fs-axis);
+    --fs-credit:      var(--fs-source);
+    /* Supporting sizes the two registers share. */
+    --fs-body:        calc(1.0625rem * var(--ui-scale));  /* 17px       */
+    --fs-secondary:   calc(0.9375rem * var(--ui-scale));  /* 15px       */
+    --fs-micro:       calc(0.8125rem * var(--ui-scale));  /* 13px floor */
+
+    --lh-hud-name:    1.1;
+    --lh-panel-title: 1.2;      /* 20/24 at small                          */
+    --lh-panel-sub:   1.12;     /* 18/20                                   */
+    --lh-figure:      1.05;
+    --lh-source:      1;        /* 12/12 at small                          */
+    --lh-body:        1.35;
+
+    --w-regular: 400;
+    --w-medium:  500;
+    --w-semibold:600;
+    --w-bold:    700;
+    --w-heavy:   800;    /* HUD names, primary action labels               */
+    --w-black:   900;
+
+    /* Weight floor in the game register is 600. The teardown forbids
+       anything lighter and forbids mid-grey text for live values. */
+
+    /* ---------------------------------------------------------------------
+       SPACING / GEOMETRY — touch.json, exact
+       --------------------------------------------------------------------- */
+    --gap:    12px;    /* minimum gap between adjacent hit targets          */
+    --gap-sm:  8px;    /* absolute floor, used inside a single control      */
+    --gap-lg: 20px;
+    --pad-x:  16px;
+    --bar-h:  56px;    /* primary action height, 14.8mm                     */
+    --hit:    48px;    /* our hit-target floor, 12.7mm (Apple's is 44px)    */
+    --hit-icon: 64px;  /* icon button width in the bottom bar               */
+    --hit-hard: 44px;  /* destructive control, top-right, by design         */
+    --edge-guard: 20px;/* keep drag surfaces clear of the back-gesture strip*/
+    --attrib-h: 16px;  /* the OGL credit line, reserved out of the HUD grid */
+
+    --safe-t: max(env(safe-area-inset-top),    8px);
+    --safe-r: max(env(safe-area-inset-right), 12px);
+    --safe-b: max(env(safe-area-inset-bottom),12px);
+    --safe-l: max(env(safe-area-inset-left),  12px);
+    --kb-h: 0px;       /* set by the visualViewport handler in JS           */
+
+    --dur-fast:  120ms;
+    --dur-base:  250ms;
+    --dur-slow:  500ms;
+    --ease: cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* Layer order for the fixed stack. The canvas is the world; the HUD is
+       the instrument panel; overlays sit above both. */
+    --z-canvas:  0;
+    --z-hud:    10;
+    --z-overlay:20;
+    --z-sheet:  30;
+    --z-boot:   40;
+
+    /* ---------------------------------------------------------------------
+       DATA — FT SURFACE AND GREY RAMP (light, canonical)
+       Every FT grey is black mixed over the paper tint. Never a neutral or
+       cool grey next to the tint — it reads as dirty.
+       --------------------------------------------------------------------- */
+    --ft-paper:      #FFF1E5;
+    --ft-paper-box:  #F2DFCE;   /* inset panel                              */
+    --ft-paper-band: #FFFCFA;   /* banded rows behind ranked bars           */
+    --ft-ink:        #000000;   /* title, and the 60×4 signature bar        */
+
+    --ft-black-05: #F2E5DA;
+    --ft-black-10: #E6D9CE;
+    --ft-black-20: #CCC1B7;
+    --ft-black-30: #B3A9A0;
+    --ft-black-40: #999189;
+    --ft-black-50: #807973;
+    --ft-black-60: #66605C;
+    --ft-black-70: #4D4845;
+    --ft-black-80: #33302E;
+
+    --ft-text-title:       var(--ft-ink);
+    --ft-text-body:        var(--ft-black-80);
+    --ft-text-axis:        var(--ft-black-70);
+    --ft-text-annotation:  var(--ft-black-70);
+    --ft-text-subtitle:    var(--ft-black-60);
+    --ft-text-source:      var(--ft-black-60);
+    --ft-text-value-label: var(--ft-black-60);
+
+    --ft-gridline:        var(--ft-black-10);
+    --ft-tick:            var(--ft-black-20);
+    --ft-baseline:        var(--ft-black-40);
+    --ft-annotation-rule: var(--ft-black-60);
+    --ft-gridline-width: 1px;
+    --ft-baseline-width: 1px;
+    --ft-line-width:     3px;
+
+    /* Semantic series */
+    --ft-primary:     #0F5499;  /* oxford — 'now' / the subject             */
+    --ft-highlight:   #990F3D;  /* claret — the asset in focus              */
+    --ft-secondary:   #0D7680;  /* teal                                     */
+    --ft-tertiary:    #593380;  /* velvet                                   */
+    --ft-muted:       #B3A9A0;  /* 'then' / context, fill only              */
+    --ft-muted-light: #CCC1B7;
+    --ft-positive:    #00994D;  /* jade, fill grade — never small text      */
+    --ft-negative:    #CC0000;  /* crimson                                  */
+    --ft-alert:       #FF8833;  /* mandarin, fill only; always label it     */
+    --ft-no-data-area:#DAD2C3;
+    --ft-no-data-line:#B9B3A7;
+
+    /* Categorical, IN ORDER — the sequence alternates dark/light so adjacent
+       series separate in greyscale. Do not reorder. */
+    --ft-cat-1:#0F5499; --ft-cat-2:#EB5E8D; --ft-cat-3:#70DCE6; --ft-cat-4:#9DBF57;
+    --ft-cat-5:#208FCE; --ft-cat-6:#7F062E; --ft-cat-7:#C2B7AF; --ft-cat-8:#CE3140;
+    --ft-bar-1:#1E558C; --ft-bar-2:#94D2E6; --ft-bar-3:#1E8FCC; --ft-bar-4:#B3325D;
+    --ft-bar-5:#FF75A3; --ft-bar-6:#D9CCC3; --ft-bar-7:#AECC70; --ft-bar-8:#F34D5B;
+
+    --ft-seq-1:#F3DEC8; --ft-seq-2:#98C3CE; --ft-seq-3:#649EC1;
+    --ft-seq-4:#3C78AE; --ft-seq-5:#0F5499;
+    --ft-div-1:#B31147; --ft-div-2:#D75D79; --ft-div-3:#CEC6B9;
+    --ft-div-4:#5884D6; --ft-div-5:#105BA6;
+
+    /* FT layout geometry */
+    --ft-blackbar-w: 60px;
+    --ft-blackbar-h:  4px;
+    --ft-text-x:      1px;   /* title/subtitle/source flush to the graphic  */
+    --ft-margin-left:15px;
+    --ft-source-gap: 20px;
+  }
+
+  /* -- DARK DATA SURFACE ---------------------------------------------------
+     Only --ft-* tokens change. Every --g-* token above is untouched: the
+     table stays lit. :not([data-theme="light"]) means an explicit light
+     override always wins here, with no specificity contest. */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ft-paper:           #333333;
+      --ft-paper-box:       #3D3D3D;
+      --ft-paper-band:      #3A3A3A;
+      --ft-text-title:      #FFFFFF;
+      --ft-text-body:       #E8E8E8;
+      --ft-text-axis:       #8E9095;
+      --ft-text-annotation: #8E9095;
+      --ft-text-subtitle:   #8E9095;
+      --ft-text-source:     #8E9095;
+      --ft-text-value-label:#8E9095;
+      --ft-gridline:        #47494D;
+      --ft-tick:            #47494D;
+      --ft-baseline:        #8E9095;
+      --ft-annotation-rule: #8E9095;
+      --ft-ink:             #FFFFFF;   /* the signature bar inverts too     */
+      /* Series lift so they hold 3:1 against #333333. */
+      --ft-primary:         #6BA5E7;
+      --ft-highlight:       #E8607F;
+      --ft-secondary:       #4FB8C2;
+      --ft-tertiary:        #B08FD9;
+      --ft-muted:           #8E9095;
+      --ft-muted-light:     #6E7075;
+      --ft-positive:        #4FC98A;
+      --ft-negative:        #FF6B6B;
+      --ft-alert:           #FFA45C;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --ft-paper:           #333333;
+    --ft-paper-box:       #3D3D3D;
+    --ft-paper-band:      #3A3A3A;
+    --ft-text-title:      #FFFFFF;
+    --ft-text-body:       #E8E8E8;
+    --ft-text-axis:       #8E9095;
+    --ft-text-annotation: #8E9095;
+    --ft-text-subtitle:   #8E9095;
+    --ft-text-source:     #8E9095;
+    --ft-text-value-label:#8E9095;
+    --ft-gridline:        #47494D;
+    --ft-tick:            #47494D;
+    --ft-baseline:        #8E9095;
+    --ft-annotation-rule: #8E9095;
+    --ft-ink:             #FFFFFF;
+    --ft-primary:         #6BA5E7;
+    --ft-highlight:       #E8607F;
+    --ft-secondary:       #4FB8C2;
+    --ft-tertiary:        #B08FD9;
+    --ft-muted:           #8E9095;
+    --ft-muted-light:     #6E7075;
+    --ft-positive:        #4FC98A;
+    --ft-negative:        #FF6B6B;
+    --ft-alert:           #FFA45C;
+  }
+
+  /* -- TYPE SCALE BREAKPOINTS — FT medium and large frames ---------------- */
+  @media (min-width: 481px) {
+    :root {
+      --fs-panel-title: calc(1.5rem   * var(--ui-scale));  /* 24px */
+      --fs-panel-sub:   calc(1.125rem * var(--ui-scale));  /* 18px */
+      --fs-figure:      calc(2.75rem  * var(--ui-scale));  /* 44px */
+      --fs-axis:        calc(1rem     * var(--ui-scale));  /* 16px */
+      --fs-annotation:  calc(1rem     * var(--ui-scale));  /* 16px */
+      --fs-source:      calc(0.875rem * var(--ui-scale));  /* 14px */
+      --fs-hud-name:    calc(1.375rem * var(--ui-scale));  /* 22px */
+      --fs-action:      calc(1.125rem * var(--ui-scale));  /* 18px */
+      --lh-panel-title: 1.1667;   /* 24/28 */
+      --lh-source:      1.1428;   /* 14/16 */
+      --ft-margin-left: 20px;
+    }
+  }
+  @media (min-width: 1000px) {
+    :root {
+      --fs-panel-title: calc(1.75rem  * var(--ui-scale));  /* 28px */
+      --fs-figure:      calc(3.5rem   * var(--ui-scale));  /* 56px */
+      --fs-axis:        calc(1.125rem * var(--ui-scale));  /* 18px */
+      --fs-annotation:  calc(1.125rem * var(--ui-scale));  /* 18px */
+      --fs-source:      calc(1rem     * var(--ui-scale));  /* 16px */
+      --lh-panel-title: 1.1428;   /* 28/32 */
+      --lh-source:      1;        /* 16/16 */
+    }
+  }
+}
+
+/* =============================================================================
+   BASE — the non-scrolling stage
+   ========================================================================== */
+@layer base {
+  html {
+    height: 100%;
+    overscroll-behavior: none;          /* no pull-to-refresh, no glow      */
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    background: var(--g-table-void);
+  }
+
+  body {
+    position: fixed;                    /* one stage, it never scrolls      */
+    inset: 0;
+    overflow: hidden;
+    overscroll-behavior: none;
+    touch-action: none;                 /* we own every gesture             */
+    background: var(--g-table-void);    /* solid: prevents the white flash. */
+                                        /* The 3D environment paints over   */
+                                        /* it; this is NOT a page gradient. */
+    color: var(--g-text-primary);
+    font-family: var(--font-hud);
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Every figure in this product is tabular. Non-tabular digits make a
+     column of prices fail to line up, which the FT standard forbids and
+     which a player reads as sloppiness. */
+  body,
+  input,
+  button,
+  table {
+    font-variant-numeric: tabular-nums;
+    -webkit-font-feature-settings: "tnum" 1;
+    font-feature-settings: "tnum" 1;
+  }
+
+  h1, h2, h3, h4 { font-weight: var(--w-heavy); line-height: 1.15; }
+
+  /* Focus is always visible and always on the outside of the object, so it
+     survives the bezel. */
+  :focus { outline: none; }
+  :focus-visible {
+    outline: 3px solid #FFFFFF;
+    outline-offset: 3px;
+    border-radius: inherit;
+  }
+}
+
+/* =============================================================================
+   LAYOUT — canvas, HUD grid, overlay, boot, attribution
+   ========================================================================== */
+@layer layout {
+
+  /* -- THE CANVAS ---------------------------------------------------------
+     Full-bleed, fixed, behind everything, edge to edge UNDER the safe-area
+     insets — the board should touch the bezel. It carries NO background of
+     its own: no gradient, no flat colour, no grey void. The 3D environment
+     reaches all four frame edges and does the framing with its own pool of
+     light. A CSS backdrop here is the single strongest "WebGL demo" signal
+     there is. */
+  #board-canvas {
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-canvas);
+    display: block;
+    width: 100%;
+    height: 100vh;      /* fallback for very old engines                    */
+    height: 100svh;     /* the document never scrolls, so svh == dvh here   */
+    background: none;
+    touch-action: none;
+  }
+
+  /* -- THE HUD ------------------------------------------------------------
+     Sits on top and respects the insets. Roughly 80% of the frame stays
+     free of UI: a top strip, a thin left rail, a bottom bar. Taps fall
+     through to the canvas except on the controls themselves. */
+  #hud {
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-hud);
+    height: 100vh;
+    height: 100svh;
+    display: grid;
+    grid-template-areas:
+      "status"
+      "spacer"
+      "controls";
+    grid-template-rows: auto 1fr auto;
+    /* The bottom padding reserves the safe-area strip, any on-screen
+       keyboard, AND the persistent OGL credit line, so the control bar can
+       never land on top of the attribution or on the home indicator. */
+    padding:
+      var(--safe-t)
+      var(--safe-r)
+      calc(var(--safe-b) + var(--kb-h) + var(--attrib-h))
+      var(--safe-l);
+    pointer-events: none;
+  }
+  #hud > * { pointer-events: auto; }
+
+  .hud__status   { grid-area: status; display: flex; gap: var(--gap);
+                   align-items: flex-start; justify-content: space-between; }
+  .hud__spacer   { grid-area: spacer; pointer-events: none; }
+  .hud__controls { grid-area: controls; display: flex; gap: var(--gap);
+                   align-items: flex-end; justify-content: center;
+                   padding: 0 var(--pad-x); }
+
+  /* The left rail holds secondary and meta functions only. Nothing that
+     changes game state lives here. Kept clear of the back-gesture strip. */
+  .hud__rail {
+    position: absolute;
+    /* Clear of the iOS back-swipe / Android back-gesture strip. That strip
+       is unwinnable, so the rail simply does not enter it. */
+    left: calc(var(--safe-l) + var(--edge-guard));
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap);
+  }
+
+  /* Identity top-left, prompt top-right — opposite corners. */
+  .hud__identity { flex: 0 1 auto; }
+  .hud__prompt   { flex: 0 1 auto; margin-left: auto; }
+
+  /* -- OVERLAY LAYER ------------------------------------------------------ */
+  #overlay {
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-overlay);
+    display: grid;
+    place-items: center;
+    padding: calc(var(--safe-t) + var(--gap)) var(--safe-r)
+             calc(var(--safe-b) + var(--gap)) var(--safe-l);
+    pointer-events: none;
+  }
+  #overlay > * { pointer-events: auto; }
+  #overlay:empty { display: none; }
+
+  /* -- BOOT SCREEN --------------------------------------------------------
+     Paints in under 100ms from inline colour. Never a white flash, never a
+     bare spinner. */
+  #boot {
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-boot);
+    display: grid;
+    place-items: center;
+    padding: var(--safe-t) var(--pad-x) var(--safe-b);
+    background:
+      radial-gradient(120% 90% at 50% 58%,
+        var(--g-table-lit) 0%,
+        var(--g-table-shade) 52%,
+        var(--g-table-corner) 100%);
+  }
+  /* NOTE: the boot screen is the ONE place a CSS gradient is permitted, and
+     only because the WebGL context does not exist yet. It is a stand-in for
+     the pool of light, matched to the measured table values, and it is
+     removed the moment the renderer takes over. */
+
+  .boot-plate {
+    width: min(420px, 100%);
+    background: var(--ft-paper);
+    color: var(--ft-text-body);
+    border-radius: var(--r-drawer);
+    box-shadow: var(--elev-4);
+    overflow: hidden;
+  }
+  .boot-band {
+    width: var(--ft-blackbar-w);
+    height: var(--ft-blackbar-h);
+    margin: var(--gap-lg) 0 0 var(--gap-lg);
+    background: var(--ft-ink);
+  }
+  .boot-body { padding: var(--gap) var(--gap-lg) var(--gap-lg); }
+  .boot-eyebrow {
+    font-family: var(--font-data);
+    font-size: var(--fs-source);
+    color: var(--ft-text-source);
+    letter-spacing: 0.02em;
+  }
+  .boot-title {
+    font-family: var(--font-data);
+    font-size: var(--fs-panel-title);
+    line-height: var(--lh-panel-title);
+    font-weight: var(--w-regular);     /* FT titles are 400, never bold     */
+    color: var(--ft-text-title);
+    margin: 6px 0 4px;
+  }
+  .boot-sub {
+    font-family: var(--font-data);
+    font-size: var(--fs-panel-sub);
+    line-height: var(--lh-panel-sub);
+    color: var(--ft-text-subtitle);
+  }
+  .boot-status {
+    font-family: var(--font-data);
+    font-size: var(--fs-source);
+    line-height: var(--lh-source);
+    color: var(--ft-text-source);
+    margin-top: var(--gap);
+  }
+
+  /* -- ATTRIBUTION FOOTER -------------------------------------------------
+     Open Government Licence credit. Always present, never in the way. */
+  #attribution {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: var(--safe-b);
+    z-index: var(--z-hud);
+    block-size: var(--attrib-h);
+    padding-inline: calc(var(--safe-l) + 4px) calc(var(--safe-r) + 4px);
+    font-family: var(--font-data);
+    font-size: var(--fs-source);
+    line-height: var(--attrib-h);
+    color: rgba(255, 255, 255, 0.62);
+    text-align: center;
+    text-shadow: var(--g-text-shadow);
+    pointer-events: none;
+  }
+  #attribution a { pointer-events: auto; text-decoration: underline; }
+  #attribution:empty { display: none; }
+
+  /* -- LANDSCAPE ----------------------------------------------------------
+     Aspect ratio, not `orientation`, so foldables and tablets behave. No
+     rotation lock and no "please rotate" interstitial, ever. */
+  @media (min-aspect-ratio: 1/1) {
+    #hud {
+      grid-template-areas: "status spacer controls";
+      grid-template-columns: minmax(96px, 26vw) 1fr minmax(96px, 26vw);
+      grid-template-rows: 1fr;
+    }
+    .hud__status   { flex-direction: column; align-items: flex-start; }
+    .hud__prompt   { margin-left: 0; }
+    .hud__controls { flex-direction: column; justify-content: flex-end;
+                     align-items: flex-end; padding: 0 0 0 var(--gap); }
+    .hud__rail     { position: static; transform: none; flex-direction: row; }
+    :root { --bar-h: 52px; }
+  }
+
+  /* Very short viewports (landscape phone): drop the stat wording, keep the
+     numeral. */
+  @media (max-height: 420px) {
+    .stat__label { display: none; }
+  }
+}
+
+/* =============================================================================
+   COMPONENTS — every one of them a physical object
+   ---------------------------------------------------------------------------
+   THE RULE, stated once so it is never quietly broken:
+   there is no translucent black rectangle in this stylesheet. Not one. Every
+   surface is opaque, coloured, framed and shadowed. `backdrop-filter` does
+   not appear either — it is expensive on mobile and it looks like an overlay
+   bolted onto a render, which is exactly the failure the teardown identifies
+   in under a second.
+   ========================================================================== */
+@layer components {
+
+  /* -- PLATE --------------------------------------------------------------
+     The primitive. An opaque body, a bezel, an inner gradient face, a drop
+     shadow. Everything else in this layer is a plate with a job. */
+  .plate {
+    position: relative;
+    display: block;
+    padding: var(--gap-sm) var(--gap);
+    background: var(--g-face-cream);
+    color: var(--g-text-on-plate);
+    border: var(--bezel) solid var(--g-chrome-bezel);
+    border-top-color: var(--g-chrome-bezel-lit);
+    border-radius: var(--r-drawer);
+    box-shadow: var(--elev-2), var(--elev-inset-face);
+    font-family: var(--font-hud);
+    font-weight: var(--w-bold);
+    text-shadow: none;
+  }
+
+  .plate--dark {
+    background: var(--g-face-dark);
+    color: var(--g-text-primary);
+    border-radius: var(--r-plate);
+    text-shadow: var(--g-text-shadow);
+  }
+
+  .plate--card   { border-radius: var(--r-card); }
+  .plate--drawer {
+    background: var(--g-face-drawer);
+    border-color: var(--g-drawer-border);
+    border-radius: var(--r-drawer);
+    color: var(--g-text-primary);
+    text-shadow: var(--g-text-shadow);
+  }
+  .plate--shell {
+    border-radius: var(--r-shell);
+    padding: var(--gap);
+    box-shadow: var(--elev-3), var(--elev-inset-face);
+  }
+  .plate--banner {
+    border-radius: var(--r-banner);
+    padding: var(--gap) var(--gap-lg);
+  }
+
+  /* A pennant: a plate with a cut chevron tail on the right, and the 2px
+     gold stroke top and bottom that the teardown measures on every name
+     plate. The tail is geometry, not an icon. */
+  .plate--pennant {
+    padding-right: calc(var(--gap) + var(--pennant-notch));
+    border: 0;
+    border-radius: var(--r-plate);
+    /* Fallback first: a solid opaque plate plus the gold stroke. If the
+       engine cannot parse color-mix the second declaration is discarded and
+       this one still renders a complete, opaque pennant. */
+    background:
+      linear-gradient(180deg,
+        var(--g-plate-stroke-gold) 0, var(--g-plate-stroke-gold) 2px,
+        transparent 2px, transparent calc(100% - 2px),
+        var(--g-plate-stroke-gold) calc(100% - 2px), var(--g-plate-stroke-gold) 100%),
+      linear-gradient(180deg, var(--player-plate) 0%, var(--player-plate) 100%);
+    background:
+      linear-gradient(180deg,
+        var(--g-plate-stroke-gold) 0, var(--g-plate-stroke-gold) 2px,
+        transparent 2px, transparent calc(100% - 2px),
+        var(--g-plate-stroke-gold) calc(100% - 2px), var(--g-plate-stroke-gold) 100%),
+      linear-gradient(180deg,
+        color-mix(in srgb, #FFFFFF 14%, var(--player-plate)) 0%,
+        var(--player-plate) 100%);
+    color: var(--g-text-primary);
+    text-shadow: var(--g-text-shadow);
+    box-shadow: none;              /* clip-path would eat it — see --drop-2 */
+    filter: var(--drop-2);
+    clip-path: polygon(
+      0 0,
+      100% 0,
+      calc(100% - var(--pennant-notch)) 50%,
+      100% 100%,
+      0 100%);
+  }
+
+  /* -- PLAYER PANEL -------------------------------------------------------
+     Colour identity appears on the shell, the portrait, the badge, the name
+     pennant and the stat pennants — five surfaces, plus the piece in the 3D
+     scene. Never a single coloured dot. */
+  .player-panel {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+      "portrait name"
+      "portrait stats";
+    gap: 6px var(--gap-sm);
+    padding: var(--gap-sm);
+    background: var(--g-face-cream);
+    border: var(--bezel) solid var(--g-chrome-bezel);
+    border-radius: var(--r-shell);
+    box-shadow: var(--elev-3);
+    max-width: 62vw;
+  }
+  .player-panel__portrait {
+    grid-area: portrait;
+    width: 46px;
+    height: 58px;
+    border-radius: var(--r-card);
+    background: var(--player-plate);
+    border: 3px solid #4A5560;      /* neutral frame; gold when active      */
+    box-shadow: var(--elev-1);
+    display: grid;
+    place-items: center;
+    color: var(--g-text-primary);
+    font-weight: var(--w-black);
+    text-shadow: var(--g-text-shadow);
+  }
+  .player-panel__name {
+    grid-area: name;
+    font-family: var(--font-hud);
+    font-size: var(--fs-hud-name);
+    line-height: var(--lh-hud-name);
+    font-weight: var(--w-heavy);
+    letter-spacing: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .player-panel__stats {
+    grid-area: stats;
+    display: flex;
+    gap: 4px;
+    align-items: stretch;
+  }
+
+  /* A stat pennant: dark plate, downward point, white numeral and glyph. */
+  .stat {
+    display: grid;
+    justify-items: center;
+    gap: 1px;
+    min-width: 40px;
+    padding: 4px 6px 8px;
+    background: var(--g-face-dark);
+    border-radius: var(--r-plate) var(--r-plate) 0 0;
+    color: var(--g-text-primary);
+    text-shadow: var(--g-text-shadow);
+    filter: var(--drop-1);         /* cut plate: shadow via filter, not box */
+    clip-path: polygon(0 0, 100% 0, 100% 72%, 50% 100%, 0 72%);
+  }
+  .stat__value {
+    font-size: var(--fs-hud-stat);
+    font-weight: var(--w-bold);
+    line-height: 1.1;
+  }
+  .stat__label {
+    font-size: var(--fs-micro);
+    font-weight: var(--w-semibold);
+    opacity: 0.86;
+  }
+
+  /* The active-player chevron, 8px above the panel. One of four redundant
+     cues; see the state layer for the other three. */
+  .active-chevron {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    width: 18px;
+    height: 12px;
+    margin-left: -9px;
+    background: var(--state-active);
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+  }
+
+  /* -- BUTTONS ------------------------------------------------------------
+     `click`, not `touchstart`. touch-action: manipulation kills the 300ms
+     delay and double-tap zoom without breaking keyboard, switch control or
+     screen readers. */
+  .btn {
+    position: relative;
+    display: inline-grid;
+    place-items: center;
+    gap: 2px;
+    min-block-size: var(--hit);
+    min-inline-size: var(--hit);
+    padding: 0 var(--gap);
+    touch-action: manipulation;
+    cursor: pointer;
+    font-family: var(--font-hud);
+    font-size: var(--fs-action);
+    font-weight: var(--w-heavy);
+    color: var(--g-rail-glyph);
+    background: var(--g-face-rail);
+    border: var(--bezel) solid var(--g-chrome-bezel);
+    border-top-color: var(--g-chrome-bezel-lit);
+    border-radius: var(--r-rail);
+    box-shadow: var(--elev-2), var(--elev-inset-face);
+    transition: transform var(--dur-fast) var(--ease),
+                box-shadow var(--dur-fast) var(--ease);
+  }
+
+  .btn--primary {
+    min-block-size: var(--bar-h);
+    min-inline-size: 120px;
+    padding: 0 var(--gap-lg);
+    border-width: var(--bezel-lg);
+    border-radius: var(--r-action);
+    background: var(--g-face-gold);
+    color: var(--g-rail-glyph);
+    /* The halo no other control has. */
+    box-shadow: var(--elev-3), var(--elev-inset-face), var(--glow-action);
+  }
+
+  .btn--secondary {
+    min-block-size: var(--bar-h);
+    min-inline-size: var(--hit-icon);
+    border-radius: var(--r-drawer);
+    background: var(--g-face-dark);
+    color: var(--g-text-primary);
+    text-shadow: var(--g-text-shadow);
+  }
+
+  .btn--icon {
+    inline-size: var(--hit-icon);
+    block-size: var(--bar-h);
+    padding: 0;
+    border-radius: var(--r-drawer);
+  }
+
+  .btn--rail {
+    inline-size: var(--hit);
+    block-size: var(--hit);
+    padding: 0;
+    border-radius: var(--r-rail);
+    box-shadow: var(--elev-1), var(--elev-inset-face);
+  }
+
+  /* Destructive controls sit in the top-right hard-reach zone on purpose. */
+  .btn--destructive {
+    inline-size: var(--hit-hard);
+    block-size: var(--hit-hard);
+    min-inline-size: var(--hit-hard);
+    min-block-size: var(--hit-hard);
+    padding: 0;
+    border-radius: var(--r-rail);
+    background: var(--g-face-dark);
+    color: var(--g-text-primary);
+    box-shadow: var(--elev-1);
+  }
+
+  .btn__glyph { font-size: 1.25em; line-height: 1; }
+  .btn__label { font-size: var(--fs-hud-stat); font-weight: var(--w-heavy); }
+
+  /* Bottom bar: at most four targets on a 360px viewport
+     (4 × 64 + 3 × 12 = 292px inside 328px usable). A fifth goes to the
+     overflow sheet, never squeezed. */
+  .action-cluster {
+    display: flex;
+    gap: var(--gap);
+    align-items: flex-end;
+    justify-content: center;
+    inline-size: 100%;
+    max-inline-size: 420px;
+  }
+
+  /* -- DICE --------------------------------------------------------------- */
+  .dice {
+    display: flex;
+    gap: var(--gap);
+    justify-content: center;
+    margin-bottom: var(--gap);
+  }
+  .die {
+    inline-size: 50px;
+    block-size: 50px;
+    display: grid;
+    place-items: center;
+    border-radius: var(--r-card);
+    background: linear-gradient(180deg, #FFFFFF 0%, var(--g-dice-white) 100%);
+    color: var(--g-dice-pip);
+    font-size: var(--fs-hud-name);
+    font-weight: var(--w-black);
+    box-shadow: var(--elev-2), var(--elev-inset-face);
+  }
+
+  /* -- HOLDINGS DRAWER ---------------------------------------------------- */
+  .drawer {
+    display: flex;
+    gap: var(--gap-sm);
+    align-items: center;
+    padding: var(--gap-sm) var(--gap);
+    background: var(--g-face-drawer);
+    border: var(--bezel) solid var(--g-drawer-border);
+    border-radius: var(--r-drawer);
+    box-shadow: var(--elev-2);
+    color: var(--g-text-primary);
+    text-shadow: var(--g-text-shadow);
+  }
+
+  /* -- GROUP CHIP ---------------------------------------------------------
+     A street's colour group, doubled by its name so it never depends on hue. */
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 10px 3px 6px;
+    border-radius: var(--r-pill);
+    background: var(--g-face-dark);
+    color: var(--g-text-primary);
+    font-size: var(--fs-micro);
+    font-weight: var(--w-bold);
+    text-shadow: var(--g-text-shadow);
+    box-shadow: var(--elev-1);
+  }
+  .chip__swatch {
+    inline-size: 12px;
+    block-size: 12px;
+    border-radius: 3px;
+    background: var(--chip-colour, var(--state-neutral));
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.35);
+  }
+
+  /* -- MONEY --------------------------------------------------------------
+     Formatting is money.js's job; this only sets the face. Every element
+     carrying a currency string must also carry data-money (or data-fact),
+     which is what the load-time gate looks for.
+     "Dim what is zero": a zero value renders in --g-text-disabled with a
+     desaturated companion glyph, so state is legible without reading a
+     digit. Live non-zero values are never mid-grey. */
+  .money {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum" 1;
+    font-weight: var(--w-heavy);
+    white-space: nowrap;
+  }
+  .money--figure {
+    font-family: var(--font-data);
+    font-size: var(--fs-figure);
+    line-height: var(--lh-figure);
+    font-weight: var(--w-regular);   /* FT: size carries hierarchy, not weight */
+    letter-spacing: -0.01em;
+  }
+  .money--1935 {
+    font-family: var(--font-antique);
+    font-weight: var(--w-regular);
+    letter-spacing: 0.01em;
+  }
+  .money--gain { color: var(--state-gain); }
+  .money--loss { color: var(--state-loss); }
+  .money--zero { color: var(--g-text-disabled); font-weight: var(--w-semibold); }
+
+  /* -- PROMPT BANNER ------------------------------------------------------
+     Top-right, opposite the identity panel. A hanging object: two cords and
+     grommets, not a floating rectangle. */
+  .prompt {
+    position: relative;
+    max-inline-size: min(56vw, 420px);
+    margin-top: 14px;
+    padding: var(--gap) var(--gap-lg);
+    background: var(--g-face-cream);
+    border-radius: var(--r-banner);
+    box-shadow: var(--elev-3), var(--elev-inset-face);
+    color: var(--g-text-on-plate);
+    font-family: var(--font-hud);
+    font-size: var(--fs-hud-stat);
+    font-weight: var(--w-heavy);
+    text-wrap: balance;
+  }
+  .prompt::before,
+  .prompt::after {
+    content: "";
+    position: absolute;
+    top: -14px;
+    inline-size: 3px;
+    block-size: 14px;
+    background: rgba(0, 0, 0, 0.35);
+  }
+  .prompt::before { left: 28%; }
+  .prompt::after  { right: 28%; }
+  .prompt__grommet {
+    position: absolute;
+    top: 4px;
+    inline-size: 10px;
+    block-size: 10px;
+    border-radius: 50%;
+    background: var(--g-chrome-bezel);
+    box-shadow: var(--elev-inset-well);
+  }
+
+  /* =========================================================================
+     DATA PANEL — the FT register
+     A panel is a sheet of paper. The tint IS the card: never a white card on
+     the tint, never a chart on #FFFFFF.
+     ====================================================================== */
+  .panel {
+    background: var(--ft-paper);
+    color: var(--ft-text-body);
+    font-family: var(--font-data);
+    font-weight: var(--w-regular);
+    padding: var(--gap-lg) var(--pad-x) var(--pad-x);
+    border-radius: var(--r-drawer);
+    box-shadow: var(--elev-4);
+    inline-size: min(680px, 100%);
+    max-block-size: calc(100svh - var(--safe-t) - var(--safe-b) - 2 * var(--gap));
+    overflow-y: auto;
+    overscroll-behavior: contain;   /* scroll here must not move the stage  */
+    touch-action: pan-y;            /* the one surface that may scroll      */
+    -webkit-overflow-scrolling: touch;
+    user-select: text;
+  }
+
+  /* FT's chart signature: a 60×4 bar at the very top-left, above the title.
+     It costs nothing and it does most of the work. */
+  .panel__mark {
+    inline-size: var(--ft-blackbar-w);
+    block-size: var(--ft-blackbar-h);
+    background: var(--ft-ink);
+    margin-inline-start: var(--ft-text-x);
+    margin-block-end: var(--gap);
+  }
+
+  /* Title, subtitle and source are flush to the GRAPHIC's left edge; the plot
+     is indented. That deliberate misalignment is the FT layout signature.
+     Nothing here is ever centred. */
+  .panel__title {
+    font-size: var(--fs-panel-title);
+    line-height: var(--lh-panel-title);
+    font-weight: var(--w-regular);   /* 400. Bold is the counterfeit tell.  */
+    color: var(--ft-text-title);
+    margin-inline-start: var(--ft-text-x);
+    text-align: left;
+    text-wrap: balance;
+  }
+  .panel__subtitle {
+    font-size: var(--fs-panel-sub);
+    line-height: var(--lh-panel-sub);
+    font-weight: var(--w-regular);
+    color: var(--ft-text-subtitle);
+    margin: 6px 0 0;
+    margin-inline-start: var(--ft-text-x);
+    text-align: left;
+  }
+  .panel__body {
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+    color: var(--ft-text-body);
+    margin-block-start: var(--gap);
+  }
+  .panel__figure {
+    font-size: var(--fs-figure);
+    line-height: var(--lh-figure);
+    font-weight: var(--w-regular);
+    color: var(--ft-text-title);
+    letter-spacing: -0.01em;
+    margin-block-start: var(--gap);
+  }
+  .panel__figure-label {
+    font-size: var(--fs-label);
+    color: var(--ft-text-subtitle);
+    margin-block-start: 2px;
+  }
+  .panel__note {
+    font-size: var(--fs-annotation);
+    line-height: 1.4;
+    color: var(--ft-text-annotation);
+    margin-block-start: var(--gap);
+  }
+  /* Source block: stacked lines, left-aligned to the same x as the title.
+     Footnote, then Source:, then Graphic:. Never lighter than --ft-black-60,
+     and the data vintage belongs in the subtitle, not here. */
+  .panel__source {
+    font-size: var(--fs-source);
+    line-height: var(--lh-source);
+    color: var(--ft-text-source);
+    margin-inline-start: var(--ft-text-x);
+    margin-block-start: var(--ft-source-gap);
+    text-align: left;
+  }
+  .panel__source > * + * { margin-block-start: 4px; }
+  .panel__credit { font-style: italic; font-size: var(--fs-credit); }
+
+  /* An inset panel that must separate from the page uses wheat, not white. */
+  .panel__inset {
+    background: var(--ft-paper-box);
+    padding: var(--gap);
+    border-radius: var(--r-plate);
+    margin-block-start: var(--gap);
+  }
+
+  /* Data tables. Figures right-aligned and tabular; no vertical rules. */
+  .panel table { inline-size: 100%; font-size: var(--fs-label); }
+  .panel th {
+    text-align: left;
+    font-weight: var(--w-medium);
+    color: var(--ft-text-subtitle);
+    padding: 6px 0;
+    border-block-end: 1px solid var(--ft-gridline);
+  }
+  .panel td {
+    padding: 6px 0;
+    color: var(--ft-text-body);
+    border-block-end: 1px solid var(--ft-gridline);
+  }
+  .panel td.num, .panel th.num { text-align: right; }
+
+  /* -- BOTTOM SHEET ------------------------------------------------------- */
+  .sheet {
+    position: fixed;
+    inset-inline: 0;
+    inset-block-end: 0;
+    z-index: var(--z-sheet);
+    padding: var(--gap) var(--safe-r) calc(var(--safe-b) + var(--gap)) var(--safe-l);
+    background: var(--ft-paper);
+    border-start-start-radius: var(--r-shell);
+    border-start-end-radius: var(--r-shell);
+    box-shadow: var(--elev-4);
+    max-block-size: 86svh;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    touch-action: pan-y;
+    user-select: text;
+  }
+  .sheet__handle {
+    inline-size: 44px;
+    block-size: 5px;
+    border-radius: var(--r-pill);
+    background: var(--ft-black-20);
+    margin: 0 auto var(--gap);
+  }
+}
+
+/* =============================================================================
+   CHART — FT marks. No axis line. No rounded bars. No gradients. No shadows.
+   ========================================================================== */
+@layer chart {
+  .chart { background: var(--ft-paper); font-family: var(--font-data); }
+  .chart text,
+  .chart tspan {
+    font-feature-settings: "tnum" 1;
+    -webkit-font-feature-settings: "tnum" 1;
+  }
+
+  /* FT removes the domain path on both axes in every frame. */
+  .chart .domain { stroke-width: 0; stroke: none; }
+
+  .chart .axis-label,
+  .chart .xAxis text { font-size: var(--fs-axis); fill: var(--ft-text-axis); }
+  .chart .yAxis text  { font-size: var(--fs-axis); fill: var(--ft-text-axis);
+                        text-anchor: end; }
+
+  /* Horizontal gridlines only, on the value axis, drawn behind every mark. */
+  .chart .yAxis line   { stroke: var(--ft-gridline); stroke-width: var(--ft-gridline-width); }
+  .chart .xAxis line   { stroke: var(--ft-tick);     stroke-width: var(--ft-gridline-width); }
+  .chart .baseline line,
+  .chart .baseline     { stroke: var(--ft-baseline); stroke-width: var(--ft-baseline-width); }
+
+  .chart .band, .chart .highlights { fill: var(--ft-paper-band); }
+
+  .chart .bars, .chart .bar {
+    stroke: none;
+    fill: var(--ft-primary);
+    rx: 0;                /* explicit: bars are never rounded              */
+  }
+  .chart .bar--muted   { fill: var(--ft-muted-light); }
+  .chart .bar--context { fill: var(--ft-muted); }
+  .chart .bar--subject { fill: var(--ft-highlight); }
+
+  .chart .lines, .chart .line {
+    fill: none;
+    stroke: var(--ft-primary);
+    stroke-width: var(--ft-line-width);
+    stroke-linecap: square;
+    stroke-linejoin: round;
+  }
+  .chart .line--then { stroke: var(--ft-muted); }
+  .chart .line--now  { stroke: var(--ft-primary); }
+
+  .chart .dot        { fill: var(--ft-primary); stroke: none; }
+  .chart .dot--then  { fill: var(--ft-muted); }
+  .chart .connector  { stroke: var(--ft-muted); stroke-width: 2px; }
+
+  .chart .annotations-holder line,
+  .chart .annotations-holder path {
+    stroke: var(--ft-annotation-rule);
+    stroke-width: 1px;
+    fill: none;
+  }
+  .chart .annotations-holder text,
+  .chart .annotation {
+    font-size: var(--fs-annotation);
+    fill: var(--ft-text-annotation);
+  }
+  .chart .legend,
+  .chart .value-label,
+  .chart .highlight-label {
+    font-size: var(--fs-legend);
+    fill: var(--ft-text-value-label);
+  }
+}
+
+/* =============================================================================
+   STATE — later than components by construction, so it always wins
+   ========================================================================== */
+@layer state {
+
+  /* Player identity. hud.js sets data-player on the panel; every child then
+     reads --player-* without any per-child rule. */
+  [data-player="1"] { --player-plate: var(--p1-plate); --player-piece: var(--p1-piece); --player-pennant: var(--p1-pennant); }
+  [data-player="2"] { --player-plate: var(--p2-plate); --player-piece: var(--p2-piece); --player-pennant: var(--p2-pennant); }
+  [data-player="3"] { --player-plate: var(--p3-plate); --player-piece: var(--p3-piece); --player-pennant: var(--p3-pennant); }
+  [data-player="4"] { --player-plate: var(--p4-plate); --player-piece: var(--p4-piece); --player-pennant: var(--p4-pennant); }
+
+  /* Street group. panel.js sets data-group on a chip or a rule. */
+  [data-group="riverside"]   { --chip-colour: var(--grp-riverside); }
+  [data-group="terminus"]    { --chip-colour: var(--grp-terminus); }
+  [data-group="civic"]       { --chip-colour: var(--grp-civic); }
+  [data-group="theatreland"] { --chip-colour: var(--grp-theatreland); }
+  [data-group="chambers"]    { --chip-colour: var(--grp-chambers); }
+  [data-group="square-mile"] { --chip-colour: var(--grp-square-mile); }
+  [data-group="gallery"]     { --chip-colour: var(--grp-gallery); }
+  [data-group="crown"]       { --chip-colour: var(--grp-crown); }
+
+  /* Both of these exist ONLY on the active panel, so they start absent. */
+  .active-chevron,
+  .turn-glyph { display: none; }
+
+  /* ACTIVE PLAYER — four redundant cues at once, never one.
+     (1) gold portrait frame, (2) gold stroke on the panel shell,
+     (3) the chevron above it, (4) a turn glyph that exists only here. */
+  .player-panel.is-active { box-shadow: var(--elev-3), 0 0 0 2px var(--state-active); }
+  .player-panel.is-active .player-panel__portrait { border-color: #E8A93C; }
+  .player-panel.is-active .active-chevron { display: block; }
+  .player-panel.is-active .turn-glyph {
+    display: grid;
+    place-items: center;
+    inline-size: 40px;
+    block-size: 40px;
+    border-radius: 8px;
+    border: 2px solid #FFFFFF;
+    background: var(--g-face-dark);
+    color: var(--g-text-primary);
+  }
+
+  /* Pressed. The object moves down onto the table and its shadow shortens. */
+  .btn:active {
+    transform: translateY(2px);
+    box-shadow: var(--elev-1), var(--elev-inset-well);
+  }
+  .btn--primary:active {
+    transform: translateY(2px);
+    box-shadow: var(--elev-2), var(--elev-inset-well), var(--glow-action);
+  }
+
+  /* Disabled: desaturated, no halo, still 48px and still announced. */
+  .btn:disabled,
+  .btn.is-disabled,
+  .btn[aria-disabled="true"] {
+    cursor: default;
+    filter: saturate(0.25) brightness(0.86);
+    box-shadow: var(--elev-1);
+    color: var(--g-text-disabled);
+  }
+
+  /* A square the current player may legally act on. Colour plus a glyph —
+     never colour alone. */
+  .is-legal { box-shadow: var(--elev-2), 0 0 0 2px var(--state-legal); }
+
+  /* Warning and danger both carry a text label in the markup; the colour
+     reinforces, it does not carry. */
+  .is-warning { box-shadow: var(--elev-2), 0 0 0 2px var(--state-warning); }
+  .is-danger  { box-shadow: var(--elev-2), 0 0 0 2px var(--state-danger); }
+
+  /* Dim what is zero — the desaturated companion glyph. */
+  .is-zero { color: var(--g-text-disabled); }
+  .is-zero .chip__swatch,
+  .is-zero .btn__glyph { filter: saturate(0.15); opacity: 0.7; }
+
+  .is-hidden { display: none !important; }
+
+  /* -- Higher contrast, per the reader's setting ------------------------- */
+  @media (prefers-contrast: more) {
+    :root {
+      --ft-gridline: var(--ft-black-20);
+      --ft-text-subtitle: var(--ft-black-70);
+      --ft-text-source: var(--ft-black-70);
+    }
+    .plate, .btn, .player-panel { border-width: calc(var(--bezel) + 1px); }
+    :focus-visible { outline-width: 4px; }
+  }
+
+  /* -- REDUCED MOTION ----------------------------------------------------
+     Camera fly-ins become cuts, dice tumbles become a cross-fade, idle
+     drift is off outright — the JS side reads the same media query. Here we
+     simply stop everything CSS can animate. */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+    .btn:active, .btn--primary:active { transform: none; }
+  }
+}
+
+/* =============================================================================
+   UTILITIES
+   ========================================================================== */
+@layer utilities {
+  /* A canvas is invisible to assistive technology, so the board state is
+     mirrored into a hidden DOM grid and turns are announced through a terse
+     polite live region. Both live here. */
+  .sr-only {
+    position: absolute;
+    inline-size: 1px;
+    block-size: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .tnum { font-variant-numeric: tabular-nums; font-feature-settings: "tnum" 1; }
+  .nowrap { white-space: nowrap; }
+  .stack   { display: grid; gap: var(--gap); }
+  .stack-sm{ display: grid; gap: var(--gap-sm); }
+  .row     { display: flex; gap: var(--gap); align-items: center; }
+  .row-end { display: flex; gap: var(--gap); align-items: center; justify-content: flex-end; }
+  .grow    { flex: 1 1 auto; min-inline-size: 0; }
+  .truncate{ overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .dim     { color: var(--g-text-disabled); }
+
+  /* Anything that must never be dragged out from under a gesture. */
+  .no-touch { touch-action: none; }
+  .pan-y    { touch-action: pan-y; overscroll-behavior: contain; }
+
+  /* Print: the data panels are the only thing worth printing, and they print
+     on paper the same way they render on it. */
+  @media print {
+    #board-canvas, #hud, #boot, .btn { display: none !important; }
+    .panel { box-shadow: none; max-block-size: none; overflow: visible; }
+  }
+}

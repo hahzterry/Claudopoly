@@ -1,0 +1,14 @@
+node_modules/
+dist/
+.vercel/
+.DS_Store
+
+# Build artefacts and evidence that are large and regenerable.
+# The raw HM Land Registry extract and the round-0 research specs ARE kept —
+# they are the provenance for every figure in the game.
+bench/screenshots/
+bench/shots/
+bench/blind/
+bench/video/
+bench/tmp/
+progress-site/

@@ -1,0 +1,2378 @@
+{
+  "$schema": "landlord-facts/1",
+  "title": "LANDLORD: LONDON 2026 \u2014 fact base",
+  "description": "Every monetary value rendered by the game is defined here. Nothing may be displayed that is not present in this file.",
+  "generatedUtc": "2026-08-10T13:12:06.010663+00:00",
+  "datasetAccessed": "10 August 2026",
+  "datasetAccessedIso": "2026-08-10",
+  "heritage": {
+    "title": "The Landlord's Game",
+    "author": "Elizabeth Magie",
+    "year": 1904,
+    "patent": "US Patent 748,626",
+    "status": "public domain",
+    "note": "Designed to demonstrate the economic consequences of land monopoly and rent. This game is an original homage to it."
+  },
+  "assumptions": {
+    "grossYieldPct": 4.0,
+    "ltvPct": 60.0,
+    "levyRateOfRentPct": 25.0,
+    "startingCapital": 6000000,
+    "turnLimit": 24,
+    "statement": "Rent and debt figures in this game are derived from a single flat assumption set, stated above and shown on screen. They are modelling assumptions, not market observations.",
+    "debtInterestPct": 4.35,
+    "debtInterestSource": {
+      "name": "Bank of England \u2014 Money and Credit, June 2026",
+      "figure": "effective interest rate on new mortgages, 4.35%",
+      "date": "29 July 2026",
+      "url": "https://www.bankofengland.co.uk/statistics/money-and-credit/2026/june-2026"
+    },
+    "bankRatePct": 3.75,
+    "bankRateSource": {
+      "name": "Bank of England \u2014 Monetary Policy Summary, July 2026",
+      "figure": "Bank Rate held at 3.75%",
+      "date": "30 July 2026",
+      "url": "https://www.bankofengland.co.uk/monetary-policy-summary-and-minutes/2026/july-2026"
+    },
+    "ai": {
+      "note": "Opponent tuning only. Not sourced, not displayed, not a market figure. Declared here so the source contains no bare money literal.",
+      "cashReserve": 250000,
+      "baseAppetite": 0.45,
+      "groupAppetite": 0.75,
+      "gearWhenTrophy": 0.88
+    },
+    "assemblyMultiplier": 2,
+    "assemblyNote": "Site assembly: hold every square in a colour group and the rent those squares yield counts double. Assembling contiguous holdings is how real land value is unlocked, and it is what the 1904 original was built to demonstrate.",
+    "winCondition": "The winner is the player with the largest annual rent roll at the close, NET of debt service. Not the largest pile of cash \u2014 the largest claim on London's land rent, after the bank has taken its cut. Net worth breaks a tie. Because debt costs 4.35% and the assumed yield is 4.0%, gearing buys you more streets but a lower return on the cash you commit: that is the decision the game is built on.",
+    "levyNote": "The land value levy square charges one month of assumed rent on every street a player holds. It taxes land rent, not improvements \u2014 the point Elizabeth Magie built the 1904 original to demonstrate."
+  },
+  "valueBases": {
+    "ppd-median-a": "Median price paid, arm's-length residential sales (PPD Category A)",
+    "ppd-median-all": "Median price paid, all recorded transactions (PPD Categories A and B)",
+    "ppd-single": "A single recorded sale",
+    "ukhpi-la-average": "UK House Price Index average price for the local authority"
+  },
+  "groups": [
+    {
+      "id": "riverside",
+      "name": "Riverside",
+      "colour": "#8C6A4F",
+      "size": 2
+    },
+    {
+      "id": "terminus",
+      "name": "Terminus",
+      "colour": "#7FA9C9",
+      "size": 3
+    },
+    {
+      "id": "civic",
+      "name": "Civic",
+      "colour": "#B4708F",
+      "size": 3
+    },
+    {
+      "id": "theatreland",
+      "name": "Theatreland",
+      "colour": "#D9843C",
+      "size": 3
+    },
+    {
+      "id": "chambers",
+      "name": "Chambers",
+      "colour": "#B23A34",
+      "size": 3
+    },
+    {
+      "id": "square-mile",
+      "name": "Square Mile",
+      "colour": "#D9B23C",
+      "size": 3
+    },
+    {
+      "id": "gallery",
+      "name": "Gallery",
+      "colour": "#4E8A6E",
+      "size": 3
+    },
+    {
+      "id": "crown",
+      "name": "Crown",
+      "colour": "#2F5473",
+      "size": 2
+    }
+  ],
+  "streets": [
+    {
+      "id": "old-kent-road",
+      "name": "Old Kent Road",
+      "localAuthority": "Southwark",
+      "group": "riverside",
+      "boardPrice1935": {
+        "amount": 60,
+        "currency": "GBP",
+        "label": "1935 board price",
+        "note": "Purchase price printed on the London edition of the 1935/36 British board, shown here purely as a historical contrast figure."
+      },
+      "value2026": {
+        "currency": "GBP",
+        "windowFrom": "1 January 2023",
+        "windowTo": "10 August 2026",
+        "datasetAccessed": "10 August 2026",
+        "amount": 325000,
+        "basis": "ppd-median-a",
+        "basisLabel": "Median price paid, arm's-length residential sales",
+        "dataset": "HM Land Registry Price Paid Data",
+        "datasetLicence": "OGL-3.0",
+        "sourceUrl": "https://landregistry.data.gov.uk/app/ppd/",
+        "sampleSize": 38,
+        "sampleLow": 130000,
+        "sampleHigh": 604000,
+        "latestRecord": {
+          "transactionId": "559C5AD5-9AF6-AFE3-E063-4804A8C004A4",
+          "transactionUri": "https://landregistry.data.gov.uk/data/ppi/transaction/559C5AD5-9AF6-AFE3-E063-4804A8C004A4/current",
+          "address": "FLAT 2A 549, Old Kent Road, SE1 5EW",
+          "price": 450000,
+          "date": "2026-05-18",
+          "tenure": "leasehold",
+          "ppdCategory": "A"
+        },
+        "method": "Median of HM Land Registry Price Paid Data Category A transactions (standard, arm's-length, full market value) recorded on this street between 1 January 2023 and 10 August 2026."
+      },
+      "rentAssumption": {
+        "amount": 13000,
+        "currency": "GBP",
+        "label": "Rent \u2014 yield assumption, not a recorded figure",
+        "period": "per year",
+        "isAssumption": true,
+        "grossYieldPct": 4.0,
+        "formula": "value2026 x 4.0% assumed gross yield = one year of rent",
+        "note": "This is a flat modelling assumption applied identically to every square. It is NOT an observed rent, NOT a valuation, and NOT drawn from any commercial dataset. Real gross yields vary widely by street, use class and lease terms."
+      },
+      "mortgageAssumption": {
+        "amount": 195000,
+        "currency": "GBP",
+        "label": "Debt available \u2014 leverage assumption",
+        "isAssumption": true,
+        "ltvPct": 60.0,
+        "formula": "value2026 x 60.0% loan to value",
+        "note": "A flat leverage assumption for gameplay. Not an offer, not advice, and not indicative of real lending terms."
+      },
+      "proxyNote": null
+    },
+    {
+      "id": "whitechapel-road",
+      "name": "Whitechapel Road",
+      "localAuthority": "Tower Hamlets",
+      "group": "riverside",
+      "boardPrice1935": {
+        "amount": 60,
+        "currency": "GBP",
+        "label": "1935 board price",
+        "note": "Purchase price printed on the London edition of the 1935/36 British board, shown here purely as a historical contrast figure."
+      },
+      "value2026": {
+        "currency": "GBP",
+        "windowFrom": "1 January 2023",
+        "windowTo": "10 August 2026",
+        "datasetAccessed": "10 August 2026",
+        "amount": 935000,
+        "basis": "ppd-median-all",
+        "basisLabel": "Median price paid, all recorded transactions",
+        "dataset": "HM Land Registry Price Paid Data",
+        "datasetLicence": "OGL-3.0",
+        "sourceUrl": "https://landregistry.data.gov.uk/app/ppd/",
+        "sampleSize": 7,
+        "sampleLow": 415000,
+        "sampleHigh": 83464831,
+        "latestRecord": {
+          "transactionId": "4C1B673F-DBD1-D8EA-E063-4704A8C0BF7D",
+          "transactionUri": "https://landregistry.data.gov.uk/data/ppi/transaction/4C1B673F-DBD1-D8EA-E063-4704A8C0BF7D/current",
+          "address": "108, Whitechapel Road, E1 1JD",
+          "price": 935000,
+          "date": "2026-01-29",
+          "tenure": "freehold",
+          "ppdCategory": "B"
+        },
+        "method": "Median of all HM Land Registry Price Paid Data transactions (Categories A and B, so including transfers to companies and other non-standard sales) recorded on this street between 1 January 2023 and 10 August 2026. Too few Category A sales were recorded to use those alone."
+      },
+      "rentAssumption": {
+        "amount": 37400,
+        "currency": "GBP",
+        "label": "Rent \u2014 yield assumption, not a recorded figure",
+        "period": "per year",
+        "isAssumption": true,
+        "grossYieldPct": 4.0,
+        "formula": "value2026 x 4.0% assumed gross yield = one year of rent",
+        "note": "This is a flat modelling assumption applied identically to every square. It is NOT an observed rent, NOT a valuation, and NOT drawn from any commercial dataset. Real gross yields vary widely by street, use class and lease terms."
+      },
+      "mortgageAssumption": {
+        "amount": 561000,
+        "currency": "GBP",
+        "label": "Debt available \u2014 leverage assumption",
+        "isAssumption": true,
+        "ltvPct": 60.0,
+        "formula": "value2026 x 60.0% loan to value",
+        "note": "A flat leverage assumption for gameplay. Not an offer, not advice, and not indicative of real lending terms."
+      },
+      "proxyNote": null
+    },
+    {
+      "id": "the-angel-islington",
+      "name": "The Angel, Islington",
+      "localAuthority": "Islington",
+      "group": "terminus",
+      "boardPrice1935": {
+        "amount": 100,
+        "currency": "GBP",
+        "label": "1935 board price",
+        "note": "Purchase price printed on the London edition of the 1935/36 British board, shown here purely as a historical contrast figure."
+      },
+      "value2026": {
+        "currency": "GBP",
+        "windowFrom": "1 January 2023",
+        "windowTo": "10 August 2026",
+        "datasetAccessed": "10 August 2026",
+        "amount": 815000,
+        "basis": "ppd-median-all",
+        "basisLabel": "Median price paid, all recorded transactions",
+        "dataset": "HM Land Registry Price Paid Data",
+        "datasetLicence": "OGL-3.0",
+        "sourceUrl": "https://landregistry.data.gov.uk/app/ppd/",
+        "sampleSize": 4,
+        "sampleLow": 100000,
+        "sampleHigh": 1600000,
+        "latestRecord": {
+          "transactionId": "402A3A66-ACCD-A7DF-E063-4804A8C0B80D",
+          "transactionUri": "https://landregistry.data.gov.uk/data/ppi/transaction/402A3A66-ACCD-A7DF-E063-4804A8C0B80D/current",
+          "address": "ANGEL CORNER HOUSE, 1, Islington High Street, N1 9AH",
+          "price": 180000,
+          "date": "2024-11-08",
+          "tenure": "leasehold",
+          "ppdCategory": "B"
+        },
+        "method": "Median of all HM Land Registry Price Paid Data transactions (Categories A and B, so including transfers to companies and other non-standard sales) recorded on this street between 1 January 2023 and 10 August 2026. Too few Category A sales were recorded to use those alone."
+      },
+      "rentAssumption": {
+        "amount": 32600,
+        "currency": "GBP",
+        "label": "Rent \u2014 yield assumption, not a recorded figure",
+        "period": "per year",
+        "isAssumption": true,
+        "grossYieldPct": 4.0,
+        "formula": "value2026 x 4.0% assumed gross yield = one year of rent",
+        "note": "This is a flat modelling assumption applied identically to every square. It is NOT an observed rent, NOT a valuation, and NOT drawn from any commercial dataset. Real gross yields vary widely by street, use class and lease terms."
+      },
+      "mortgageAssumption": {
+        "amount": 489000,
+        "currency": "GBP",
+        "label": "Debt available \u2014 leverage assumption",
+        "isAssumption": true,
+        "ltvPct": 60.0,
+        "formula": "value2026 x 60.0% loan to value",
+        "note": "A flat leverage assumption for gameplay. Not an offer, not advice, and not indicative of real lending terms."
+      },
+      "proxyNote": "The Angel is a landmark junction, not a street. Evidence is drawn from Islington High Street, on which The Angel stands."
+    },
+    {
+      "id": "euston-road",
+      "name": "Euston Road",
+      "localAuthority": "Camden",
+      "group": "terminus",
+      "boardPrice1935": {
+        "amount": 100,
+        "currency": "GBP",
+        "label": "1935 board price",
+        "note": "Purchase price printed on the London edition of the 1935/36 British board, shown here purely as a historical contrast figure."
+      },
+      "value2026": {
+        "currency": "GBP",
+        "windowFrom": "1 January 2023",
+        "windowTo": "10 August 2026",
+        "datasetAccessed": "10 August 2026",
+        "amount": 825000,
+        "basis": "ppd-median-a",
+        "basisLabel": "Median price paid, arm's-length residential sales",
+        "dataset": "HM Land Registry Price Paid Data",
+        "datasetLicence": "OGL-3.0",
+        "sourceUrl": "https://landregistry.data.gov.uk/app/ppd/",
+        "sampleSize": 9,
+        "sampleLow": 620000,
+        "sampleHigh": 1400000,
+        "latestRecord": {
+          "transactionId": "559C5AD5-5C85-AFE3-E063-4804A8C004A4",
+          "transactionUri": "https://landregistry.data.gov.uk/data/ppi/transaction/559C5AD5-5C85-AFE3-E063-4804A8C004A4/current",
+          "address": "APARTMENT 3-13 ST. PANCRAS CHAMBERS, Euston Road, NW1 2AR",
+          "price": 620000,
+          "date": "2026-05-21",
+          "tenure": "leasehold",
+          "ppdCategory": "A"
+        },
+        "method": "Median of HM Land Registry Price Paid Data Category A transactions (standard, arm's-length, full market value) recorded on this street between 1 January 2023 and 10 August 2026."
+      },
+      "rentAssumption": {
+        "amount": 33000,
+        "currency": "GBP",
+        "label": "Rent \u2014 yield assumption, not a recorded figure",
+        "period": "per year",
+        "isAssumption": true,
+        "grossYieldPct": 4.0,
+        "formula": "value2026 x 4.0% assumed gross yield = one year of rent",
+        "note": "This is a flat modelling assumption applied identically to every square. It is NOT an observed rent, NOT a valuation, and NOT drawn from any commercial dataset. Real gross yields vary widely by street, use class and lease terms."
+      },
+      "mortgageAssumption": {
+        "amount": 495000,
+        "currency": "GBP",
+        "label": "Debt available \u2014 leverage assumption",
+        "isAssumption": true,
+        "ltvPct": 60.0,
+        "formula": "value2026 x 60.0% loan to value",
+        "note": "A flat leverage assumption for gameplay. Not an offer, not advice, and not indicative of real lending terms."
+      },
+      "proxyNote": null
+    },
+    {
+      "id": "pentonville-road",
+      "name": "Pentonville Road",
+      "localAuthority": "Islington",
+      "group": "terminus",
+      "boardPrice1935": {
+        "amount": 120,
+        "currency": "GBP",
+        "label": "1935 board price",
+        "note": "Purchase price printed on the London edition of the 1935/36 British board, shown here purely as a historical contrast figure."
+      },
+      "value2026": {
+        "currency": "GBP",
+        "windowFrom": "1 January 2023",
+        "windowTo": "10 August 2026",
+        "datasetAccessed": "10 August 2026",
+        "amount": 765000,
+        "basis": "ppd-median-a",
+        "basisLabel": "Median price paid, arm's-length residential sales",
+        "dataset": "HM Land Registry Price Paid Data",
+        "datasetLicence": "OGL-3.0",
+        "sourceUrl": "https://landregistry.data.gov.uk/app/ppd/",
+        "sampleSize": 20,
+        "sampleLow": 325000,
+        "sampleHigh": 1000000,
+        "latestRecord": {
+          "transactionId": "559C5AD5-5BDB-AFE3-E063-4804A8C004A4",
+          "transactionUri": "https://landregistry.data.gov.uk/data/ppi/transaction/559C5AD5-5BDB-AFE3-E063-4804A8C004A4/current",
+          "address": "FLAT 38 CLAREMONT HEIGHTS, 70, Pentonville Road, N1 9PR",
+          "price": 810000,
+          "date": "2026-05-29",
+          "tenure": "leasehold",
+          "ppdCategory": "A"
+        },
+        "method": "Median of HM Land Registry Price Paid Data Category A transactions (standard, arm's-length, full market value) recorded on this street between 1 January 2023 and 10 August 2026."
+      },
+      "rentAssumption": {
+        "amount": 30600,
+        "currency": "GBP",
+        "label": "Rent \u2014 yield assumption, not a recorded figure",
+        "period": "per year",
+        "isAssumption": true,
+        "grossYieldPct": 4.0,
+        "formula": "value2026 x 4.0% assumed gross yield = one year of rent",
+        "note": "This is a flat modelling assumption applied identically to every square. It is NOT an observed rent, NOT a valuation, and NOT drawn from any commercial dataset. Real gross yields vary widely by street, use class and lease terms."
+      },
+      "mortgageAssumption": {
+        "amount": 459000,
+        "currency": "GBP",
+        "label": "Debt available \u2014 leverage assumption",
+        "isAssumption": true,
+        "ltvPct": 60.0,
+        "formula": "value2026 x 60.0% loan to value",
+        "note": "A flat leverage assumption for gameplay. Not an offer, not advice, and not indicative of real lending terms."
+      },
+      "proxyNote": null
+    },
+    {
+      "id": "pall-mall",
+      "name": "Pall Mall",
+      "localAuthority": "City of Westminster",
+      "group": "civic",
+      "boardPrice1935": {
+        "amount": 140,
+        "currency": "GBP",
+        "label": "1935 board price",
+        "note": "Purchase price printed on the London edition of the 1935/36 British board, shown here purely as a historical contrast figure."
+      },
+      "value2026": {
+        "currency": "GBP",
+        "windowFrom": "1 January 2023",
+        "windowTo": "10 August 2026",
+        "datasetAccessed": "10 August 2026",
+        "amount": 1165000,
+        "basis": "ppd-median-a",
+        "basisLabel": "Median price paid, arm's-length residential sales",
+        "dataset": "HM Land Registry Price Paid Data",
+        "datasetLicence": "OGL-3.0",
+        "sourceUrl": "https://landregistry.data.gov.uk/app/ppd/",
+        "sampleSize": 3,
+        "sampleLow": 800000,
+        "sampleHigh": 4050000,
+        "latestRecord": {
+          "transactionId": "49E87C32-358C-591C-E063-4704A8C00C31",
+          "transactionUri": "https://landregistry.data.gov.uk/data/ppi/transaction/49E87C32-358C-591C-E063-4704A8C00C31/current",
+          "address": "FLAT 18 CRUSADER HOUSE, 14, Pall Mall, SW1Y 5LU",
+          "price": 800000,
+          "date": "2025-12-18",
+          "tenure": "leasehold",
+          "ppdCategory": "A"
+        },
+        "method": "Median of HM Land Registry Price Paid Data Category A transactions (standard, arm's-length, full market value) recorded on this street between 1 January 2023 and 10 August 2026."
+      },
+      "rentAssumption": {
+        "amount": 46600,
+        "currency": "GBP",
+        "label": "Rent \u2014 yield assumption, not a recorded figure",
+        "period": "per year",
+        "isAssumption": true,
+        "grossYieldPct": 4.0,
+        "formula": "value2026 x 4.0% assumed gross yield = one year of rent",
+        "note": "This is a flat modelling assumption applied identically to every square. It is NOT an observed rent, NOT a valuation, and NOT drawn from any commercial dataset. Real gross yields vary widely by street, use class and lease terms."
+      },
+      "mortgageAssumption": {
+        "amount": 699000,
+        "currency": "GBP",
+        "label": "Debt available \u2014 leverage assumption",
+        "isAssumption": true,
+        "ltvPct": 60.0,
+        "formula": "value2026 x 60.0% loan to value",
+        "note": "A flat leverage assumption for gameplay. Not an offer, not advice, and not indicative of real lending terms."
+      },
+      "proxyNote": null
+    },
+    {
+      "id": "whitehall",
+      "name": "Whitehall",
+      "localAuthority": "City of Westminster",
+      "group": "civic",
+      "boardPrice1935": {
+        "amount": 140,
+        "currency": "GBP",
+        "label": "1935 board price",
+        "note": "Purchase price printed on the London edition of the 1935/36 British board, shown here purely as a historical contrast figure."
+      },
+      "value2026": {
+        "currency": "GBP",
+        "windowFrom": "1 January 2023",
+        "windowTo": "10 August 2026",
+        "datasetAccessed": "10 August 2026",
+        "amount": 853200,
+        "basis": "ppd-median-a",
+        "basisLabel": "Median price paid, arm's-length residential sales",
+        "dataset": "HM Land Registry Price Paid Data",
+        "datasetLicence": "OGL-3.0",
+        "sourceUrl": "https://landregistry.data.gov.uk/app/ppd/",
+        "sampleSize": 67,
+        "sampleLow": 212500,
+        "sampleHigh": 4500000,
+        "latestRecord": {
+          "transactionId": "559C5AD4-BE52-AFE3-E063-4804A8C004A4",
+          "transactionUri": "https://landregistry.data.gov.uk/data/ppi/transaction/559C5AD4-BE52-AFE3-E063-4804A8C004A4/current",
+          "address": "13, Whitehall Gardens, W4 3LT",
+          "price": 585000,
+          "date": "2026-06-08",
+          "tenure": "leasehold",
+          "ppdCategory": "A"
+        },
+        "method": "Median of HM Land Registry Price Paid Data Category A transactions (standard, arm's-length, full market value) recorded on this street between 1 January 2023 and 10 August 2026."
+      },
+      "rentAssumption": {
+        "amount": 34128,
+        "currency": "GBP",
+        "label": "Rent \u2014 yield assumption, not a recorded figure",
+        "period": "per year",
+        "isAssumption": true,
+        "grossYieldPct": 4.0,
+        "formula": "value2026 x 4.0% assumed gross yield = one year of rent",
+        "note": "This is a flat modelling assumption applied identically to every square. It is NOT an observed rent, NOT a valuation, and NOT drawn from any commercial dataset. Real gross yields vary widely by street, use class and lease terms."
+      },
+      "mortgageAssumption": {
+        "amount": 511920,
+        "currency": "GBP",
+        "label": "Debt available \u2014 leverage assumption",
+        "isAssumption": true,
+        "ltvPct": 60.0,
+        "formula": "value2026 x 60.0% loan to value",
+        "note": "A flat leverage assumption for gameplay. Not an offer, not advice, and not indicative of real lending terms."
+      },
+      "proxyNote": null
+    },
+    {
+      "id": "northumberland-avenue",
+      "name": "Northumberland Avenue",
+      "localAuthority": "City of Westminster",
+      "group": "civic",
+      "boardPrice1935": {
+        "amount": 160,
+        "currency": "GBP",
+        "label": "1935 board price",
+        "note": "Purchase price printed on the London edition of the 1935/36 British board, shown here purely as a historical contrast figure."
+      },
+      "value2026": {
+        "currency": "GBP",
+        "windowFrom": "1 January 2023",
+        "windowTo": "10 August 2026",
+        "datasetAccessed": "10 August 2026",
+        "amount": 1262500,
+        "basis": "ppd-median-a",
+        "basisLabel": "Median price paid, arm's-length residential sales",
+        "dataset": "HM Land Registry Price Paid Data",
+        "datasetLicence": "OGL-3.0",
+        "sourceUrl": "https://landregistry.data.gov.uk/app/ppd/",
+        "sampleSize": 6,
+        "sampleLow": 350000,
+        "sampleHigh": 2290000,
+        "latestRecord": {
+          "transactionId": "402A3A65-BECC-A7DF-E063-4804A8C0B80D",
+          "transactionUri": "https://landregistry.data.gov.uk/data/ppi/transaction/402A3A65-BECC-A7DF-E063-4804A8C0B80D/current",
+          "address": "5, Northumberland Avenue, E12 5HF",
+          "price": 1225000,
+          "date": "2025-09-02",
+          "tenure": "freehold",
+          "ppdCategory": "A"
+        },
+        "method": "Median of HM Land Registry Price Paid Data Category A transactions (standard, arm's-length, full market value) recorded on this street between 1 January 2023 and 10 August 2026."
+      },
+      "rentAssumption": {
+        "amount": 50500,
+        "currency": "GBP",
+        "label": "Rent \u2014 yield assumption, not a recorded figure",
+        "period": "per year",
+        "isAssumption": true,
+        "grossYieldPct": 4.0,
+        "formula": "value2026 x 4.0% assumed gross yield = one year of rent",
+        "note": "This is a flat modelling assumption applied identically to every square. It is NOT an observed rent, NOT a valuation, and NOT drawn from any commercial dataset. Real gross yields vary widely by street, use class and lease terms."
+      },
+      "mortgageAssumption": {
+        "amount": 757500,
+        "currency": "GBP",
+        "label": "Debt available \u2014 leverage assumption",
+        "isAssumption": true,
+        "ltvPct": 60.0,
+        "formula": "value2026 x 60.0% loan to value",
+        "note": "A flat leverage assumption for gameplay. Not an offer, not advice, and not indicative of real lending terms."
+      },
+      "proxyNote": null
+    },
+    {
+      "id": "bow-street",
+      "name": "Bow Street",
+      "localAuthority": "City of Westminster",
+      "group": "theatreland",
+      "boardPrice1935": {
+        "amount": 180,
+        "currency": "GBP",
+        "label": "1935 board price",
+        "note": "Purchase price printed on the London edition of the 1935/36 British board, shown here purely as a historical contrast figure."
+      },
+      "value2026": {
+        "currency": "GBP",
+        "windowFrom": "1 January 2023",
+        "windowTo": "10 August 2026",
+        "datasetAccessed": "10 August 2026",
+        "amount": 367933,
+        "basis": "ppd-single",
+        "basisLabel": "Single recorded sale",
+        "dataset": "HM Land Registry Price Paid Data",
+        "datasetLicence": "OGL-3.0",
+        "sourceUrl": "https://landregistry.data.gov.uk/app/ppd/",
+        "sampleSize": 1,
+        "sampleLow": 367933,
+        "sampleHigh": 367933,
+        "latestRecord": {
+          "transactionId": "1C3E72FE-6CAC-F410-E063-4804A8C0DFA6",
+          "transactionUri": "https://landregistry.data.gov.uk/data/ppi/transaction/1C3E72FE-6CAC-F410-E063-4804A8C0DFA6/current",
+          "address": "APARTMENT 8 OSCAR HOUSE, 18, Bow Street, WC2E 7AA",
+          "price": 367933,
+          "date": "2024-03-27",
+          "tenure": "leasehold",
+          "ppdCategory": "A"
+        },
+        "method": "The most recent \u2014 and one of only 1 \u2014 HM Land Registry Price Paid transaction(s) recorded on this street since 1 January 2023. A single sale, not an average."
+      },
+      "rentAssumption": {
+        "amount": 14717,
+        "currency": "GBP",
+        "label": "Rent \u2014 yield assumption, not a recorded figure",
+        "period": "per year",
+        "isAssumption": true,
+        "grossYieldPct": 4.0,
+        "formula": "value2026 x 4.0% assumed gross yield = one year of rent",
+        "note": "This is a flat modelling assumption applied identically to every square. It is NOT an observed rent, NOT a valuation, and NOT drawn from any commercial dataset. Real gross yields vary widely by street, use class and lease terms."
+      },
+      "mortgageAssumption": {
+        "amount": 220760,
+        "currency": "GBP",
+        "label": "Debt available \u2014 leverage assumption",
+        "isAssumption": true,
+        "ltvPct": 60.0,
+        "formula": "value2026 x 60.0% loan to value",
+        "note": "A flat leverage assumption for gameplay. Not an offer, not advice, and not indicative of real lending terms."
+      },
+      "proxyNote": null
+    },
+    {
+      "id": "marlborough-street",
+      "name": "Marlborough Street",
+      "localAuthority": "City of Westminster",
+      "group": "theatreland",
+      "boardPrice1935": {
+        "amount": 180,
+        "currency": "GBP",
+        "label": "1935 board price",
+        "note": "Purchase price printed on the London edition of the 1935/36 British board, shown here purely as a historical contrast figure."
+      },
+      "value2026": {
+        "currency": "GBP",
+        "windowFrom": "1 January 2023",
+        "windowTo": "10 August 2026",
+        "datasetAccessed": "10 August 2026",
+        "amount": 1100000,
+        "basis": "ppd-median-all",
+        "basisLabel": "Median price paid, all recorded transactions",
+        "dataset": "HM Land Registry Price Paid Data",
+        "datasetLicence": "OGL-3.0",
+        "sourceUrl": "https://landregistry.data.gov.uk/app/ppd/",
+        "sampleSize": 3,
+        "sampleLow": 360000,
+        "sampleHigh": 3050000,
+        "latestRecord": {
+          "transactionId": "2859C1AC-FE1D-52B4-E063-4804A8C05948",
+          "transactionUri": "https://landregistry.data.gov.uk/data/ppi/transaction/2859C1AC-FE1D-52B4-E063-4804A8C05948/current",
+          "address": "UNIT A3 44 - 45, Great Marlborough Street, W1F 7JL",
+          "price": 1100000,
+          "date": "2024-03-22",
+          "tenure": "leasehold",
+          "ppdCategory": "B"
+        },
+        "method": "Median of all HM Land Registry Price Paid Data transactions (Categories A and B, so including transfers to companies and other non-standard sales) recorded on this street between 1 January 2023 and 10 August 2026. Too few Category A sales were recorded to use those alone."
+      },
+      "rentAssumption": {
+        "amount": 44000,
+        "currency": "GBP",
+        "label": "Rent \u2014 yield assumption, not a recorded figure",
+        "period": "per year",
+        "isAssumption": true,
+        "grossYieldPct": 4.0,
+        "formula": "value2026 x 4.0% assumed gross yield = one year of rent",
+        "note": "This is a flat modelling assumption applied identically to every square. It is NOT an observed rent, NOT a valuation, and NOT drawn from any commercial dataset. Real gross yields vary widely by street, use class and lease terms."
+      },
+      "mortgageAssumption": {
+        "amount": 660000,
+        "currency": "GBP",
+        "label": "Debt available \u2014 leverage assumption",
+        "isAssumption": true,
+        "ltvPct": 60.0,
+        "formula": "value2026 x 60.0% loan to value",
+        "note": "A flat leverage assumption for gameplay. Not an offer, not advice, and not indicative of real lending terms."
+      },
+      "proxyNote": "Recorded as Great Marlborough Street, the full street name in the HM Land Registry address data."
+    },
+    {
+      "id": "vine-street",
+      "name": "Vine Street",
+      "localAuthority": "City of Westminster",
+      "group": "theatreland",
+      "boardPrice1935": {
+        "amount": 200,
+        "currency": "GBP",
+        "label": "1935 board price",
+        "note": "Purchase price printed on the London edition of the 1935/36 British board, shown here purely as a historical contrast figure."
+      },
+      "value2026": {
+        "currency": "GBP",
+        "windowFrom": "1 January 2023",
+        "windowTo": "10 August 2026",
+        "datasetAccessed": "10 August 2026",
+        "amount": 435000,
+        "basis": "ppd-single",
+        "basisLabel": "Single recorded sale",
+        "dataset": "HM Land Registry Price Paid Data",
+        "datasetLicence": "OGL-3.0",
+        "sourceUrl": "https://landregistry.data.gov.uk/app/ppd/",
+        "sampleSize": 1,
+        "sampleLow": 435000,
+        "sampleHigh": 435000,
+        "latestRecord": {
+          "transactionId": "25E9DA80-5622-555E-E063-4704A8C066F2",
+          "transactionUri": "https://landregistry.data.gov.uk/data/ppi/transaction/25E9DA80-5622-555E-E063-4704A8C066F2/current",
+          "address": "FLAT 15 HIBISCUS HOUSE, 1, Vine Street, E17 3GF",
+          "price": 435000,
+          "date": "2024-06-28",
+          "tenure": "leasehold",
+          "ppdCategory": "A"
+        },
+        "method": "The most recent \u2014 and one of only 1 \u2014 HM Land Registry Price Paid transaction(s) recorded on this street since 1 January 2023. A single sale, not an average."
+      },
+      "rentAssumption": {
+        "amount": 17400,
+        "currency": "GBP",
+        "label": "Rent \u2014 yield assumption, not a recorded figure",
+        "period": "per year",
+        "isAssumption": true,
+        "grossYieldPct": 4.0,
+        "formula": "value2026 x 4.0% assumed gross yield = one year of rent",
+        "note": "This is a flat modelling assumption applied identically to every square. It is NOT an observed rent, NOT a valuation, and NOT drawn from any commercial dataset. Real gross yields vary widely by street, use class and lease terms."
+      },
+      "mortgageAssumption": {
+        "amount": 261000,
+        "currency": "GBP",
+        "label": "Debt available \u2014 leverage assumption",
+        "isAssumption": true,
+        "ltvPct": 60.0,
+        "formula": "value2026 x 60.0% loan to value",
+        "note": "A flat leverage assumption for gameplay. Not an offer, not advice, and not indicative of real lending terms."
+      },
+      "proxyNote": null
+    },
+    {
+      "id": "strand",
+      "name": "Strand",
+      "localAuthority": "City of Westminster",
+      "group": "chambers",
+      "boardPrice1935": {
+        "amount": 220,
+        "currency": "GBP",
+        "label": "1935 board price",
+        "note": "Purchase price printed on the London edition of the 1935/36 British board, shown here purely as a historical contrast figure."
+      },
+      "value2026": {
+        "currency": "GBP",
+        "windowFrom": "1 January 2023",
+        "windowTo": "10 August 2026",
+        "datasetAccessed": "10 August 2026",
+        "amount": 908000,
+        "basis": "ppd-median-a",
+        "basisLabel": "Median price paid, arm's-length residential sales",
+        "dataset": "HM Land Registry Price Paid Data",
+        "datasetLicence": "OGL-3.0",
+        "sourceUrl": "https://landregistry.data.gov.uk/app/ppd/",
+        "sampleSize": 41,
+        "sampleLow": 175000,
+        "sampleHigh": 7500000,
+        "latestRecord": {
+          "transactionId": "5340B1C5-A0AF-8052-E063-4804A8C06EE4",
+          "transactionUri": "https://landregistry.data.gov.uk/data/ppi/transaction/5340B1C5-A0AF-8052-E063-4804A8C06EE4/current",
+          "address": "APARTMENT 304 MARCONI HOUSE, 335, Strand, WC2R 1HA",
+          "price": 575000,
+          "date": "2026-05-14",
+          "tenure": "leasehold",
+          "ppdCategory": "A"
+        },
+        "method": "Median of HM Land Registry Price Paid Data Category A transactions (standard, arm's-length, full market value) recorded on this street between 1 January 2023 and 10 August 2026."
+      },
+      "rentAssumption": {
+        "amount": 36320,
+        "currency": "GBP",
+        "label": "Rent \u2014 yield assumption, not a recorded figure",
+        "period": "per year",
+        "isAssumption": true,
+        "grossYieldPct": 4.0,
+        "formula": "value2026 x 4.0% assumed gross yield = one year of rent",
+        "note": "This is a flat modelling assumption applied identically to every square. It is NOT an observed rent, NOT a valuation, and NOT drawn from any commercial dataset. Real gross yields vary widely by street, use class and lease terms."
+      },
+      "mortgageAssumption": {
+        "amount": 544800,
+        "currency": "GBP",
+        "label": "Debt available \u2014 leverage assumption",
+        "isAssumption": true,
+        "ltvPct": 60.0,
+        "formula": "value2026 x 60.0% loan to value",
+        "note": "A flat leverage assumption for gameplay. Not an offer, not advice, and not indicative of real lending terms."
+      },
+      "proxyNote": null
+    },
+    {
+      "id": "fleet-street",
+      "name": "Fleet Street",
+      "localAuthority": "City of London",
+      "group": "chambers",
+      "boardPrice1935": {
+        "amount": 220,
+        "currency": "GBP",
+        "label": "1935 board price",
+        "note": "Purchase price printed on the London edition of the 1935/36 British board, shown here purely as a historical contrast figure."
+      },
+      "value2026": {
+        "currency": "GBP",
+        "windowFrom": "1 January 2023",
+        "windowTo": "10 August 2026",
+        "datasetAccessed": "10 August 2026",
+        "amount": 685000,
+        "basis": "ppd-median-a",
+        "basisLabel": "Median price paid, arm's-length residential sales",
+        "dataset": "HM Land Registry Price Paid Data",
+        "datasetLicence": "OGL-3.0",
+        "sourceUrl": "https://landregistry.data.gov.uk/app/ppd/",
+        "sampleSize": 3,
+        "sampleLow": 450000,
+        "sampleHigh": 1700000,
+        "latestRecord": {
+          "transactionId": "2F7F2B43-44E6-E08F-E063-4804A8C05A49",
+          "transactionUri": "https://landregistry.data.gov.uk/data/ppi/transaction/2F7F2B43-44E6-E08F-E063-4804A8C05A49/current",
+          "address": "FLAT C 148, Fleet Street, EC4A 2BU",
+          "price": 450000,
+          "date": "2025-01-31",
+          "tenure": "leasehold",
+          "ppdCategory": "A"
+        },
+        "method": "Median of HM Land Registry Price Paid Data Category A transactions (standard, arm's-length, full market value) recorded on this street between 1 January 2023 and 10 August 2026."
+      },
+      "rentAssumption": {
+        "amount": 27400,
+        "currency": "GBP",
+        "label": "Rent \u2014 yield assumption, not a recorded figure",
+        "period": "per year",
+        "isAssumption": true,
+        "grossYieldPct": 4.0,
+        "formula": "value2026 x 4.0% assumed gross yield = one year of rent",
+        "note": "This is a flat modelling assumption applied identically to every square. It is NOT an observed rent, NOT a valuation, and NOT drawn from any commercial dataset. Real gross yields vary widely by street, use class and lease terms."
+      },
+      "mortgageAssumption": {
+        "amount": 411000,
+        "currency": "GBP",
+        "label": "Debt available \u2014 leverage assumption",
+        "isAssumption": true,
+        "ltvPct": 60.0,
+        "formula": "value2026 x 60.0% loan to value",
+        "note": "A flat leverage assumption for gameplay. Not an offer, not advice, and not indicative of real lending terms."
+      },
+      "proxyNote": null
+    },
+    {
+      "id": "trafalgar-square",
+      "name": "Trafalgar Square",
+      "localAuthority": "City of Westminster",
+      "group": "chambers",
+      "boardPrice1935": {
+        "amount": 240,
+        "currency": "GBP",
+        "label": "1935 board price",
+        "note": "Purchase price printed on the London edition of the 1935/36 British board, shown here purely as a historical contrast figure."
+      },
+      "value2026": {
+        "currency": "GBP",
+        "windowFrom": "1 January 2023",
+        "windowTo": "10 August 2026",
+        "datasetAccessed": "10 August 2026",
+        "amount": 836331,
+        "basis": "ukhpi-la-average",
+        "basisLabel": "UK HPI average price, City of Westminster",
+        "dataset": "UK House Price Index",
+        "datasetLicence": "OGL-3.0",
+        "sourceUrl": "https://landregistry.data.gov.uk/data/ukhpi/region/city-of-westminster/month/2026-05.json",
+        "sampleSize": null,
+        "sampleLow": null,
+        "sampleHigh": null,
+        "latestRecord": null,
+        "referenceMonth": "2026-05",
+        "method": "No residential sale has been recorded on this square in the Price Paid Data, so the UK House Price Index average price for City of Westminster in 2026-05 is used instead."
+      },
+      "rentAssumption": {
+        "amount": 33453,
+        "currency": "GBP",
+        "label": "Rent \u2014 yield assumption, not a recorded figure",
+        "period": "per year",
+        "isAssumption": true,
+        "grossYieldPct": 4.0,
+        "formula": "value2026 x 4.0% assumed gross yield = one year of rent",
+        "note": "This is a flat modelling assumption applied identically to every square. It is NOT an observed rent, NOT a valuation, and NOT drawn from any commercial dataset. Real gross yields vary widely by street, use class and lease terms."
+      },
+      "mortgageAssumption": {
+        "amount": 501799,
+        "currency": "GBP",
+        "label": "Debt available \u2014 leverage assumption",
+        "isAssumption": true,
+        "ltvPct": 60.0,
+        "formula": "value2026 x 60.0% loan to value",
+        "note": "A flat leverage assumption for gameplay. Not an offer, not advice, and not indicative of real lending terms."
+      },
+      "proxyNote": null
+    },
+    {
+      "id": "leicester-square",
+      "name": "Leicester Square",
+      "localAuthority": "City of Westminster",
+      "group": "square-mile",
+      "boardPrice1935": {
+        "amount": 260,
+        "currency": "GBP",
+        "label": "1935 board price",
+        "note": "Purchase price printed on the London edition of the 1935/36 British board, shown here purely as a historical contrast figure."
+      },
+      "value2026": {
+        "currency": "GBP",
+        "windowFrom": "1 January 2023",
+        "windowTo": "10 August 2026",
+        "datasetAccessed": "10 August 2026",
+        "amount": 10500000,
+        "basis": "ppd-single",
+        "basisLabel": "Single recorded sale",
+        "dataset": "HM Land Registry Price Paid Data",
+        "datasetLicence": "OGL-3.0",
+        "sourceUrl": "https://landregistry.data.gov.uk/app/ppd/",
+        "sampleSize": 1,
+        "sampleLow": 10500000,
+        "sampleHigh": 10500000,
+        "latestRecord": {
+          "transactionId": "42C129E5-89A2-60A9-E063-4804A8C0C25D",
+          "transactionUri": "https://landregistry.data.gov.uk/data/ppi/transaction/42C129E5-89A2-60A9-E063-4804A8C0C25D/current",
+          "address": "ODEON CINEMA, 24 - 26, Leicester Square, WC2H 7JY",
+          "price": 10500000,
+          "date": "2025-07-25",
+          "tenure": "leasehold",
+          "ppdCategory": "B"
+        },
+        "method": "The most recent \u2014 and one of only 1 \u2014 HM Land Registry Price Paid transaction(s) recorded on this street since 1 January 2023. A single sale, not an average."
+      },
+      "rentAssumption": {
+        "amount": 420000,
+        "currency": "GBP",
+        "label": "Rent \u2014 yield assumption, not a recorded figure",
+        "period": "per year",
+        "isAssumption": true,
+        "grossYieldPct": 4.0,
+        "formula": "value2026 x 4.0% assumed gross yield = one year of rent",
+        "note": "This is a flat modelling assumption applied identically to every square. It is NOT an observed rent, NOT a valuation, and NOT drawn from any commercial dataset. Real gross yields vary widely by street, use class and lease terms."
+      },
+      "mortgageAssumption": {
+        "amount": 6300000,
+        "currency": "GBP",
+        "label": "Debt available \u2014 leverage assumption",
+        "isAssumption": true,
+        "ltvPct": 60.0,
+        "formula": "value2026 x 60.0% loan to value",
+        "note": "A flat leverage assumption for gameplay. Not an offer, not advice, and not indicative of real lending terms."
+      },
+      "proxyNote": null
+    },
+    {
+      "id": "coventry-street",
+      "name": "Coventry Street",
+      "localAuthority": "City of Westminster",
+      "group": "square-mile",
+      "boardPrice1935": {
+        "amount": 260,
+        "currency": "GBP",
+        "label": "1935 board price",
+        "note": "Purchase price printed on the London edition of the 1935/36 British board, shown here purely as a historical contrast figure."
+      },
+      "value2026": {
+        "currency": "GBP",
+        "windowFrom": "1 January 2023",
+        "windowTo": "10 August 2026",
+        "datasetAccessed": "10 August 2026",
+        "amount": 13000000,
+        "basis": "ppd-single",
+        "basisLabel": "Single recorded sale",
+        "dataset": "HM Land Registry Price Paid Data",
+        "datasetLicence": "OGL-3.0",
+        "sourceUrl": "https://landregistry.data.gov.uk/app/ppd/",
+        "sampleSize": 2,
+        "sampleLow": 13000000,
+        "sampleHigh": 13000000,
+        "latestRecord": {
+          "transactionId": "402A3A66-CF81-A7DF-E063-4804A8C0B80D",
+          "transactionUri": "https://landregistry.data.gov.uk/data/ppi/transaction/402A3A66-CF81-A7DF-E063-4804A8C0B80D/current",
+          "address": "21 - 22, Coventry Street, W1D 7AE",
+          "price": 13000000,
+          "date": "2025-09-05",
+          "tenure": "leasehold",
+          "ppdCategory": "B"
+        },
+        "method": "The most recent \u2014 and one of only 2 \u2014 HM Land Registry Price Paid transaction(s) recorded on this street since 1 January 2023. A single sale, not an average."
+      },
+      "rentAssumption": {
+        "amount": 520000,
+        "currency": "GBP",
+        "label": "Rent \u2014 yield assumption, not a recorded figure",
+        "period": "per year",
+        "isAssumption": true,
+        "grossYieldPct": 4.0,
+        "formula": "value2026 x 4.0% assumed gross yield = one year of rent",
+        "note": "This is a flat modelling assumption applied identically to every square. It is NOT an observed rent, NOT a valuation, and NOT drawn from any commercial dataset. Real gross yields vary widely by street, use class and lease terms."
+      },
+      "mortgageAssumption": {
+        "amount": 7800000,
+        "currency": "GBP",
+        "label": "Debt available \u2014 leverage assumption",
+        "isAssumption": true,
+        "ltvPct": 60.0,
+        "formula": "value2026 x 60.0% loan to value",
+        "note": "A flat leverage assumption for gameplay. Not an offer, not advice, and not indicative of real lending terms."
+      },
+      "proxyNote": null
+    },
+    {
+      "id": "piccadilly",
+      "name": "Piccadilly",
+      "localAuthority": "City of Westminster",
+      "group": "square-mile",
+      "boardPrice1935": {
+        "amount": 280,
+        "currency": "GBP",
+        "label": "1935 board price",
+        "note": "Purchase price printed on the London edition of the 1935/36 British board, shown here purely as a historical contrast figure."
+      },
+      "value2026": {
+        "currency": "GBP",
+        "windowFrom": "1 January 2023",
+        "windowTo": "10 August 2026",
+        "datasetAccessed": "10 August 2026",
+        "amount": 3025000,
+        "basis": "ppd-median-all",
+        "basisLabel": "Median price paid, all recorded transactions",
+        "dataset": "HM Land Registry Price Paid Data",
+        "datasetLicence": "OGL-3.0",
+        "sourceUrl": "https://landregistry.data.gov.uk/app/ppd/",
+        "sampleSize": 8,
+        "sampleLow": 288000,
+        "sampleHigh": 57500000,
+        "latestRecord": {
+          "transactionId": "34222873-1066-4D2B-E063-4704A8C07853",
+          "transactionUri": "https://landregistry.data.gov.uk/data/ppi/transaction/34222873-1066-4D2B-E063-4704A8C07853/current",
+          "address": "CRITERION THEATRE, Piccadilly, W1J 9HT",
+          "price": 3600000,
+          "date": "2025-03-31",
+          "tenure": "leasehold",
+          "ppdCategory": "B"
+        },
+        "method": "Median of all HM Land Registry Price Paid Data transactions (Categories A and B, so including transfers to companies and other non-standard sales) recorded on this street between 1 January 2023 and 10 August 2026. Too few Category A sales were recorded to use those alone."
+      },
+      "rentAssumption": {
+        "amount": 121000,
+        "currency": "GBP",
+        "label": "Rent \u2014 yield assumption, not a recorded figure",
+        "period": "per year",
+        "isAssumption": true,
+        "grossYieldPct": 4.0,
+        "formula": "value2026 x 4.0% assumed gross yield = one year of rent",
+        "note": "This is a flat modelling assumption applied identically to every square. It is NOT an observed rent, NOT a valuation, and NOT drawn from any commercial dataset. Real gross yields vary widely by street, use class and lease terms."
+      },
+      "mortgageAssumption": {
+        "amount": 1815000,
+        "currency": "GBP",
+        "label": "Debt available \u2014 leverage assumption",
+        "isAssumption": true,
+        "ltvPct": 60.0,
+        "formula": "value2026 x 60.0% loan to value",
+        "note": "A flat leverage assumption for gameplay. Not an offer, not advice, and not indicative of real lending terms."
+      },
+      "proxyNote": null
+    },
+    {
+      "id": "regent-street",
+      "name": "Regent Street",
+      "localAuthority": "City of Westminster",
+      "group": "gallery",
+      "boardPrice1935": {
+        "amount": 300,
+        "currency": "GBP",
+        "label": "1935 board price",
+        "note": "Purchase price printed on the London edition of the 1935/36 British board, shown here purely as a historical contrast figure."
+      },
+      "value2026": {
+        "currency": "GBP",
+        "windowFrom": "1 January 2023",
+        "windowTo": "10 August 2026",
+        "datasetAccessed": "10 August 2026",
+        "amount": 570000,
+        "basis": "ppd-median-all",
+        "basisLabel": "Median price paid, all recorded transactions",
+        "dataset": "HM Land Registry Price Paid Data",
+        "datasetLicence": "OGL-3.0",
+        "sourceUrl": "https://landregistry.data.gov.uk/app/ppd/",
+        "sampleSize": 4,
+        "sampleLow": 189261,
+        "sampleHigh": 4500000,
+        "latestRecord": {
+          "transactionId": "31C68071-AE51-FEE3-E063-4804A8C04F37",
+          "transactionUri": "https://landregistry.data.gov.uk/data/ppi/transaction/31C68071-AE51-FEE3-E063-4804A8C04F37/current",
+          "address": "FLAT 2 6, Regent Street, NW10 5LG",
+          "price": 615000,
+          "date": "2025-03-14",
+          "tenure": "leasehold",
+          "ppdCategory": "A"
+        },
+        "method": "Median of all HM Land Registry Price Paid Data transactions (Categories A and B, so including transfers to companies and other non-standard sales) recorded on this street between 1 January 2023 and 10 August 2026. Too few Category A sales were recorded to use those alone."
+      },
+      "rentAssumption": {
+        "amount": 22800,
+        "currency": "GBP",
+        "label": "Rent \u2014 yield assumption, not a recorded figure",
+        "period": "per year",
+        "isAssumption": true,
+        "grossYieldPct": 4.0,
+        "formula": "value2026 x 4.0% assumed gross yield = one year of rent",
+        "note": "This is a flat modelling assumption applied identically to every square. It is NOT an observed rent, NOT a valuation, and NOT drawn from any commercial dataset. Real gross yields vary widely by street, use class and lease terms."
+      },
+      "mortgageAssumption": {
+        "amount": 342000,
+        "currency": "GBP",
+        "label": "Debt available \u2014 leverage assumption",
+        "isAssumption": true,
+        "ltvPct": 60.0,
+        "formula": "value2026 x 60.0% loan to value",
+        "note": "A flat leverage assumption for gameplay. Not an offer, not advice, and not indicative of real lending terms."
+      },
+      "proxyNote": null
+    },
+    {
+      "id": "oxford-street",
+      "name": "Oxford Street",
+      "localAuthority": "City of Westminster",
+      "group": "gallery",
+      "boardPrice1935": {
+        "amount": 300,
+        "currency": "GBP",
+        "label": "1935 board price",
+        "note": "Purchase price printed on the London edition of the 1935/36 British board, shown here purely as a historical contrast figure."
+      },
+      "value2026": {
+        "currency": "GBP",
+        "windowFrom": "1 January 2023",
+        "windowTo": "10 August 2026",
+        "datasetAccessed": "10 August 2026",
+        "amount": 6150000,
+        "basis": "ppd-median-a",
+        "basisLabel": "Median price paid, arm's-length residential sales",
+        "dataset": "HM Land Registry Price Paid Data",
+        "datasetLicence": "OGL-3.0",
+        "sourceUrl": "https://landregistry.data.gov.uk/app/ppd/",
+        "sampleSize": 13,
+        "sampleLow": 888000,
+        "sampleHigh": 6678000,
+        "latestRecord": {
+          "transactionId": "42C129E4-2E72-60A9-E063-4804A8C0C25D",
+          "transactionUri": "https://landregistry.data.gov.uk/data/ppi/transaction/42C129E4-2E72-60A9-E063-4804A8C0C25D/current",
+          "address": "APARTMENT 51 CENTRE POINT TOWER, 101 - 103, New Oxford Street, WC1A 1DB",
+          "price": 5625000,
+          "date": "2025-03-31",
+          "tenure": "leasehold",
+          "ppdCategory": "A"
+        },
+        "method": "Median of HM Land Registry Price Paid Data Category A transactions (standard, arm's-length, full market value) recorded on this street between 1 January 2023 and 10 August 2026."
+      },
+      "rentAssumption": {
+        "amount": 246000,
+        "currency": "GBP",
+        "label": "Rent \u2014 yield assumption, not a recorded figure",
+        "period": "per year",
+        "isAssumption": true,
+        "grossYieldPct": 4.0,
+        "formula": "value2026 x 4.0% assumed gross yield = one year of rent",
+        "note": "This is a flat modelling assumption applied identically to every square. It is NOT an observed rent, NOT a valuation, and NOT drawn from any commercial dataset. Real gross yields vary widely by street, use class and lease terms."
+      },
+      "mortgageAssumption": {
+        "amount": 3690000,
+        "currency": "GBP",
+        "label": "Debt available \u2014 leverage assumption",
+        "isAssumption": true,
+        "ltvPct": 60.0,
+        "formula": "value2026 x 60.0% loan to value",
+        "note": "A flat leverage assumption for gameplay. Not an offer, not advice, and not indicative of real lending terms."
+      },
+      "proxyNote": null
+    },
+    {
+      "id": "bond-street",
+      "name": "Bond Street",
+      "localAuthority": "City of Westminster",
+      "group": "gallery",
+      "boardPrice1935": {
+        "amount": 320,
+        "currency": "GBP",
+        "label": "1935 board price",
+        "note": "Purchase price printed on the London edition of the 1935/36 British board, shown here purely as a historical contrast figure."
+      },
+      "value2026": {
+        "currency": "GBP",
+        "windowFrom": "1 January 2023",
+        "windowTo": "10 August 2026",
+        "datasetAccessed": "10 August 2026",
+        "amount": 33575353,
+        "basis": "ppd-median-all",
+        "basisLabel": "Median price paid, all recorded transactions",
+        "dataset": "HM Land Registry Price Paid Data",
+        "datasetLicence": "OGL-3.0",
+        "sourceUrl": "https://landregistry.data.gov.uk/app/ppd/",
+        "sampleSize": 16,
+        "sampleLow": 129502,
+        "sampleHigh": 267500000,
+        "latestRecord": {
+          "transactionId": "559C5AD5-CDD6-AFE3-E063-4804A8C004A4",
+          "transactionUri": "https://landregistry.data.gov.uk/data/ppi/transaction/559C5AD5-CDD6-AFE3-E063-4804A8C004A4/current",
+          "address": "170, New Bond Street, W1S 4RB",
+          "price": 62000000,
+          "date": "2026-05-14",
+          "tenure": "leasehold",
+          "ppdCategory": "B"
+        },
+        "method": "Median of all HM Land Registry Price Paid Data transactions (Categories A and B, so including transfers to companies and other non-standard sales) recorded on this street between 1 January 2023 and 10 August 2026. Too few Category A sales were recorded to use those alone."
+      },
+      "rentAssumption": {
+        "amount": 1343014,
+        "currency": "GBP",
+        "label": "Rent \u2014 yield assumption, not a recorded figure",
+        "period": "per year",
+        "isAssumption": true,
+        "grossYieldPct": 4.0,
+        "formula": "value2026 x 4.0% assumed gross yield = one year of rent",
+        "note": "This is a flat modelling assumption applied identically to every square. It is NOT an observed rent, NOT a valuation, and NOT drawn from any commercial dataset. Real gross yields vary widely by street, use class and lease terms."
+      },
+      "mortgageAssumption": {
+        "amount": 20145212,
+        "currency": "GBP",
+        "label": "Debt available \u2014 leverage assumption",
+        "isAssumption": true,
+        "ltvPct": 60.0,
+        "formula": "value2026 x 60.0% loan to value",
+        "note": "A flat leverage assumption for gameplay. Not an offer, not advice, and not indicative of real lending terms."
+      },
+      "proxyNote": "Recorded across New Bond Street and Old Bond Street, which together form Bond Street."
+    },
+    {
+      "id": "park-lane",
+      "name": "Park Lane",
+      "localAuthority": "City of Westminster",
+      "group": "crown",
+      "boardPrice1935": {
+        "amount": 350,
+        "currency": "GBP",
+        "label": "1935 board price",
+        "note": "Purchase price printed on the London edition of the 1935/36 British board, shown here purely as a historical contrast figure."
+      },
+      "value2026": {
+        "currency": "GBP",
+        "windowFrom": "1 January 2023",
+        "windowTo": "10 August 2026",
+        "datasetAccessed": "10 August 2026",
+        "amount": 825000,
+        "basis": "ppd-median-a",
+        "basisLabel": "Median price paid, arm's-length residential sales",
+        "dataset": "HM Land Registry Price Paid Data",
+        "datasetLicence": "OGL-3.0",
+        "sourceUrl": "https://landregistry.data.gov.uk/app/ppd/",
+        "sampleSize": 41,
+        "sampleLow": 215000,
+        "sampleHigh": 23800000,
+        "latestRecord": {
+          "transactionId": "5340B1C5-D705-8052-E063-4804A8C06EE4",
+          "transactionUri": "https://landregistry.data.gov.uk/data/ppi/transaction/5340B1C5-D705-8052-E063-4804A8C06EE4/current",
+          "address": "FLAT 1 110, Charlton Park Lane, SE7 8QS",
+          "price": 346500,
+          "date": "2026-05-22",
+          "tenure": "leasehold",
+          "ppdCategory": "A"
+        },
+        "method": "Median of HM Land Registry Price Paid Data Category A transactions (standard, arm's-length, full market value) recorded on this street between 1 January 2023 and 10 August 2026."
+      },
+      "rentAssumption": {
+        "amount": 33000,
+        "currency": "GBP",
+        "label": "Rent \u2014 yield assumption, not a recorded figure",
+        "period": "per year",
+        "isAssumption": true,
+        "grossYieldPct": 4.0,
+        "formula": "value2026 x 4.0% assumed gross yield = one year of rent",
+        "note": "This is a flat modelling assumption applied identically to every square. It is NOT an observed rent, NOT a valuation, and NOT drawn from any commercial dataset. Real gross yields vary widely by street, use class and lease terms."
+      },
+      "mortgageAssumption": {
+        "amount": 495000,
+        "currency": "GBP",
+        "label": "Debt available \u2014 leverage assumption",
+        "isAssumption": true,
+        "ltvPct": 60.0,
+        "formula": "value2026 x 60.0% loan to value",
+        "note": "A flat leverage assumption for gameplay. Not an offer, not advice, and not indicative of real lending terms."
+      },
+      "proxyNote": null
+    },
+    {
+      "id": "mayfair",
+      "name": "Mayfair",
+      "localAuthority": "City of Westminster",
+      "group": "crown",
+      "boardPrice1935": {
+        "amount": 400,
+        "currency": "GBP",
+        "label": "1935 board price",
+        "note": "Purchase price printed on the London edition of the 1935/36 British board, shown here purely as a historical contrast figure."
+      },
+      "value2026": {
+        "currency": "GBP",
+        "windowFrom": "1 January 2023",
+        "windowTo": "10 August 2026",
+        "datasetAccessed": "10 August 2026",
+        "amount": 5200000,
+        "basis": "ppd-median-a",
+        "basisLabel": "Median price paid, arm's-length residential sales",
+        "dataset": "HM Land Registry Price Paid Data",
+        "datasetLicence": "OGL-3.0",
+        "sourceUrl": "https://landregistry.data.gov.uk/app/ppd/",
+        "sampleSize": 33,
+        "sampleLow": 1671500,
+        "sampleHigh": 31500000,
+        "latestRecord": {
+          "transactionId": "559C5AD5-5CAF-AFE3-E063-4804A8C004A4",
+          "transactionUri": "https://landregistry.data.gov.uk/data/ppi/transaction/559C5AD5-5CAF-AFE3-E063-4804A8C004A4/current",
+          "address": "5A, Mount Street, W1K 3NE",
+          "price": 6400000,
+          "date": "2026-06-05",
+          "tenure": "leasehold",
+          "ppdCategory": "A"
+        },
+        "method": "Median of HM Land Registry Price Paid Data Category A transactions (standard, arm's-length, full market value) recorded on this street between 1 January 2023 and 10 August 2026."
+      },
+      "rentAssumption": {
+        "amount": 208000,
+        "currency": "GBP",
+        "label": "Rent \u2014 yield assumption, not a recorded figure",
+        "period": "per year",
+        "isAssumption": true,
+        "grossYieldPct": 4.0,
+        "formula": "value2026 x 4.0% assumed gross yield = one year of rent",
+        "note": "This is a flat modelling assumption applied identically to every square. It is NOT an observed rent, NOT a valuation, and NOT drawn from any commercial dataset. Real gross yields vary widely by street, use class and lease terms."
+      },
+      "mortgageAssumption": {
+        "amount": 3120000,
+        "currency": "GBP",
+        "label": "Debt available \u2014 leverage assumption",
+        "isAssumption": true,
+        "ltvPct": 60.0,
+        "formula": "value2026 x 60.0% loan to value",
+        "note": "A flat leverage assumption for gameplay. Not an offer, not advice, and not indicative of real lending terms."
+      },
+      "proxyNote": "Mayfair is a district, not a street. Evidence is drawn from three principal Mayfair residential streets: Curzon Street, Mount Street and South Audley Street."
+    }
+  ],
+  "eventCards": [
+    {
+      "id": "epc-domestic-current",
+      "title": "The E-Grade Sweep",
+      "body": "Council inspectors sweep the borough. Any rented home below EPC E is illegal to let \u2014 fix it or leave it empty.",
+      "category": "Energy & EPC",
+      "realEvent": "The current legal minimum energy efficiency standard for domestic private rented property in England and Wales is EPC band E, in force for all tenancies since 1 April 2020. This remains the law as at 2026 \u2014 nothing higher is yet in force.",
+      "source": {
+        "name": "GOV.UK \u2014 Domestic private rented property: minimum energy efficiency standard, landlord guidance (MHCLG/DESNZ)",
+        "url": "https://www.gov.uk/guidance/domestic-private-rented-property-minimum-energy-efficiency-standard-landlord-guidance",
+        "date": "5 May 2026",
+        "quote": "\"if they have an EPC rating below E, unless they have a valid exemption\""
+      },
+      "effectSuggestion": "Any player holding a residential property tile marked EPC F or G cannot collect rent until they pay the retrofit cost.",
+      "quoteKind": "verbatim",
+      "extraSource": null,
+      "correctionApplied": null,
+      "figures": []
+    },
+    {
+      "id": "epc-domestic-2030",
+      "title": "One Deadline To Rule Them All",
+      "body": "One compliance date confirmed: 1 October 2030 for the new standard. The statutory instrument is still to come.",
+      "category": "Energy & EPC",
+      "realEvent": "On 21 January 2026 the Government published its response to the 2025 consultation on the energy performance of privately rented homes, confirming a single compliance date of 1 October 2030 for a new higher standard (rather than the earlier proposal of staged 2028/2030 dates). Implementation still requires a statutory instrument, expected in 2027.",
+      "source": {
+        "name": "GOV.UK \u2014 Improving the energy performance of privately rented homes: 2025 update (consultation outcome)",
+        "url": "https://www.gov.uk/government/consultations/improving-the-energy-performance-of-privately-rented-homes-2025-update",
+        "date": "21 January 2026",
+        "quote": "\"introducing a single compliance date of 1 October 2030 for the new standard\""
+      },
+      "effectSuggestion": "Set a countdown marker on the board; when it reaches 2030, all sub-standard residential tiles stop producing rent.",
+      "quoteKind": "verbatim",
+      "extraSource": null,
+      "correctionApplied": "The original read as settled law. The regulations are expected in 2027; the date is a confirmed policy intention, not yet in force.",
+      "figures": [
+        {
+          "value": 1,
+          "kind": "numeral",
+          "asWritten": "1"
+        },
+        {
+          "value": 2030,
+          "kind": "numeral",
+          "asWritten": "2030"
+        }
+      ]
+    },
+    {
+      "id": "epc-cost-cap-10k",
+      "title": "The \u00a310,000 Cap",
+      "body": "The retrofit cost cap rises from \u00a33,500 to \u00a310,000 per property. Budget for it, or register a ten-year exemption.",
+      "category": "Energy & EPC",
+      "realEvent": "The same January 2026 Government response confirmed the landlord cost cap for energy efficiency improvements will rise to \u00a310,000 per property, with exemptions valid for ten years. The current cap under the in-force regulations is \u00a33,500 including VAT.",
+      "source": {
+        "name": "GOV.UK \u2014 Improving the energy performance of privately rented homes: 2025 update (consultation outcome)",
+        "url": "https://www.gov.uk/government/consultations/improving-the-energy-performance-of-privately-rented-homes-2025-update",
+        "date": "21 January 2026",
+        "quote": "\"raising the cost-cap to \u00a310,000 with a 10-year validity period for exemptions\""
+      },
+      "effectSuggestion": "All players with an EPC-exposed residential property pay a \u00a310,000 retrofit levy, or forfeit rent for two turns.",
+      "quoteKind": "verbatim",
+      "extraSource": null,
+      "correctionApplied": "'Trebles' was imprecise \u2014 \u00a33,500 to \u00a310,000 is 2.9x. Both figures now stated.",
+      "figures": [
+        {
+          "value": 10000,
+          "kind": "currency",
+          "asWritten": "\u00a310,000"
+        },
+        {
+          "value": 3500,
+          "kind": "currency",
+          "asWritten": "\u00a33,500"
+        },
+        {
+          "value": 10,
+          "kind": "numeral",
+          "asWritten": "10"
+        },
+        {
+          "value": 0,
+          "kind": "numeral",
+          "asWritten": "000"
+        },
+        {
+          "value": 3,
+          "kind": "numeral",
+          "asWritten": "3"
+        },
+        {
+          "value": 500,
+          "kind": "numeral",
+          "asWritten": "500"
+        }
+      ]
+    },
+    {
+      "id": "epc-nondom-current",
+      "title": "Commercial Gets A Reprieve",
+      "body": "Your commercial unit needs only EPC E today, unless a registered exemption applies. Tougher targets remain consultation.",
+      "category": "Energy & EPC",
+      "realEvent": "For non-domestic (commercial) private rented property in England and Wales the legal minimum is EPC E, applying to all let properties since 1 April 2023 regardless of tenancy change. The much-cited EPC C by 2027 and EPC B by 2030 trajectory remains a consultation proposal and is NOT law.",
+      "source": {
+        "name": "GOV.UK \u2014 Non-domestic private rented property: minimum energy efficiency standard, landlord guidance",
+        "url": "https://www.gov.uk/guidance/non-domestic-private-rented-property-minimum-energy-efficiency-standard-landlord-guidance",
+        "date": "5 May 2026",
+        "quote": "\"all privately rented non-domestic properties (even where there has been no change in tenancy)\""
+      },
+      "effectSuggestion": "Commercial property tiles are immune to this round's EPC penalty, but draw a Consultation Risk card.",
+      "quoteKind": "verbatim",
+      "extraSource": null,
+      "correctionApplied": "'Every tenancy, no exceptions' was contradicted by the cited source: registered exemptions exist and short and very long leases fall outside MEES.",
+      "figures": []
+    },
+    {
+      "id": "epc-reform-delay",
+      "title": "The Certificate Rewrite Slips",
+      "body": "EPC overhaul slips again. New headline metrics for homes now land in the second half of 2027 \u2014 planning stays murky.",
+      "category": "Energy & EPC",
+      "realEvent": "Reform of the Energy Performance of Buildings regime, which replaces the single domestic EPC headline rating with four new metrics, received a partial Government response on 21 January 2026. A 9 March 2026 update postponed the launch of the reforms to the second half of 2027.",
+      "source": {
+        "name": "GOV.UK \u2014 Reforms to the Energy Performance of Buildings regime (consultation)",
+        "url": "https://www.gov.uk/government/consultations/reforms-to-the-energy-performance-of-buildings-regime",
+        "date": "9 March 2026",
+        "quote": "\"move the launch of the reforms to the second half of 2027\""
+      },
+      "effectSuggestion": "Freeze all EPC-band changes for one full round; no player may upgrade or be penalised on energy rating.",
+      "quoteKind": "verbatim",
+      "extraSource": null,
+      "correctionApplied": null,
+      "figures": [
+        {
+          "value": 2027,
+          "kind": "numeral",
+          "asWritten": "2027"
+        }
+      ]
+    },
+    {
+      "id": "bank-rate-375",
+      "title": "Rate Held At 3.75%",
+      "body": "The MPC holds Bank Rate at 3.75%, splitting six to three. Three members wanted a hike. No relief for borrowers.",
+      "category": "Interest Rates",
+      "realEvent": "At its meeting ending 29 July 2026 the Bank of England's Monetary Policy Committee voted 6\u20133 to maintain Bank Rate at 3.75%, with three members preferring a 0.25 percentage point rise to 4%. CPI inflation had fallen to 2.6%. The next decision is due 17 September 2026.",
+      "source": {
+        "name": "Bank of England \u2014 Monetary Policy Summary and minutes, July 2026",
+        "url": "https://www.bankofengland.co.uk/monetary-policy-summary-and-minutes/2026/july-2026",
+        "date": "30 July 2026",
+        "quote": "\"voted by a majority of 6\u20133 to maintain Bank Rate at 3.75%\""
+      },
+      "effectSuggestion": "No change to mortgage payments this round, but every player rolls a die: on a six, next round's rate rises.",
+      "quoteKind": "verbatim",
+      "extraSource": null,
+      "correctionApplied": null,
+      "figures": [
+        {
+          "value": 3.75,
+          "kind": "percent",
+          "asWritten": "3.75%"
+        },
+        {
+          "value": 3,
+          "kind": "numeral",
+          "asWritten": "3"
+        },
+        {
+          "value": 75,
+          "kind": "numeral",
+          "asWritten": "75"
+        }
+      ]
+    },
+    {
+      "id": "mortgage-effective-rate",
+      "title": "Refinancing Bites",
+      "body": "Actual interest paid on new mortgages climbs to 4.35%. Every refinancing this round costs more than the last.",
+      "category": "Interest Rates",
+      "realEvent": "Bank of England Money and Credit data for June 2026 show the effective interest rate on newly drawn mortgages rose to 4.35% in June, up from 4.22% in May. The rate on the outstanding stock of mortgages was 3.96%. Net mortgage approvals for house purchase were 58,200.",
+      "source": {
+        "name": "Bank of England \u2014 Money and Credit, June 2026",
+        "url": "https://www.bankofengland.co.uk/statistics/money-and-credit/2026/june-2026",
+        "date": "29 July 2026",
+        "quote": "\"newly drawn mortgages increased to 4.35% in June\""
+      },
+      "effectSuggestion": "Every player refinancing a mortgage this round pays an extra 0.13% on the loan balance.",
+      "quoteKind": "verbatim",
+      "extraSource": null,
+      "correctionApplied": null,
+      "figures": [
+        {
+          "value": 4.35,
+          "kind": "percent",
+          "asWritten": "4.35%"
+        },
+        {
+          "value": 4,
+          "kind": "numeral",
+          "asWritten": "4"
+        },
+        {
+          "value": 35,
+          "kind": "numeral",
+          "asWritten": "35"
+        }
+      ]
+    },
+    {
+      "id": "renters-s21-abolished",
+      "title": "No Fault, No More",
+      "body": "Section 21 is gone. From 1 May 2026 no landlord can evict without a valid ground. Vacant possession just got harder.",
+      "category": "Renting Reform",
+      "realEvent": "The Renters' Rights Act 2025 received Royal Assent on 27 October 2025. Under the Government's implementation roadmap, from 1 May 2026 landlords in the private rented sector can no longer use section 21 of the Housing Act 1988 to evict tenants; possession requires a valid section 8 ground.",
+      "source": {
+        "name": "GOV.UK \u2014 Implementing the Renters' Rights Act 2025: roadmap for reforming the Private Rented Sector (MHCLG)",
+        "url": "https://www.gov.uk/government/publications/renters-rights-act-2025-implementation-roadmap/implementing-the-renters-rights-act-2025-our-roadmap-for-reforming-the-private-rented-sector",
+        "date": "13 November 2025",
+        "quote": "\"landlords in the PRS will no longer be able to use section 21\""
+      },
+      "effectSuggestion": "No player may evict a tenant to redevelop or sell unless they draw a valid Grounds card.",
+      "quoteKind": "verbatim",
+      "extraSource": null,
+      "correctionApplied": null,
+      "figures": [
+        {
+          "value": 21,
+          "kind": "numeral",
+          "asWritten": "21"
+        },
+        {
+          "value": 1,
+          "kind": "numeral",
+          "asWritten": "1"
+        },
+        {
+          "value": 2026,
+          "kind": "numeral",
+          "asWritten": "2026"
+        }
+      ]
+    },
+    {
+      "id": "renters-periodic-tenancies",
+      "title": "Fixed Terms Abolished",
+      "body": "Fixed terms vanish. Nearly every tenancy converts to an assured periodic tenancy, ending on the tenant's notice.",
+      "category": "Renting Reform",
+      "realEvent": "From 1 May 2026 the vast majority of new and existing private rented sector tenancies in England convert to Assured Periodic Tenancies under the Renters' Rights Act 2025. Rent increases are limited to once a year with at least two months' notice.",
+      "source": {
+        "name": "GOV.UK \u2014 Implementing the Renters' Rights Act 2025: roadmap for reforming the Private Rented Sector (MHCLG)",
+        "url": "https://www.gov.uk/government/publications/renters-rights-act-2025-implementation-roadmap/implementing-the-renters-rights-act-2025-our-roadmap-for-reforming-the-private-rented-sector",
+        "date": "13 November 2025",
+        "quote": "\"existing tenancies in the PRS will become Assured Periodic Tenancies\""
+      },
+      "effectSuggestion": "Players may raise rent on any tenanted tile only once per year, and must wait two turns before it takes effect.",
+      "quoteKind": "verbatim",
+      "extraSource": null,
+      "correctionApplied": "'Tenants stay as long as they like' overstated the reform \u2014 landlords retain every section 8 ground, including sale and moving in.",
+      "figures": []
+    },
+    {
+      "id": "renters-bidding-ban",
+      "title": "Bidding Wars Banned",
+      "body": "Rental bidding wars are outlawed. Advertise a rent and you cannot accept a penny more, however many applicants queue.",
+      "category": "Renting Reform",
+      "realEvent": "From 1 May 2026 the Renters' Rights Act 2025 prohibits landlords and letting agents in England from asking for, encouraging or accepting an offer above the advertised rent. Agents also cannot request more than one month's rent in advance.",
+      "source": {
+        "name": "GOV.UK \u2014 Implementing the Renters' Rights Act 2025: roadmap for reforming the Private Rented Sector (MHCLG)",
+        "url": "https://www.gov.uk/government/publications/renters-rights-act-2025-implementation-roadmap/implementing-the-renters-rights-act-2025-our-roadmap-for-reforming-the-private-rented-sector",
+        "date": "13 November 2025",
+        "quote": "\"accept an offer that is higher than the advertised rent\""
+      },
+      "effectSuggestion": "Players must set rent at the tile's listed value; any player who overcharged this round refunds the difference.",
+      "quoteKind": "verbatim",
+      "extraSource": null,
+      "correctionApplied": null,
+      "figures": []
+    },
+    {
+      "id": "sdlt-standard-rates",
+      "title": "The Stamp Duty Toll",
+      "body": "Stamp duty bites from \u00a3125,000, and a 5% surcharge stacks on any additional home. Portfolio building just got pricier.",
+      "category": "Tax",
+      "realEvent": "SDLT residential thresholds reverted on 1 April 2025 and apply through 2026: nil rate to \u00a3125,000, 2% to \u00a3250,000, 5% to \u00a3925,000, 10% to \u00a31.5M and 12% above. A 5% surcharge applies where the buyer will own more than one residential property, plus a 2% non-UK resident surcharge.",
+      "source": {
+        "name": "GOV.UK \u2014 Stamp Duty Land Tax: Residential property rates (HMRC)",
+        "url": "https://www.gov.uk/stamp-duty-land-tax/residential-property-rates",
+        "date": "1 April 2025",
+        "quote": "\"pay 5% on top of SDLT rates if buying a new residential property\""
+      },
+      "effectSuggestion": "Any player buying a second or subsequent property pays an extra 5% of the purchase price to the bank.",
+      "quoteKind": "verbatim",
+      "extraSource": {
+        "name": "GOV.UK \u2014 Rates of Stamp Duty Land Tax for non-UK residents (HMRC)",
+        "url": "https://www.gov.uk/guidance/rates-of-stamp-duty-land-tax-for-non-uk-residents"
+      },
+      "correctionApplied": "Body unchanged and correct; a second source added because the non-UK-resident surcharge is not on the originally cited page.",
+      "figures": [
+        {
+          "value": 125000,
+          "kind": "currency",
+          "asWritten": "\u00a3125,000,"
+        },
+        {
+          "value": 5.0,
+          "kind": "percent",
+          "asWritten": "5%"
+        },
+        {
+          "value": 125,
+          "kind": "numeral",
+          "asWritten": "125"
+        },
+        {
+          "value": 0,
+          "kind": "numeral",
+          "asWritten": "000"
+        },
+        {
+          "value": 5,
+          "kind": "numeral",
+          "asWritten": "5"
+        }
+      ]
+    },
+    {
+      "id": "sdlt-first-time-buyer",
+      "title": "First-Time Buyer Cliff Edge",
+      "body": "First-time buyers pay nothing below \u00a3300,000 \u2014 but cross \u00a3500,000 and the relief vanishes entirely. London maths is brutal.",
+      "category": "Tax",
+      "realEvent": "First-time buyers' relief gives a nil rate band to \u00a3300,000 and 5% on the portion from \u00a3300,000 to \u00a3500,000. If the purchase price exceeds \u00a3500,000 the relief is lost entirely and standard rates apply to the whole price \u2014 a hard cliff edge in a market where average London prices are around \u00a3545,000.",
+      "source": {
+        "name": "GOV.UK \u2014 Stamp Duty Land Tax: Residential property rates (HMRC)",
+        "url": "https://www.gov.uk/stamp-duty-land-tax/residential-property-rates",
+        "date": "1 April 2025",
+        "quote": "\"If the price is over \u00a3500,000, you cannot claim the relief.\""
+      },
+      "effectSuggestion": "A first-time buyer player buying below \u00a3500,000 pays no stamp duty; above it, pay the full standard rate.",
+      "quoteKind": "verbatim",
+      "extraSource": null,
+      "correctionApplied": null,
+      "figures": [
+        {
+          "value": 300000,
+          "kind": "currency",
+          "asWritten": "\u00a3300,000"
+        },
+        {
+          "value": 500000,
+          "kind": "currency",
+          "asWritten": "\u00a3500,000"
+        },
+        {
+          "value": 300,
+          "kind": "numeral",
+          "asWritten": "300"
+        },
+        {
+          "value": 0,
+          "kind": "numeral",
+          "asWritten": "000"
+        },
+        {
+          "value": 500,
+          "kind": "numeral",
+          "asWritten": "500"
+        }
+      ]
+    },
+    {
+      "id": "hvcts-mansion-surcharge",
+      "title": "The High Value Surcharge",
+      "body": "A surcharge on homes worth \u00a32M-plus is consulted on: \u00a32,500 to \u00a37,500 yearly from April 2028, paid by owners.",
+      "category": "Tax",
+      "realEvent": "The High Value Council Tax Surcharge was announced at Budget 2025 and consulted on from 19 May 2026. It applies to English residential property worth \u00a32M or more from April 2028, charged at \u00a32,500 (\u00a32\u20132.5M) rising to \u00a37,500 (over \u00a35M), levied on owners not occupiers, raising around \u00a3430M a year. Revaluation every five years, next in 2033.",
+      "source": {
+        "name": "GOV.UK \u2014 High Value Council Tax Surcharge (consultation, MHCLG)",
+        "url": "https://www.gov.uk/government/consultations/high-value-council-tax-surcharge/high-value-council-tax-surcharge",
+        "date": "19 May 2026",
+        "quote": "\"fewer than 1% of residential properties in England will attract the HVCTS\""
+      },
+      "effectSuggestion": "Any player owning a property valued over \u00a32M pays an annual surcharge scaled to its value band.",
+      "quoteKind": "verbatim",
+      "extraSource": null,
+      "correctionApplied": null,
+      "figures": [
+        {
+          "value": 2000000,
+          "kind": "currency",
+          "asWritten": "\u00a32M"
+        },
+        {
+          "value": 2500,
+          "kind": "currency",
+          "asWritten": "\u00a32,500"
+        },
+        {
+          "value": 7500,
+          "kind": "currency",
+          "asWritten": "\u00a37,500"
+        },
+        {
+          "value": 2,
+          "kind": "numeral",
+          "asWritten": "2"
+        },
+        {
+          "value": 500,
+          "kind": "numeral",
+          "asWritten": "500"
+        },
+        {
+          "value": 7,
+          "kind": "numeral",
+          "asWritten": "7"
+        },
+        {
+          "value": 2028,
+          "kind": "numeral",
+          "asWritten": "2028"
+        }
+      ]
+    },
+    {
+      "id": "business-rates-revaluation-2026",
+      "title": "Revaluation Day",
+      "body": "New rateable values bite from 1 April 2026, based on April 2024 rents. Two million properties repriced overnight.",
+      "category": "Business Rates",
+      "realEvent": "The 2026 business rates revaluation took effect on 1 April 2026 in England and Wales, using an antecedent valuation date of 1 April 2024. The Valuation Office Agency updated rateable values for over two million non-domestic properties, publishing draft values before 31 December 2025.",
+      "source": {
+        "name": "Valuation Office Agency blog (GOV.UK) \u2014 Revaluation 2026: everything you need to know",
+        "url": "https://valuationoffice.blog.gov.uk/2025/09/29/revaluation-2026-everything-you-need-to-know/",
+        "date": "29 September 2025",
+        "quote": "\"For the 2026 revaluation, that date is 1 April 2024.\""
+      },
+      "effectSuggestion": "All commercial tiles are revalued: roll a die and adjust each tile's rates bill up or down accordingly.",
+      "quoteKind": "verbatim",
+      "extraSource": null,
+      "correctionApplied": null,
+      "figures": [
+        {
+          "value": 1,
+          "kind": "numeral",
+          "asWritten": "1"
+        },
+        {
+          "value": 2026,
+          "kind": "numeral",
+          "asWritten": "2026"
+        },
+        {
+          "value": 2024,
+          "kind": "numeral",
+          "asWritten": "2024"
+        }
+      ]
+    },
+    {
+      "id": "business-rates-high-value-multiplier",
+      "title": "The Prime Property Premium",
+      "body": "A 50.8p high-value multiplier hits every property rated \u00a3500,000 or more. Prime London offices and shops pay the premium.",
+      "category": "Business Rates",
+      "realEvent": "For 2026/27 England moved from two to five non-domestic rating multipliers. A new high-value multiplier of 50.8p applies to all hereditaments with a rateable value of \u00a3500,000 and above, funding lower retail, hospitality and leisure multipliers of 38.2p and 43.0p. The standard multiplier is 48.0p and the small business multiplier 43.2p.",
+      "source": {
+        "name": "GOV.UK \u2014 Business Rates Information Letter 2/2026: Notification of Non-Domestic Rating Multipliers for 2026/27 (MHCLG)",
+        "url": "https://www.gov.uk/government/publications/22026-notification-of-non-domestic-rating-multipliers-for-202627/22026-notification-of-non-domestic-rating-multipliers-for-202627",
+        "date": "10 February 2026",
+        "quote": "\"a high-value multiplier for properties with rateable values of \u00a3500,000 and above\""
+      },
+      "effectSuggestion": "Owners of high-value commercial tiles pay the increased 50.8p rate; small retail and hospitality tiles pay less.",
+      "quoteKind": "verbatim",
+      "extraSource": null,
+      "correctionApplied": null,
+      "figures": [
+        {
+          "value": 500000,
+          "kind": "currency",
+          "asWritten": "\u00a3500,000"
+        },
+        {
+          "value": 50.8,
+          "kind": "pence",
+          "asWritten": "50.8p"
+        },
+        {
+          "value": 50,
+          "kind": "numeral",
+          "asWritten": "50"
+        },
+        {
+          "value": 500,
+          "kind": "numeral",
+          "asWritten": "500"
+        },
+        {
+          "value": 0,
+          "kind": "numeral",
+          "asWritten": "000"
+        }
+      ]
+    },
+    {
+      "id": "cladding-remediation-deadlines",
+      "title": "The Cladding Clock",
+      "body": "Unsafe cladding on tall blocks must go by end-2029, mid-rise by end-2031. Miss it and face unlimited fines or prison.",
+      "category": "Building Safety",
+      "realEvent": "Government announced legal deadlines requiring landlords of buildings 18m or taller with unsafe cladding to complete remediation by the end of 2029, and buildings 11\u201318m by the end of 2031. Failure without reasonable excuse is a criminal offence carrying unlimited fines or imprisonment. Homes England and councils gain powers to remediate where landlords fail.",
+      "source": {
+        "name": "GOV.UK \u2014 Deadline set for unsafe cladding removal (MHCLG press release)",
+        "url": "https://www.gov.uk/government/news/deadline-set-for-unsafe-cladding-removal",
+        "date": "17 July 2025",
+        "quote": "\"complete remediation by the end of 2029\""
+      },
+      "effectSuggestion": "Any player holding a tower block tile must pay remediation costs now or lose the tile to enforcement.",
+      "quoteKind": "verbatim",
+      "extraSource": null,
+      "correctionApplied": null,
+      "figures": [
+        {
+          "value": 2029,
+          "kind": "numeral",
+          "asWritten": "2029"
+        },
+        {
+          "value": 2031,
+          "kind": "numeral",
+          "asWritten": "2031"
+        }
+      ]
+    },
+    {
+      "id": "building-safety-levy",
+      "title": "The Developer's Levy",
+      "body": "From 1 October 2026 developers pay a levy on new homes. Under ten dwellings escapes; brownfield sites get a discount.",
+      "category": "Building Safety",
+      "realEvent": "The Building Safety Levy comes into operation in England on 1 October 2026, charged on building control applications for works creating new dwellings, new purpose-built student accommodation bedspaces, or change of use to residential. Rates are weighted by local authority average house prices, with a 50% discount for previously developed land. Developments of fewer than 10 dwellings or 30 bedspaces are exempt.",
+      "source": {
+        "name": "GOV.UK \u2014 Building Safety Levy: Guidance, Section 1 Introduction (MHCLG)",
+        "url": "https://www.gov.uk/guidance/building-safety-levy-guidance/section-1-introduction",
+        "date": "2 July 2026",
+        "quote": "\"The levy will come into operation on 1 October 2026.\""
+      },
+      "effectSuggestion": "Any player developing ten or more new homes pays a levy; halve it if the site is brownfield.",
+      "quoteKind": "verbatim",
+      "extraSource": null,
+      "correctionApplied": null,
+      "figures": [
+        {
+          "value": 1,
+          "kind": "numeral",
+          "asWritten": "1"
+        },
+        {
+          "value": 2026,
+          "kind": "numeral",
+          "asWritten": "2026"
+        }
+      ]
+    },
+    {
+      "id": "commonhold-draft-bill",
+      "title": "Commonhold Comes Knocking",
+      "body": "Draft Bill published: leasehold banned for most new flats, ground rents capped at \u00a3250. Still draft, not law.",
+      "category": "Leasehold",
+      "realEvent": "The draft Commonhold and Leasehold Reform Bill was published on 27 January 2026. It proposes banning leasehold for most new flats, capping ground rents at \u00a3250 a year falling to a peppercorn after 40 years, abolishing forfeiture, and easing commonhold conversion where at least 50% of qualifying leaseholders agree. It remains in draft, undergoing pre-legislative scrutiny from 4 February 2026.",
+      "source": {
+        "name": "GOV.UK \u2014 Draft Commonhold and Leasehold Reform Bill (MHCLG)",
+        "url": "https://www.gov.uk/government/publications/draft-commonhold-and-leasehold-reform-bill",
+        "date": "27 January 2026",
+        "quote": "\"banning the use of leasehold for most new flats\""
+      },
+      "effectSuggestion": "Ground rent income on all leasehold tiles is capped at \u00a3250 per turn; freeholders lose the excess.",
+      "quoteKind": "verbatim",
+      "extraSource": null,
+      "correctionApplied": null,
+      "figures": [
+        {
+          "value": 250,
+          "kind": "currency",
+          "asWritten": "\u00a3250"
+        },
+        {
+          "value": 250,
+          "kind": "numeral",
+          "asWritten": "250"
+        }
+      ]
+    },
+    {
+      "id": "lfra-two-year-rule",
+      "title": "The Two-Year Wait Is Dead",
+      "body": "The two-year wait is abolished. Buy a flat today, extend the lease tomorrow. Enfranchisement claims accelerate across the capital.",
+      "category": "Leasehold",
+      "realEvent": "Section 27 of the Leasehold and Freehold Reform Act 2024 came into force on 31 January 2025, removing the requirement that a leaseholder must have owned their house or flat for two years before claiming a lease extension or buying the freehold.",
+      "source": {
+        "name": "legislation.gov.uk \u2014 The Leasehold and Freehold Reform Act 2024 (Commencement No. 2 and Transitional Provision) Regulations 2025, reg. 2",
+        "url": "https://www.legislation.gov.uk/uksi/2025/57/regulation/2/made",
+        "date": "31 January 2025",
+        "quote": "\"removal of qualifying period before enfranchisement and extension claims\""
+      },
+      "effectSuggestion": "Any player may extend a lease or buy a freehold immediately on acquiring a leasehold tile, with no waiting turns.",
+      "quoteKind": "verbatim",
+      "extraSource": null,
+      "correctionApplied": null,
+      "figures": []
+    },
+    {
+      "id": "london-house-prices",
+      "title": "London Slides",
+      "body": "London prices fall 3.7% over the year to May 2026 \u2014 the weakest English region. Inner London drops nearly 6%.",
+      "category": "Market Data",
+      "realEvent": "The UK House Price Index for May 2026 recorded average London house prices at around \u00a3545,000, down 3.7% over 12 months \u2014 the lowest annual change of any English region, against England overall at +2.3% and the North East strongest at +5.9%. Inner London fell 5.9%, Outer London 0.3%. It was London's ninth consecutive month of annual decline.",
+      "source": {
+        "name": "GOV.UK / HM Land Registry \u2014 UK House Price Index England: May 2026",
+        "url": "https://www.gov.uk/government/statistics/uk-house-price-index-for-may-2026/uk-house-price-index-england-may-2026",
+        "date": "31 July 2026",
+        "quote": ""
+      },
+      "effectSuggestion": "All London property tiles lose 3.7% of their value; Inner London zone tiles lose 5.9%.",
+      "quoteKind": "paraphrase",
+      "extraSource": null,
+      "correctionApplied": "The quotation was not verbatim, so it is relabelled as a paraphrase rather than shipped inside quotation marks.",
+      "figures": [
+        {
+          "value": 3.7,
+          "kind": "percent",
+          "asWritten": "3.7%"
+        },
+        {
+          "value": 6.0,
+          "kind": "percent",
+          "asWritten": "6%"
+        },
+        {
+          "value": 3,
+          "kind": "numeral",
+          "asWritten": "3"
+        },
+        {
+          "value": 7,
+          "kind": "numeral",
+          "asWritten": "7"
+        },
+        {
+          "value": 2026,
+          "kind": "numeral",
+          "asWritten": "2026"
+        },
+        {
+          "value": 6,
+          "kind": "numeral",
+          "asWritten": "6"
+        }
+      ]
+    },
+    {
+      "id": "london-private-rents",
+      "title": "Rent Growth Runs Out Of Steam",
+      "body": "London rents reach \u00a32,302 but annual growth cools to 2.2%, the slowest in England. Leveraged landlords feel the squeeze.",
+      "category": "Market Data",
+      "realEvent": "ONS Price Index of Private Rents data published 22 July 2026 show average London private rent at \u00a32,302 in June 2026, the highest of any English region, but annual rent inflation of just 2.2% \u2014 the lowest in England, against 6.3% in the North East. London rent inflation has fallen sharply from 11.5% in November 2024.",
+      "source": {
+        "name": "Office for National Statistics \u2014 Private rent and house prices, UK: July 2026",
+        "url": "https://www.ons.gov.uk/economy/inflationandpriceindices/bulletins/privaterentandhousepricesuk/july2026",
+        "date": "22 July 2026",
+        "quote": "\"Rent annual inflation remained lowest in London, at 2.2%\""
+      },
+      "effectSuggestion": "London rental income rises only 2.2% this round, while mortgage costs rise faster \u2014 leveraged players lose margin.",
+      "quoteKind": "verbatim",
+      "extraSource": null,
+      "correctionApplied": "The 11.5% peak figure could not be pinned to a single authoritative vintage (the contemporaneous bulletin said 11.6%), so it is dropped rather than shipped uncertain.",
+      "figures": [
+        {
+          "value": 2302,
+          "kind": "currency",
+          "asWritten": "\u00a32,302"
+        },
+        {
+          "value": 2.2,
+          "kind": "percent",
+          "asWritten": "2.2%"
+        },
+        {
+          "value": 2,
+          "kind": "numeral",
+          "asWritten": "2"
+        },
+        {
+          "value": 302,
+          "kind": "numeral",
+          "asWritten": "302"
+        }
+      ]
+    }
+  ],
+  "attribution": {
+    "hmlr": "Contains HM Land Registry data \u00a9 Crown copyright and database right 2026. This data is licensed under the Open Government Licence v3.0.",
+    "ogl": "Contains public sector information licensed under the Open Government Licence v3.0.",
+    "oglUrl": "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+    "ukhpiProducers": "The UK House Price Index is produced by HM Land Registry, Registers of Scotland, Land and Property Services Northern Ireland and the Office for National Statistics.",
+    "dataCurrency": "Price Paid Data extracted 10 August 2026. UK House Price Index: May 2026 release. UK HPI figures are revised as later transactions are registered.",
+    "noEndorsement": "This game is not produced, endorsed or verified by HM Land Registry, the Office for National Statistics, Registers of Scotland or Land and Property Services Northern Ireland. The underlying information is licensed \"as is\".",
+    "heritage": "An original homage to The Landlord's Game by Elizabeth Magie (1904, US Patent 748,626), which is in the public domain. Not affiliated with, endorsed by or derived from any modern commercial property-trading board game.",
+    "noSubscriptionData": "No subscription or paywalled data source is used anywhere in this project."
+  },
+  "eventCardsRejected": [
+    {
+      "claim": "Private rented homes in England must reach EPC C for NEW tenancies from 2028, with all tenancies by 2030.",
+      "whyRejected": "This was the February 2025 CONSULTATION proposal and is still repeated widely by secondary sources, but the Government response of 21 January 2026 explicitly dropped the staged approach in favour of 'a single compliance date of 1 October 2030'. The 2028 date is wrong as at 2026."
+    },
+    {
+      "claim": "Commercial (non-domestic) property must reach EPC C by 2027 and EPC B by 2030 under MEES.",
+      "whyRejected": "Not law. The GOV.UK non-domestic MEES landlord guidance (updated 5 May 2026) confirms the in-force minimum is still EPC E. The EPC B trajectory exists only as an unresolved consultation ('Non-domestic Private Rented Sector minimum energy efficiency standards: EPC B implementation'). Widely misstated in the property press."
+    },
+    {
+      "claim": "The \u00a310,000 EPC cost cap and the 2030 standard are already law.",
+      "whyRejected": "The Government response confirms the policy decision but implementation requires new parliamentary powers and a statutory instrument expected in 2027. The in-force cap under current regulations remains \u00a33,500 including VAT. Card 'epc-cost-cap-10k' is written to reflect the confirmed decision, not an in-force rule."
+    },
+    {
+      "claim": "Ground rents are capped at \u00a3250 a year and leasehold is banned for new flats.",
+      "whyRejected": "Only a DRAFT Bill as at 2026. The Commonhold and Leasehold Reform Bill was published in draft on 27 January 2026 and entered pre-legislative scrutiny on 4 February 2026. Not enacted, so no in-force ground rent cap. Card 18 states the draft status explicitly."
+    },
+    {
+      "claim": "Commonhold is now the default tenure for new flats in England and Wales.",
+      "whyRejected": "Not verified as in force. The draft Bill proposes banning leasehold for most new flats, but the GOV.UK page did not confirm commonhold as an established mandatory default, and the Bill is not law."
+    },
+    {
+      "claim": "The Bank of England cut Bank Rate during 2026 / the current rate is below 3.75%.",
+      "whyRejected": "Could not verify any cut. The most recent decision (meeting ending 29 July 2026, published 30 July 2026) held Bank Rate at 3.75% on a 6\u20133 vote, with the three dissenters wanting an INCREASE to 4%. Next decision 17 September 2026."
+    },
+    {
+      "claim": "The Renters' Rights Act 2025 introduces rent controls or caps on the level of rent.",
+      "whyRejected": "Not supported by the source. The Act limits the FREQUENCY of increases (once a year, two months' notice) and bans bidding above the advertised rent. It does not cap rent levels. Conflating the two is a common error."
+    },
+    {
+      "claim": "Awaab's Law applies to the private rented sector from a specific date in 2026.",
+      "whyRejected": "Could not verify a confirmed PRS commencement date from a primary source within this research. Excluded rather than guess."
+    },
+    {
+      "claim": "Maximum civil penalty figures for breaching non-domestic MEES.",
+      "whyRejected": "The GOV.UK non-domestic landlord guidance states a financial penalty may be issued but does not state penalty amounts. Domestic penalties (\u00a35,000 maximum per property) are verified and could be used, but the non-domestic figures could not be, so no card asserts them."
+    },
+    {
+      "claim": "A general council tax revaluation of all English homes takes effect in 2026.",
+      "whyRejected": "No such revaluation verified. The only council tax valuation exercise confirmed is the targeted valuation of properties worth \u00a32M+ for the High Value Council Tax Surcharge, which starts April 2028 with five-yearly revaluations thereafter (next 2033)."
+    },
+    {
+      "claim": "Specific Building Safety Levy rates per London borough (\u00a3 per square metre).",
+      "whyRejected": "The guidance confirms rates are set by local authority and weighted to average house prices, with a 50% brownfield discount, but individual London borough rates were not verified from the primary source. The card states only the verified structure."
+    },
+    {
+      "claim": "London house price and rental forecasts for 2026-2027 from agency research houses.",
+      "whyRejected": "Excluded by the brief. Savills, CBRE, JLL and Knight Frank forecasts are proprietary research, and CoStar / Green Street / PitchBook / React News are subscription sources. Only HM Land Registry UK HPI and ONS PIPR actuals were used."
+    },
+    {
+      "claim": "The new four-metric EPC system is live and affecting ratings in 2026.",
+      "whyRejected": "Postponed. A 9 March 2026 update moved the launch of the Energy Performance of Buildings reforms to the second half of 2027, with a new launch date to be agreed with industry. Card 5 reflects the delay rather than a live change."
+    },
+    {
+      "claim": "Section 21 was abolished on 27 December 2025.",
+      "whyRejected": "A search snippet suggested tenancy reform measures commenced on 27 December 2025, but the MHCLG implementation roadmap and GOV.UK guidance both give 1 May 2026 as the date landlords can no longer use section 21, with valid section 21 notices servable until 30 April 2026. The December date could not be corroborated and was rejected in favour of the roadmap date."
+    }
+  ],
+  "displayAllowlist": {
+    "note": "Every numeral the game is permitted to render. The load-time gate rejects any on-screen numeral absent from this file, so structural numbers are declared here explicitly rather than assumed.",
+    "structural": {
+      "dieFaces": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "dieTotals": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "playerSlots": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "boardSquares": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40
+      ],
+      "turnCounter": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40
+      ],
+      "percentGrid": [
+        0,
+        5,
+        10,
+        15,
+        20,
+        25,
+        30,
+        40,
+        50,
+        60,
+        70,
+        75,
+        80,
+        90,
+        100
+      ],
+      "ordinals": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22
+      ]
+    },
+    "years": [
+      1904,
+      1935,
+      1936,
+      2023,
+      2024,
+      2025,
+      2026,
+      2027,
+      2028,
+      2029,
+      2030,
+      2031,
+      748626
+    ],
+    "structuralNumerals": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      50,
+      60,
+      70,
+      75,
+      80,
+      90,
+      100,
+      1904,
+      1935,
+      1936,
+      2023,
+      2024,
+      2025,
+      2026,
+      2027,
+      2028,
+      2029,
+      2030,
+      2031,
+      748626
+    ]
+  },
+  "banned": {
+    "note": "Terms and trade dress this project must never render. Enforced at load time by src/integrity.js and at build time by scripts/verify-facts.mjs.",
+    "words": [
+      "MONOPOLY",
+      "MR MONOPOLY",
+      "COMMUNITY CHEST",
+      "CHANCE",
+      "RICH UNCLE PENNYBAGS",
+      "GO TO JAIL",
+      "FREE PARKING",
+      "TITLE DEED",
+      "HASBRO",
+      "PARKER BROTHERS",
+      "WADDINGTONS",
+      "ELECTRIC COMPANY",
+      "WATER WORKS"
+    ],
+    "tradeDress": [
+      "mascot character of any kind",
+      "the classic card-back designs",
+      "the corner-square iconography",
+      "the specific colour-band ladder of the modern commercial board",
+      "any named playing piece from the modern commercial board"
+    ]
+  }
+}

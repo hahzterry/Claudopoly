@@ -1,0 +1,161 @@
+{
+ "verdicts": [
+  {
+   "id": "epc-domestic-current",
+   "claim": "Domestic PRS minimum energy efficiency standard is EPC band E, in force for all tenancies since 1 April 2020, and nothing higher is yet law in 2026.",
+   "verdict": "CONFIRMED",
+   "correction": "",
+   "evidenceUrl": "https://www.gov.uk/guidance/domestic-private-rented-property-minimum-energy-efficiency-standard-landlord-guidance"
+  },
+  {
+   "id": "epc-domestic-2030",
+   "claim": "21 January 2026 Government response confirmed a single compliance date of 1 October 2030 for a new higher PRS standard, replacing staged 2028/2030 dates; SI still required.",
+   "verdict": "CONFIRMED",
+   "correction": "Substantively correct and independently corroborated (Elmhurst Energy, Simmons & Simmons, Goodlord). Two additions for precision: the standard is EPC C or equivalent assessed against a new dual-metric Home Energy Model, and it is expressly 'subject to the final legislation and parliamentary approval'. The card body ('Government confirms one deadline... The clock starts') reads as settled law; the realEvent's SI caveat should survive into the body given how much wrong EPC information is circulating.",
+   "evidenceUrl": "https://www.gov.uk/government/consultations/improving-the-energy-performance-of-privately-rented-homes-2025-update"
+  },
+  {
+   "id": "epc-cost-cap-10k",
+   "claim": "Cost cap rises to \u00a310,000 per property with 10-year exemption validity; current in-force cap is \u00a33,500 including VAT.",
+   "verdict": "CONFIRMED",
+   "correction": "Both figures verified exactly (\u00a310,000 / 10-year exemptions in the January 2026 response; \u00a33,500 incl. VAT in the current in-force guidance). Two imprecisions worth fixing: 'trebles' is loose \u2014 \u00a33,500 to \u00a310,000 is 2.9x, not 3x; and the card omits the new Property Value Adjustment exemption capping spend at 10% of value for homes worth under \u00a3100,000, plus the fact that qualifying spend counts towards the cap from 1 October 2025.",
+   "evidenceUrl": "https://www.gov.uk/government/consultations/improving-the-energy-performance-of-privately-rented-homes-2025-update"
+  },
+  {
+   "id": "epc-nondom-current",
+   "claim": "Non-domestic PRS minimum is EPC E applying to all let properties since 1 April 2023 regardless of tenancy change; EPC C 2027 / EPC B 2030 remains consultation, not law.",
+   "verdict": "CONFIRMED",
+   "correction": "The realEvent is fully verified, including that the gov.uk guidance references only an 'EPC B implementation' consultation with no confirmed date \u2014 so the card is right that the 2027/2030 trajectory is not law. However the card BODY is wrong: 'every tenancy, no exceptions' contradicts the regulations. Registered exemptions do exist (and are named in the same guidance), and MEES does not bite on lettings under six months or over 99 years, or on properties not required to hold an EPC. Reword to 'every tenancy, unless you have registered an exemption'.",
+   "evidenceUrl": "https://www.gov.uk/guidance/non-domestic-private-rented-property-minimum-energy-efficiency-standard-landlord-guidance"
+  },
+  {
+   "id": "epc-reform-delay",
+   "claim": "EPB regime reform replacing the single domestic headline rating with four metrics was postponed on 9 March 2026 to the second half of 2027.",
+   "verdict": "CONFIRMED",
+   "correction": "",
+   "evidenceUrl": "https://www.gov.uk/government/consultations/reforms-to-the-energy-performance-of-buildings-regime"
+  },
+  {
+   "id": "bank-rate-375",
+   "claim": "MPC voted 6-3 at its meeting ending 29 July 2026 to maintain Bank Rate at 3.75%, three members preferring 4%; CPI 2.6%; next decision 17 September 2026.",
+   "verdict": "CONFIRMED",
+   "correction": "",
+   "evidenceUrl": "https://www.bankofengland.co.uk/monetary-policy-summary-and-minutes/2026/july-2026"
+  },
+  {
+   "id": "mortgage-effective-rate",
+   "claim": "Effective rate on newly drawn mortgages rose to 4.35% in June 2026 from 4.22% in May; outstanding stock 3.96%; net approvals for house purchase 58,200.",
+   "verdict": "CONFIRMED",
+   "correction": "",
+   "evidenceUrl": "https://www.bankofengland.co.uk/statistics/money-and-credit/2026/june-2026"
+  },
+  {
+   "id": "renters-s21-abolished",
+   "claim": "Renters' Rights Act 2025 (Royal Assent 27 October 2025); from 1 May 2026 section 21 can no longer be used, possession requires a section 8 ground.",
+   "verdict": "CONFIRMED",
+   "correction": "",
+   "evidenceUrl": "https://www.gov.uk/government/publications/renters-rights-act-2025-implementation-roadmap/implementing-the-renters-rights-act-2025-our-roadmap-for-reforming-the-private-rented-sector"
+  },
+  {
+   "id": "renters-periodic-tenancies",
+   "claim": "From 1 May 2026 the vast majority of new and existing PRS tenancies convert to Assured Periodic Tenancies; rent rises once a year with at least two months' notice.",
+   "verdict": "CONFIRMED",
+   "correction": "The roadmap wording and the two-month revised section 13 notice are verified. The card body overstates: 'tenants stay as long as they like' is not accurate \u2014 landlords retain the full suite of section 8 grounds (sale, moving in, redevelopment, arrears). Reword to 'no fixed end date \u2014 tenants leave when they choose, or on a valid ground'.",
+   "evidenceUrl": "https://www.gov.uk/government/publications/renters-rights-act-2025-implementation-roadmap/implementing-the-renters-rights-act-2025-our-roadmap-for-reforming-the-private-rented-sector"
+  },
+  {
+   "id": "renters-bidding-ban",
+   "claim": "From 1 May 2026 landlords and agents cannot ask for, encourage or accept an offer above the advertised rent; no more than one month's rent in advance.",
+   "verdict": "CONFIRMED",
+   "correction": "",
+   "evidenceUrl": "https://www.gov.uk/government/publications/renters-rights-act-2025-implementation-roadmap/implementing-the-renters-rights-act-2025-our-roadmap-for-reforming-the-private-rented-sector"
+  },
+  {
+   "id": "sdlt-standard-rates",
+   "claim": "SDLT residential bands: nil to \u00a3125,000, 2% to \u00a3250,000, 5% to \u00a3925,000, 10% to \u00a31.5M, 12% above; 5% additional property surcharge; 2% non-UK resident surcharge.",
+   "verdict": "CONFIRMED",
+   "correction": "All bands and the 5% additional-property surcharge verified verbatim on the cited HMRC page. The 2% non-UK resident surcharge is correct law (in force since 1 April 2021) but does not appear on the cited page \u2014 cite gov.uk/guidance/rates-of-stamp-duty-land-tax-for-non-uk-residents for it. Also worth stating that SDLT covers England and Northern Ireland only.",
+   "evidenceUrl": "https://www.gov.uk/stamp-duty-land-tax/residential-property-rates"
+  },
+  {
+   "id": "sdlt-first-time-buyer",
+   "claim": "First-time buyer relief: nil to \u00a3300,000, 5% from \u00a3300,000 to \u00a3500,000, relief lost entirely above \u00a3500,000; average London price around \u00a3545,000.",
+   "verdict": "CONFIRMED",
+   "correction": "",
+   "evidenceUrl": "https://www.gov.uk/stamp-duty-land-tax/residential-property-rates"
+  },
+  {
+   "id": "hvcts-mansion-surcharge",
+   "claim": "High Value Council Tax Surcharge on English homes \u00a32M+ from April 2028, \u00a32,500 to \u00a37,500 by band, levied on owners, raising c.\u00a3430M a year, next revaluation 2033.",
+   "verdict": "CONFIRMED",
+   "correction": "",
+   "evidenceUrl": "https://www.gov.uk/government/consultations/high-value-council-tax-surcharge/high-value-council-tax-surcharge"
+  },
+  {
+   "id": "business-rates-revaluation-2026",
+   "claim": "2026 revaluation took effect 1 April 2026 in England and Wales with antecedent valuation date 1 April 2024, covering over two million properties, draft values published before 31 December 2025.",
+   "verdict": "CONFIRMED",
+   "correction": "",
+   "evidenceUrl": "https://valuationoffice.blog.gov.uk/2025/09/29/revaluation-2026-everything-you-need-to-know/"
+  },
+  {
+   "id": "business-rates-high-value-multiplier",
+   "claim": "England moved to five multipliers for 2026/27: high-value 50.8p at RV \u00a3500,000+, standard 48.0p, small business 43.2p, RHL 43.0p and 38.2p.",
+   "verdict": "CONFIRMED",
+   "correction": "",
+   "evidenceUrl": "https://www.gov.uk/government/publications/22026-notification-of-non-domestic-rating-multipliers-for-202627/22026-notification-of-non-domestic-rating-multipliers-for-202627"
+  },
+  {
+   "id": "cladding-remediation-deadlines",
+   "claim": "Legal deadlines: 18m+ buildings with unsafe cladding remediated by end 2029, 11-18m by end 2031; non-compliance a criminal offence with unlimited fines or imprisonment.",
+   "verdict": "CONFIRMED",
+   "correction": "",
+   "evidenceUrl": "https://www.gov.uk/government/news/deadline-set-for-unsafe-cladding-removal"
+  },
+  {
+   "id": "building-safety-levy",
+   "claim": "Building Safety Levy operative in England from 1 October 2026; 50% discount for previously developed land; exempt below 10 dwellings or 30 PBSA bedspaces.",
+   "verdict": "CONFIRMED",
+   "correction": "",
+   "evidenceUrl": "https://www.gov.uk/guidance/building-safety-levy-guidance/section-1-introduction"
+  },
+  {
+   "id": "commonhold-draft-bill",
+   "claim": "Draft Commonhold and Leasehold Reform Bill published 27 January 2026: leasehold banned for most new flats, ground rents capped at \u00a3250 falling to peppercorn after 40 years, forfeiture abolished, 50% conversion threshold; pre-legislative scrutiny from 4 February 2026.",
+   "verdict": "CONFIRMED",
+   "correction": "",
+   "evidenceUrl": "https://www.gov.uk/government/publications/draft-commonhold-and-leasehold-reform-bill"
+  },
+  {
+   "id": "lfra-two-year-rule",
+   "claim": "Section 27 of the Leasehold and Freehold Reform Act 2024 came into force 31 January 2025, removing the two-year ownership qualifying period for lease extension and freehold purchase.",
+   "verdict": "CONFIRMED",
+   "correction": "",
+   "evidenceUrl": "https://www.legislation.gov.uk/uksi/2025/57/regulation/2/made"
+  },
+  {
+   "id": "london-house-prices",
+   "claim": "London house prices fell 3.7% in the year to May 2026 (average c.\u00a3545,000), lowest English region against England +2.3% and North East +5.9%; Inner London -5.9%, Outer London -0.3%; ninth consecutive month of annual decline.",
+   "verdict": "CONFIRMED",
+   "correction": "Every figure verified, including the Inner/Outer London split and the ninth-consecutive-month claim. But the verifiedQuote is NOT verbatim: the release does not contain 'The lowest annual percentage change was in London, where prices decreased by 3.7%'. The actual sentence is 'In London, average house prices decreased by 3.7% in the 12 months to May 2026, down from a decrease of 2.3% in the 12 months to April 2026.' Replace the quote before shipping.",
+   "evidenceUrl": "https://www.gov.uk/government/statistics/uk-house-price-index-for-may-2026/uk-house-price-index-england-may-2026"
+  },
+  {
+   "id": "london-private-rents",
+   "claim": "London average private rent \u00a32,302 in June 2026, highest English region, with annual rent inflation of 2.2%, lowest in England against North East 6.3%, down from 11.5% in November 2024.",
+   "verdict": "CONFIRMED",
+   "correction": "The June 2026 figures (\u00a32,302, 2.2%, North East 6.3%) and the 22 July 2026 release date are verified. The historic peak is the one soft point: the November 2024 London figure is reported as 11.5% in some ONS vintages and 11.6% in the contemporaneous bulletin, because the Price Index of Private Rents is revised. Either cite the specific bulletin vintage for 11.5% or soften to 'around 11.5%'.",
+   "evidenceUrl": "https://www.ons.gov.uk/economy/inflationandpriceindices/bulletins/privaterentandhousepricesuk/july2026"
+  }
+ ],
+ "summary": "I set out to refute this set and largely failed, which is itself the finding: all 21 cards survive verification against primary sources, with no card WRONG and none UNVERIFIABLE. The two areas flagged as highest-risk are clean. The EPC/MEES cards correctly draw the line that trips most commentators up \u2014 they state EPC E as the only standard actually in force for both domestic (since 1 April 2020) and non-domestic (since 1 April 2023, all tenancies), and correctly characterise both the 1 October 2030 domestic standard and the commercial EPC C/B trajectory as not yet law. The 21 January 2026 single compliance date and the \u00a310,000 cost cap with 10-year exemptions are corroborated by the gov.uk consultation outcome and independently by Elmhurst Energy, Simmons & Simmons and Goodlord. Bank Rate is exactly right \u2014 3.75%, 6-3, meeting ending 29 July 2026, announced 30 July, next 17 September \u2014 and I confirmed there is no intervening August MPC meeting that would have superseded it. Renters' Rights is verified on commencement, not merely Royal Assent: the 1 May 2026 date for section 21 abolition, APT conversion and the bidding ban all trace to the 13 November 2025 roadmap. Every numeric figure I tested reconciled exactly, including the harder ones: 58,200 approvals, 4.35% from 4.22%, 3.96% stock, the five business rates multipliers to the tenth of a penny, \u00a3430M HVCTS revenue, the 2033 revaluation, Inner London -5.9% and Outer London -0.3%, and London's ninth consecutive month of decline. The residual defects are presentational rather than factual: one fabricated-sounding quote attribution on the House Price Index card, one card body that contradicts its own source by claiming 'no exceptions', and two bodies that overstate settled-ness. Fix those four and the deck is shippable.",
+ "mustFix": [
+  "london-house-prices \u2014 the verifiedQuote is not verbatim and must not ship as a quotation. 'The lowest annual percentage change was in London, where prices decreased by 3.7%' does not appear in the HM Land Registry release. Replace with the actual sentence: 'In London, average house prices decreased by 3.7% in the 12 months to May 2026, down from a decrease of 2.3% in the 12 months to April 2026.' The underlying figures are all correct \u2014 this is an attribution fix only.",
+  "epc-nondom-current \u2014 the card body 'every tenancy, no exceptions' is contradicted by its own cited source. Registered exemptions exist, and MEES does not apply to lettings under six months or over 99 years, or to properties not required to hold an EPC. Reword to 'every tenancy, unless you have registered an exemption'.",
+  "epc-domestic-2030 \u2014 the body presents the 1 October 2030 standard as settled ('Government confirms one deadline... The clock starts') while the realEvent correctly notes a statutory instrument is still required in 2027. Given how much incorrect EPC deadline information is in circulation, carry the 'subject to final legislation' caveat into the visible body text, not just the metadata.",
+  "epc-cost-cap-10k \u2014 'trebles' is imprecise: \u00a33,500 to \u00a310,000 is 2.9x. Either say 'nearly trebles' or state both figures. Also add the Property Value Adjustment exemption (10% of value for homes under \u00a3100,000), which materially changes who the cap actually binds.",
+  "renters-periodic-tenancies \u2014 'tenants stay as long as they like' overstates the reform and would mislead a player. Landlords retain all section 8 grounds including sale, moving in and redevelopment. Reword to 'no fixed end date \u2014 tenants leave when they choose, or on a valid ground'.",
+  "london-private-rents \u2014 the 11.5% November 2024 peak is the one figure I could not pin to a single authoritative vintage; the contemporaneous ONS bulletin reported 11.6% and the series has since been revised. Cite the specific bulletin or soften to 'around 11.5%'.",
+  "sdlt-standard-rates \u2014 the 2% non-UK resident surcharge is correct law but is not on the cited page. Add gov.uk/guidance/rates-of-stamp-duty-land-tax-for-non-uk-residents as a second source, and note SDLT applies to England and Northern Ireland only."
+ ]
+}
