@@ -14,7 +14,7 @@ mkdirSync(OUT, { recursive: true });
 const W = 1080;
 
 const CAPTIONS = [
-  { id: 'a1', kicker: 'PARK LANE', line: '2nd dearest in 1935 · 6th cheapest in 2026' },
+  { id: 'a1', kicker: 'REGENT STREET', line: '4th dearest in 1935 · 4th cheapest in 2026' },
   { id: 'a2', kicker: 'BOND STREET', line: '20th of 22 in 1935 · 1st in 2026' },
   { id: 'a3', kicker: 'OLD KENT ROAD', line: 'still last. £60 then, £325,000 now' },
   { id: 'a4', kicker: '', line: 'the old ladder spanned 6.7×', big: 'this one spans 103×' },

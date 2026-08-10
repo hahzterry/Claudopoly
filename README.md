@@ -21,8 +21,9 @@ her point.
 | Bond Street | £320 | £33,575,353 | median, all recorded transactions, n=16 |
 
 The printed 1935 ladder spanned **6.7×**. The recorded 2026 evidence spans **103×**.
-Park Lane was second dearest in 1935 and is now sixth cheapest. Bond Street was
-20th of 22 and is now 1st.
+Regent Street was the 4th dearest square in 1935 and is now the 4th cheapest.
+Park Lane was 2nd dearest and is now 9th cheapest, below the midpoint. Bond Street
+was 20th of 22 counting from the cheapest, and is now 1st.
 
 21 of the 22 streets resolve to actual recorded transactions, each carrying its
 HM Land Registry transaction ID and URI. Trafalgar Square has no residential sale

@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>The prompt, the fact base and the gate — LANDLORD: LONDON 2026</title>
+<meta name="description" content="The prompt that built a London property board game where every price is real, the HM Land Registry fact base behind it, and the integrity gate that refuses to render an unsourced number.">
+<meta name="theme-color" content="#FFF1E5">
+<link rel="license" href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/">
+<meta property="og:title" content="The prompt, the fact base and the gate">
+<meta property="og:description" content="Regent Street was the 4th dearest square in 1935. It is now the 4th cheapest. Every price on the board is real — and the game refuses to start if it finds one it cannot source.">
+<meta property="og:type" content="website">
+<style>
+  /*
+   * Deliberately the same visual grammar as the game's property panels: the FT
+   * tint, the rule above the title, the basis label under every figure. Someone
+   * arriving from the video should recognise where they are, and the form should
+   * feel like it came from the same hand as the data.
+   */
+  :root{
+    --paper:#FFF1E5; --ink:#1A1817; --mute:#66605C; --rule:#E0D4C8;
+    --claret:#C8102E; --blue:#0F5499; --plate:#FFFBF6;
+    --shadow:0 1px 0 rgba(26,24,23,.05), 0 18px 40px -28px rgba(26,24,23,.65);
+  }
+  @media (prefers-color-scheme:dark){
+    :root{--paper:#17140F; --ink:#F3ECE3; --mute:#9C938A; --rule:#332C24;
+          --claret:#E8455F; --blue:#7FB2E8; --plate:#1F1B15;
+          --shadow:0 1px 0 rgba(0,0,0,.5), 0 18px 40px -28px #000;}
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--paper)}
+  body{
+    color:var(--ink);
+    font:17px/1.55 "Helvetica Neue",Helvetica,ui-sans-serif,system-ui,Arial,sans-serif;
+    -webkit-text-size-adjust:100%;
+    padding:max(28px,env(safe-area-inset-top)) 20px calc(56px + env(safe-area-inset-bottom));
+    max-width:640px;margin:0 auto;
+  }
+  .rule{width:76px;height:4px;background:var(--ink);margin-bottom:22px}
+  h1{font-size:clamp(30px,7.4vw,42px);line-height:1.06;letter-spacing:-.022em;
+     margin:0 0 6px;font-weight:700;text-wrap:balance}
+  .sub{font-size:18px;color:var(--mute);margin:0 0 30px;line-height:1.45;max-width:34ch}
+
+  .reversal{background:var(--plate);border:1px solid var(--rule);border-radius:3px;
+    padding:22px 24px;margin:0 0 28px;box-shadow:var(--shadow)}
+  .reversal .k{font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;
+    color:var(--mute);margin-bottom:12px}
+  /* Stacked by default: a long value beside a long label overflowed a 375px
+     screen. Side by side only once there is genuinely room for it. */
+  .row{padding:11px 0;border-bottom:1px solid var(--rule)}
+  .row:last-of-type{border-bottom:0}
+  .row .n{display:block;font-size:12px;font-weight:700;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--mute);margin-bottom:4px}
+  .row .v{display:block;font-variant-numeric:tabular-nums;font-weight:700;
+    font-size:19px;letter-spacing:-.01em}
+  @media (min-width:430px){
+    .row{display:flex;align-items:baseline;justify-content:space-between;gap:18px}
+    .row .n{margin-bottom:0;font-size:12px}
+    .row .v{font-size:18px;white-space:nowrap;text-align:right}
+  }
+  .row .v.now{color:var(--blue)}
+  .src{font-size:12.5px;color:var(--mute);margin-top:14px;line-height:1.5}
+
+  h2{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--mute);margin:38px 0 14px;padding-bottom:8px;border-bottom:1px solid var(--rule)}
+  p{margin:0 0 16px}
+  ul{margin:0 0 16px;padding-left:0;list-style:none}
+  ul li{padding:11px 0 11px 26px;border-bottom:1px solid var(--rule);position:relative;font-size:16px}
+  ul li:last-child{border-bottom:0}
+  ul li::before{content:"";position:absolute;left:4px;top:19px;width:8px;height:8px;
+    background:var(--claret);border-radius:50%}
+  ul li b{font-weight:700}
+  ul li span{display:block;color:var(--mute);font-size:14px;margin-top:3px;line-height:1.45}
+
+  .formwrap{background:var(--plate);border:1px solid var(--rule);border-radius:3px;
+    box-shadow:var(--shadow);overflow:hidden;margin:8px 0 10px}
+  .formwrap iframe{display:block;width:100%;height:660px;border:0;background:transparent}
+  .formfallback{padding:26px 24px}
+  .formfallback a{display:block;text-align:center;background:var(--claret);color:#fff;
+    text-decoration:none;font-weight:700;font-size:17px;padding:16px;border-radius:3px}
+  .formfallback a:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+  .note{font-size:13.5px;color:var(--mute);line-height:1.5;margin:0 0 30px}
+
+  .play{display:block;text-align:center;border:1px solid var(--ink);color:var(--ink);
+    text-decoration:none;font-weight:700;font-size:16px;padding:15px;border-radius:3px;margin:0 0 8px}
+  .play:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+
+  footer{margin-top:44px;padding-top:18px;border-top:2px solid var(--ink);
+    font-size:12.5px;color:var(--mute);line-height:1.65}
+  footer a{color:var(--mute)}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<div class="rule"></div>
+<h1>The prompt, the fact base, and the gate that enforces it.</h1>
+<p class="sub">Everything behind a London property board game where every price is a real figure, and nothing unsourced can reach the screen.</p>
+
+<div class="reversal">
+  <div class="k">Regent Street · City of Westminster</div>
+  <div class="row"><span class="n">On the 1935 board</span><span class="v">£300 — 4th dearest of 22</span></div>
+  <div class="row"><span class="n">Recorded, 2026</span><span class="v now">£570,000 — 4th cheapest of 22</span></div>
+  <p class="src">Median price paid, HM Land Registry Price Paid Data, accessed 10 August 2026. The 1935 figure is the price printed on the London board of that year, shown as a historical contrast.</p>
+</div>
+
+<p>The printed ladder spread its prices over 6.7×. The recorded evidence spreads them over 103×, from Old Kent Road at £325,000 to Bond Street at £33,575,353.</p>
+
+<p>A board game is the most absurd possible place to insist that every price be real. That is exactly why it was built there. If the rule holds up somewhere this frivolous, it holds up in a lender covenant pack.</p>
+
+<a class="play" href="/">Play it first →</a>
+<p class="note">No email needed to play. The game is the evidence; this page is just the method.</p>
+
+<h2>What you get</h2>
+<ul>
+  <li><b>The prompt</b><span>The brief that produced it, in full — including the constraints that did the real work, and the ones that were wrong.</span></li>
+  <li><b>The fact base</b><span>landlord-facts.json. 22 streets, each with its basis, sample size, window, dataset and HM Land Registry transaction ID.</span></li>
+  <li><b>The integrity gate</b><span>The code that halts the build if a displayed value has no chain back to that file, and the eight-injection suite that proves it works.</span></li>
+  <li><b>The 14 rejected claims</b><span>What was thrown out as unverifiable, and why — including the commercial EPC deadline a great deal of the industry repeats as law.</span></li>
+</ul>
+
+<h2>Where to send it</h2>
+
+<div class="formwrap">
+  <!-- Replace FORM_EMBED_URL with the Airtable form's share link + "?backgroundColor=orange&layout=embed".
+       Until then the fallback below shows instead, so the page is never broken. -->
+  <div class="formfallback" id="fallback">
+    <a href="FORM_SHARE_URL" id="formlink">Send me the prompt →</a>
+    <p class="note" style="margin:14px 0 0;text-align:center">One email. The material, then nothing you did not ask for.</p>
+  </div>
+</div>
+
+<p class="note">Your address is used to send you this and nothing else. No list, no sequence, no sharing with anyone.</p>
+
+<h2>What this is not</h2>
+<p class="note" style="margin-bottom:8px">Stated here rather than discovered later, which is the same discipline the gate enforces.</p>
+<ul>
+  <li><b>Not a valuation</b><span>Median price paid is recorded evidence, not an opinion of value. On a few streets the method mixes in some commercial transfers; Bond Street's figure is the one most affected, and each affected square says so on its face.</span></li>
+  <li><b>Not complete</b><span>Trafalgar Square has no residential sale on record at all, so it falls back to the borough UK HPI average — and the square admits it.</span></li>
+  <li><b>Not one prompt</b><span>It took several rounds, and independent critics rejected the first build outright. The method is the interesting part, not the speed.</span></li>
+</ul>
+
+<footer>
+  Contains HM Land Registry data © Crown copyright and database right 2026. This data is
+  licensed under the <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" rel="license noopener" target="_blank">Open Government Licence v3.0</a>.
+  Contains public sector information licensed under the Open Government Licence v3.0.
+  The UK House Price Index is produced by HM Land Registry, Registers of Scotland, Land and
+  Property Services Northern Ireland and the Office for National Statistics.<br><br>
+  No subscription or paywalled data source is used anywhere in this project. Not produced,
+  endorsed or verified by HM Land Registry or the Office for National Statistics.<br><br>
+  An original homage to The Landlord's Game by Elizabeth Magie, 1904, US Patent 748,626,
+  public domain. Source: <a href="https://github.com/teddyjames1995/Claudopoly">github.com/teddyjames1995/Claudopoly</a>
+</footer>
+
+<script>
+  // Swap the fallback button for the embedded form as soon as a real URL is set.
+  // Written this way so the page degrades to a working link rather than an empty
+  // frame if the form is ever moved or removed.
+  (function () {
+    var FORM_EMBED_URL = '';   // <-- paste the Airtable form share URL here
+    if (!FORM_EMBED_URL) return;
+    var wrap = document.querySelector('.formwrap');
+    var f = document.createElement('iframe');
+    f.src = FORM_EMBED_URL;
+    f.title = 'Request the prompt, the fact base and the integrity gate';
+    f.loading = 'lazy';
+    wrap.innerHTML = '';
+    wrap.appendChild(f);
+  })();
+</script>
+
+</body>
+</html>

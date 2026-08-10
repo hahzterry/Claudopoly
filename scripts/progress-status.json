@@ -1,7 +1,7 @@
 {
   "project": "LANDLORD: LONDON 2026",
   "subtitle": "Three.js property board game \u2014 every price real, every source open",
-  "updatedIso": "2026-08-10T23:40:00Z",
+  "updatedIso": "2026-08-11T09:10:00Z",
   "round": 5,
   "roundLabel": "Live",
   "liveUrl": "https://claudopoly.vercel.app",
@@ -102,8 +102,8 @@
       "board1935": 320
     },
     "biggestFaller": {
-      "name": "Park Lane",
-      "note": "2nd dearest in 1935, 6th cheapest in 2026"
+      "name": "Regent Street",
+      "note": "4th dearest in 1935, 4th cheapest in 2026 \u2014 an exact mirror"
     },
     "eventCards": 21
   },
@@ -259,6 +259,10 @@
     {
       "time": "23:40",
       "text": "Played a real game on the live URL: 6 rounds, 3 streets, \u00a376k net rent roll. Verified on production, never on localhost."
+    },
+    {
+      "time": "09:10",
+      "text": "Correction: I had claimed Park Lane was 6th cheapest in 2026. It is 9th. The figure was never verified against the fact base. Corrected everywhere; the game itself computes ranks and was always right."
     }
   ]
 }
