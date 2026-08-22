@@ -1,6 +1,6 @@
 @charset "UTF-8";
 /* =============================================================================
-   LANDLORD: LONDON 2026 — styles.css
+   LANDLORD: ATLANTA 2026 — styles.css
    The single stylesheet. Serves the game HUD (hud.js) and the data panels
    (panel.js).
 
@@ -95,12 +95,12 @@
     background: none;
     border: 0;
   }
-  /* NOTE ON SPELLING: this repository is written in British English without
+  /* NOTE ON SPELLING: this repository is written in American English without
      exception. `color`, `center` and `gray` appear below only where they are
      CSS grammar — property names and keywords defined by the specification,
      which cannot be spelled any other way. Every word this file actually
-     authors — token names, class names, comments, copy — is British:
-     colour, centre, grey, analyse, organise, neighbourhood. */
+     authors — token names, class names, comments, copy — is American:
+     colour, centre, grey, analyze, organize, neighborhood. */
 
   img, canvas, svg, video { display: block; max-width: 100%; }
   img, canvas { -webkit-user-drag: none; user-select: none; }
@@ -180,15 +180,17 @@
 
     /* ---------------------------------------------------------------------
        GAME — STREET GROUP COLOURS (from data/landlord-facts.json groups[])
+       Atlanta groups: Buckhead, Midtown, Downtown, Old Fourth Ward,
+       Inman Park, Virginia-Highland, East Atlanta, West End.
        --------------------------------------------------------------------- */
-    --grp-riverside:   #8C6A4F;
-    --grp-terminus:    #7FA9C9;
-    --grp-civic:       #B4708F;
-    --grp-theatreland: #D9843C;
-    --grp-chambers:    #B23A34;
-    --grp-square-mile: #D9B23C;
-    --grp-gallery:     #4E8A6E;
-    --grp-crown:       #2F5473;
+    --grp-buckhead:          #8C6A4F;
+    --grp-midtown:           #7FA9C9;
+    --grp-downtown:          #B4708F;
+    --grp-old-fourth-ward:   #D9843C;
+    --grp-inman-park:        #B23A34;
+    --grp-virginia-highland: #D9B23C;
+    --grp-east-atlanta:      #4E8A6E;
+    --grp-west-end:          #2F5473;
 
     /* ---------------------------------------------------------------------
        SEMANTIC STATE
@@ -1386,14 +1388,14 @@
   [data-player="4"] { --player-plate: var(--p4-plate); --player-piece: var(--p4-piece); --player-pennant: var(--p4-pennant); }
 
   /* Street group. panel.js sets data-group on a chip or a rule. */
-  [data-group="riverside"]   { --chip-colour: var(--grp-riverside); }
-  [data-group="terminus"]    { --chip-colour: var(--grp-terminus); }
-  [data-group="civic"]       { --chip-colour: var(--grp-civic); }
-  [data-group="theatreland"] { --chip-colour: var(--grp-theatreland); }
-  [data-group="chambers"]    { --chip-colour: var(--grp-chambers); }
-  [data-group="square-mile"] { --chip-colour: var(--grp-square-mile); }
-  [data-group="gallery"]     { --chip-colour: var(--grp-gallery); }
-  [data-group="crown"]       { --chip-colour: var(--grp-crown); }
+  [data-group="buckhead"]          { --chip-colour: var(--grp-buckhead); }
+  [data-group="midtown"]           { --chip-colour: var(--grp-midtown); }
+  [data-group="downtown"]          { --chip-colour: var(--grp-downtown); }
+  [data-group="old-fourth-ward"]   { --chip-colour: var(--grp-old-fourth-ward); }
+  [data-group="inman-park"]        { --chip-colour: var(--grp-inman-park); }
+  [data-group="virginia-highland"] { --chip-colour: var(--grp-virginia-highland); }
+  [data-group="east-atlanta"]      { --chip-colour: var(--grp-east-atlanta); }
+  [data-group="west-end"]          { --chip-colour: var(--grp-west-end); }
 
   /* Both of these exist ONLY on the active panel, so they start absent. */
   .active-chevron,
