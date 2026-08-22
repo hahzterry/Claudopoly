@@ -1,5 +1,5 @@
 /**
- * engine.js — rules and state for LANDLORD: LONDON 2026.
+ * engine.js — rules and state for LANDLORD: ATLANTA 2026.
  *
  * Lineage: Elizabeth Magie's The Landlord's Game (1904, US Patent 748,626,
  * public domain), which existed to show what happens when land rent accrues to
@@ -8,6 +8,7 @@
  *   - THE LEVY taxes that rent roll, so holding land has a running cost.
  *
  * No mechanic, name or artwork is taken from any modern commercial board game.
+ * Adapted for Atlanta, GA, using real property data from the Atlanta metro area.
  */
 import { Money, fmtPlain, fmtCompact } from './money.js';
 import * as F from './facts.js';
@@ -111,7 +112,7 @@ export class Player {
     // dominant: it bought 2.5x the rent per pound of cash and its only cost,
     // interest, was paid in a currency nobody was scored on. Charging the
     // interest against the score restores the trade-off — gearing buys scale
-    // but at a lower return on the cash you put in, because the 4.35% cost of
+    // but at a lower return on the cash you put in, because the 5.25% cost of
     // debt sits above the 4.0% the asset yields.
     if (this.debt.amount <= 0) return gross;
     const service = this.debt.scale(game.assumptions.debtInterestPct / 100,
