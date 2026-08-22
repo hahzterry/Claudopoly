@@ -1,5 +1,5 @@
 /**
- * panel.js — the data surfaces of LANDLORD: LONDON 2026.
+ * panel.js — the data surfaces of LANDLORD: ATLANTA 2026.
  *
  * Three exported builders, all judged against Financial Times graphics
  * standards (bench/round0/ft.json):
@@ -10,7 +10,7 @@
  *   renderSourcesPanel()          — attribution and method, in full.
  *
  * THE HEADLINE AND THE MARKS ARGUE THE SAME THING — AND THE HEADLINE MAKES TWO
- * CLAIMS. "The 1935 price ladder no longer describes London" says the rungs are
+ * CLAIMS. "The 1935 price ladder no longer describes Atlanta" says the rungs are
  * further apart than the printed board made them AND that they are in a
  * different order. Drawing only one of those earns the other complaint, which
  * is exactly what happened twice: a rank slope chart under a headline about
@@ -21,10 +21,10 @@
  * crossings a chart of rows cannot draw.
  *
  * THE EDITORIAL POINT. The 1935 board printed a price ladder that ran from
- * £60 to £400 — a spread of under seven times. The 2026 evidence spreads over
- * ninety times, and it has comprehensively re-ordered the ladder. Every claim
- * this module makes about that re-ordering is COMPUTED from the fact base at
- * render time rather than written into the copy, so the prose cannot drift
+ * $60 to $400 — a spread of under seven times. The 2026 evidence spreads over
+ * more than a hundred times, and it has comprehensively re-ordered the ladder.
+ * Every claim this module makes about that re-ordering is COMPUTED from the fact
+ * base at render time rather than written into the copy, so the prose cannot drift
  * away from the data it describes.
  *
  * ONE SCALE MEANS ONE BOX. Every mark on the comparison page is positioned as
@@ -56,7 +56,7 @@
  *    multiples, logarithmic axis ticks, postal addresses copied verbatim from
  *    the register — carry data-numeral-ok, and each use is justified in a
  *    comment beside it.
- * 4. British English throughout, in copy and in comments.
+ * 4. American English throughout, in copy and in comments.
  *
  * NUMBER FORMAT. FT house style abbreviates millions as "mn", never a bare
  * "m", because a screen reader announces "m" as "metres". money.js is fixed
@@ -64,13 +64,13 @@
  * ONLY formatter used for a figure above a million here. It is deliberately
  * built to mirror integrity.js's compactOf so that every abbreviated string it
  * produces still resolves against the fact base: one decimal place on
- * millions, and a whole number only where a value at or above £100mn would
+ * millions, and a whole number only where a value at or above $100mn would
  * otherwise round to a figure the fact base does not contain. Anything under a
- * million is written out in full with its comma — "£129,502", not "£0.1mn" —
+ * million is written out in full with its comma — "$129,502", not "$0.1mn" —
  * because that is what FT does and because rounding away four significant
  * figures on a small number is a loss, not an abbreviation. The one exception
- * is the cited HM Land Registry transaction price, which is reproduced to the
- * pound: it is a register entry, not an estimate.
+ * is the cited transaction price, which is reproduced to the dollar: it is a
+ * register entry, not an estimate.
  *
  * ONE DELIBERATE ACCESSIBILITY DECISION. ft.json's small frame sets source
  * text at 12px. touch.json floors every label at 13px because these panels are
@@ -84,7 +84,7 @@
  * set in the same ink. A blue "2026" over a chart with no blue in it names a
  * series that does not exist.
  *
- * A SUBTITLE BELONGS TO THE CHART IT DESCRIBES. "£ per square, logarithmic
+ * A SUBTITLE BELONGS TO THE CHART IT DESCRIBES. "$ per square, logarithmic
  * scale" is true of the ranked value plot and false of the slope chart, whose
  * marks encode places on the ladder and carry no unit at all. Each chart
  * therefore states its own unit and period beneath its own heading, and the
@@ -370,7 +370,7 @@ const FT_CSS = `
 }
 
 /* ══ era spread bands — drawn in the plot column of the ladder figure ══════
-   Two bands on the shared logarithmic pound scale: the printed board's whole
+   Two bands on the shared logarithmic dollar scale: the printed board's whole
    price range, and the recorded evidence's whole price range. Because the
    scale is logarithmic, the LENGTH of a band is the multiple between the
    cheapest and dearest square of its era — which is the claim the headline
@@ -725,7 +725,7 @@ function heading(title, subtitle) {
 
 /**
  * A chart's own heading and its own subtitle. A subtitle belongs to the chart
- * it describes: "£ per square, logarithmic scale" is true of the value plot
+ * it describes: "$ per square, logarithmic scale" is true of the value plot
  * and false of the rank slope, so each carries its own.
  */
 function chartHead(title, subtitle) {
@@ -755,16 +755,16 @@ function sourceBlock({ footnote, sources, credit = 'Graphic: Teddy James Advisor
  * FT abbreviation for money, in this module's own hand because money.js is
  * fixed and emits a bare "m".
  *
- *   £33,575,353  ->  £33.6mn
- *   £267,500,000 ->  £267.5mn
- *   £129,502     ->  £129,502   (under a million, written out with its comma)
+ *   $33,575,353  ->  $33.6mn
+ *   $267,500,000 ->  $267.5mn
+ *   $129,502     ->  $129,502   (under a million, written out with its comma)
  *
  * The integrity gate accepts an abbreviated token two ways: the token parses
  * back to an exact fact-base amount, or it matches what integrity.js's own
  * compactOf() would render for one. One decimal place satisfies the second
- * test for everything below £100mn. At or above £100mn compactOf drops the
+ * test for everything below $100mn. At or above $100mn compactOf drops the
  * decimal, so the one-decimal form is kept only where it parses back exactly —
- * which is what makes £267.5mn legible rather than rounded to £268mn — and the
+ * which is what makes $267.5mn legible rather than rounded to $268mn — and the
  * whole-number form is used otherwise. No figure can be shown that the fact
  * base cannot account for.
  */
@@ -774,8 +774,8 @@ function fmtMn(amount) {
   const m = n / 1_000_000;
   const oneDp = Math.round(m * 10) / 10;
   const exact = Math.round(oneDp * 1_000_000) === n;
-  const body = (m >= 100 && !exact) ? Math.round(m).toLocaleString('en-GB') : oneDp.toFixed(1);
-  const out = '£' + body + 'mn';
+  const body = (m >= 100 && !exact) ? Math.round(m).toLocaleString('en-US') : oneDp.toFixed(1);
+  const out = '$' + body + 'mn';
   return amount < 0 ? '−' + out : out;
 }
 
@@ -783,14 +783,14 @@ const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July',
   'August', 'September', 'October', 'November', 'December'];
 
 /** "2024-03-27" -> "27 March 2024". Day and year numerals are both declared. */
-function ukDate(iso) {
+function usDate(iso) {
   const [y, m, d] = String(iso).split('-').map(Number);
   if (!y || !m || !d) return String(iso);
-  return `${d} ${MONTHS[m - 1]} ${y}`;
+  return `${MONTHS[m - 1]} ${d}, ${y}`;
 }
 
 /** "2026-05" -> "May 2026". */
-function ukMonth(iso) {
+function usMonth(iso) {
   const [y, m] = String(iso).split('-').map(Number);
   return m ? `${MONTHS[m - 1]} ${y}` : String(iso);
 }
@@ -809,13 +809,13 @@ const ordinal = (n) => `${n}${ORD_SUFFIX(n)}`;
 function multipleText(now, then) {
   const r = now / then;
   const rounded = r >= 100 ? Math.round(r) : Math.round(r * 10) / 10;
-  return `${rounded.toLocaleString('en-GB')}×`;
+  return `${rounded.toLocaleString('en-US')}×`;
 }
 
 /* ------------------------------------------------------- logarithmic scale */
 
 /**
- * One shared logarithmic domain, £10 to £100,000,000, used by every then-and-
+ * One shared logarithmic domain, $10 to $100,000,000, used by every then-and-
  * now visual in this module so that a single square's strip can be compared
  * directly against the ranked chart.
  *
@@ -850,12 +850,12 @@ function tickLabel(exp) {
   if (exp === 5) return '100k';
   if (exp === 4) return '10k';
   if (exp === 3) return '1k';
-  return Math.pow(10, exp).toLocaleString('en-GB');
+  return Math.pow(10, exp).toLocaleString('en-US');
 }
 
 /**
  * The decade axis. Every tick label is a bare numeral that the fact base does
- * not contain (£1,000 and £100,000,000 are scale marks, not observations), so
+ * not contain ($1,000 and $100,000,000 are scale marks, not observations), so
  * the row carries data-numeral-ok.
  *
  * There are no tick marks, because a value axis takes none. There is no domain
@@ -897,7 +897,7 @@ function logScaleNote() {
     class: 'll-note',
     text: 'The value scale is logarithmic: each gridline is ten times the one '
         + 'before it, so equal distances are equal multiples rather than equal '
-        + 'pounds. Bars are not used here, because a bar must start at zero and '
+        + 'dollars. Bars are not used here, because a bar must start at zero and '
         + 'a logarithmic scale cannot reach it. The dots are the two values; '
         + 'the line between them is the multiple.',
   });
@@ -909,37 +909,35 @@ function logScaleNote() {
  * Why one square's figure is measured differently from the next one's, said in
  * plain English on the square where the player meets it.
  *
- * A reader who sees Whitehall at a median of arm's-length residential sales
- * and Piccadilly at a median of all recorded transactions has been shown two
- * different measurements without being told they are different. The basis
- * label alone does not carry that; it is a category name, not a comparison.
- * So each square states, in words, what its own evidence is worth and how it
- * differs from the preferred basis — and a square resting on weaker evidence
- * says so on its face before the reader gets to the figure.
+ * A reader who sees a street at a median of Zillow's ZHVI and another at a
+ * single recorded sale has been shown two different measurements without being
+ * told they are different. The basis label alone does not carry that; it is a
+ * category name, not a comparison. So each square states, in words, what its
+ * own evidence is worth and how it differs from the preferred basis — and a
+ * square resting on weaker evidence says so on its face before the reader gets
+ * to the figure.
  *
  * `strength` is the flag; `firm` is the preferred basis and takes the quiet
  * treatment. The mandarin flag is a fill, so it always carries its own words.
  */
 const BASIS_STRENGTH = {
-  'ppd-median-a': {
+  'zillow-median': {
     strength: 'firm',
     flag: 'Preferred basis',
-    plain: 'This is the strongest basis the open data offers: the middle price '
-         + 'of the ordinary, arm’s-length residential sales recorded on this '
-         + 'street. Squares measured this way are the ones to compare against '
-         + 'each other with the most confidence.',
+    plain: 'This is the strongest basis the open data offers: the Zillow Home '
+         + 'Value Index (ZHVI) median for this ZIP code or neighborhood. '
+         + 'Squares measured this way are the ones to compare against each '
+         + 'other with the most confidence.',
   },
-  'ppd-median-all': {
+  'fha-median': {
     strength: 'weaker',
     flag: 'Wider basis than most squares',
-    plain: 'Too few ordinary residential sales were recorded here to take a '
-         + 'median from, so the sample was widened to every recorded transfer, '
-         + 'including sales to companies and other non-standard transactions. '
-         + 'A single commercial block changing hands can pull that figure well '
-         + 'above what a home on the same street costs, so this square is not '
-         + 'measuring quite the same thing as a square on the preferred basis.',
+    plain: 'Too few transactions were recorded here to take a reliable median, '
+         + 'so the sample was widened to FHA-insured loans, which cover a '
+         + 'broader range of property types. This figure may not reflect the '
+         + 'typical market value of a single-family home on this street.',
   },
-  'ppd-single': {
+  'single-sale': {
     strength: 'weak',
     flag: 'One sale only — not an average',
     plain: 'Only one recorded sale sits behind this figure. It is a fact about '
@@ -947,33 +945,33 @@ const BASIS_STRENGTH = {
          + 'the real recorded evidence and hiding it would be worse, but it '
          + 'should not be read as this street’s price.',
   },
-  'ukhpi-la-average': {
+  'census-avg': {
     strength: 'weak',
-    flag: 'Borough average — not a street figure',
-    plain: 'No residential sale is recorded on this square at all, so the UK '
-         + 'House Price Index average for the whole local authority stands in '
-         + 'for the street. It describes the borough, not this address, and it '
-         + 'is the weakest evidence anywhere on this board.',
+    flag: 'Census tract average — not a street figure',
+    plain: 'No single-family sale is recorded on this square in the window, '
+         + 'so the American Community Survey (ACS) median value for the whole '
+         + 'census tract stands in for the street. It describes the area, not '
+         + 'this address, and it is the weakest evidence anywhere on this board.',
   },
 };
 
 /**
  * The bases that rest on something thinner than a median of a street's own
- * ordinary sales. A square measured this way carries a visible mark wherever
- * it is plotted or tabulated, not only on its own card, because the charts are
- * where a reader forms the comparison in the first place.
+ * sales. A square measured this way carries a visible mark wherever it is
+ * plotted or tabulated, not only on its own card, because the charts are where
+ * a reader forms the comparison in the first place.
  */
-const WEAK_BASES = new Set(['ppd-single', 'ukhpi-la-average']);
+const WEAK_BASES = new Set(['single-sale', 'census-avg']);
 
 /** The mark itself. A dagger, so it survives greyscale and colour-blindness. */
 const WEAK_MARK = '†';
 
 /** Two or three words naming the evidence, for a table column or a list. */
 const EVIDENCE_WORD = {
-  'ppd-median-a': 'Street median',
-  'ppd-median-all': 'Wider basis',
-  'ppd-single': 'One sale only',
-  'ukhpi-la-average': 'Borough average',
+  'zillow-median': 'Zillow ZHVI',
+  'fha-median': 'FHA median',
+  'single-sale': 'One sale only',
+  'census-avg': 'Census tract avg',
 };
 
 /** Small counts are set as words, which is both FT style and gate-proof. */
@@ -984,17 +982,17 @@ const sentenceCase = (t) => t.charAt(0).toUpperCase() + t.slice(1);
 
 /**
  * The two squares that make the difference between bases legible: the square
- * with the deepest ordinary-sales sample, and the square where widening to
- * every recorded transfer moved the figure furthest. Both are chosen from the
- * fact base, so the comparison cannot go stale.
+ * with the deepest Zillow sample, and the square where the single-sale figure
+ * is most extreme. Both are chosen from the fact base, so the comparison cannot
+ * go stale.
  */
 function exemplarPair() {
   const all = streets();
-  const firm = all.filter((s) => s.value2026.basis === 'ppd-median-a')
+  const firm = all.filter((s) => s.value2026.basis === 'zillow-median')
     .sort((a, b) => (b.value2026.sampleSize || 0) - (a.value2026.sampleSize || 0))[0];
-  const wide = all.filter((s) => s.value2026.basis === 'ppd-median-all')
+  const single = all.filter((s) => s.value2026.basis === 'single-sale')
     .sort((a, b) => b.value2026.amount - a.value2026.amount)[0];
-  return (firm && wide) ? { firm, wide } : null;
+  return (firm && single) ? { firm, wide: single } : null;
 }
 
 /**
@@ -1018,16 +1016,13 @@ function basisContrastNote(where) {
   }));
   p.appendChild(moneyEl('span', '', priceOf(firm.id), `${where}:contrast:${firm.id}`));
   p.appendChild(h('span', {
-    text: ` — the middle price of ${firm.value2026.sampleSize} ordinary homes `
-        + `changing hands — while ${wide.name} is `,
+    text: ` — the middle ZHVI value for that ZIP code — while ${wide.name} is `,
   }));
   p.appendChild(moneyEl('span', '', priceOf(wide.id), `${where}:contrast:${wide.id}`, fmtMn));
   p.appendChild(h('span', {
-    text: `, the middle price of ${wide.value2026.sampleSize} recorded transfers `
-        + 'of every kind, including whole commercial blocks bought by companies. '
-        + 'The second figure is larger partly because it counts sales no home '
-        + 'buyer would ever make. Both are real; they are answers to different '
-        + 'questions, and each square says which question it answered.',
+    text: `, the price of a single recorded sale. The second figure is real, but it is `
+        + 'a fact about one building on one day, not a market. Both are real; they are '
+        + 'answers to different questions, and each square says which question it answered.',
   }));
   return p;
 }
@@ -1041,24 +1036,24 @@ function listWords(items) {
 /**
  * The key to the weak-evidence mark, naming every square that carries it.
  *
- * Four squares on this board rest on one recorded sale and one on none at all.
+ * Several squares on this board rest on one recorded sale or a census average.
  * That is the most interesting thing the open data has to say about them, and
  * burying it in a basis code would be a way of not saying it.
  */
 function evidenceNote(rows) {
-  const single = rows.filter((r) => r.basis === 'ppd-single').map((r) => r.name);
-  const index = rows.filter((r) => r.basis === 'ukhpi-la-average').map((r) => r.name);
+  const single = rows.filter((r) => r.basis === 'single-sale').map((r) => r.name);
+  const index = rows.filter((r) => r.basis === 'census-avg').map((r) => r.name);
 
-  const parts = [`${WEAK_MARK} marks a square whose 2026 figure is not a median `
-                 + 'of that street’s own sales. '];
+  const parts = [`${WEAK_MARK} marks a square whose 2026 figure is not a ZHVI median `
+                 + 'of that street’s own neighborhood. '];
   if (single.length) {
     parts.push(`${listWords(single)} rest on a single recorded sale — one `
              + 'building, one day, not a market. ');
   }
   if (index.length) {
-    parts.push(`${listWords(index)} has no residential sale recorded on it at `
-             + 'all, so the UK House Price Index average for the whole borough '
-             + 'stands in for the street. ');
+    parts.push(`${listWords(index)} has no recent sale recorded on it at all, so the `
+             + 'American Community Survey median for the whole census tract stands '
+             + 'in for the street. ');
   }
   parts.push('They are plotted alongside the rest because they are the real '
            + 'recorded evidence, and marked because they are thinner than it.');
@@ -1069,10 +1064,10 @@ function evidenceNote(rows) {
 /** The footnote FT would set beneath the figure, stating the sample plainly. */
 function basisFootnote(v) {
   const n = v.sampleSize;
-  if (v.basis === 'ppd-median-a' && n) return `Median of ${n} arm’s-length residential sales`;
-  if (v.basis === 'ppd-median-all' && n) return `Median of ${n} recorded transactions`;
-  if (v.basis === 'ppd-single') return 'A single recorded sale, not an average';
-  if (v.basis === 'ukhpi-la-average') return 'Local authority average, not a street-level figure';
+  if (v.basis === 'zillow-median' && n) return `Median ZHVI from ${n} records`;
+  if (v.basis === 'fha-median' && n) return `Median FHA-insured loan amount from ${n} records`;
+  if (v.basis === 'single-sale') return 'A single recorded sale, not an average';
+  if (v.basis === 'census-avg') return 'Census tract average, not a street-level figure';
   return n ? `Median of ${n} recorded transactions` : null;
 }
 
@@ -1183,7 +1178,7 @@ export function renderPropertyPanel(streetId) {
   valueSec.appendChild(h('p', {
     class: 'll-meta',
     text: `Window ${v.windowFrom} to ${v.windowTo}`
-        + (v.referenceMonth ? ` · reference month ${ukMonth(v.referenceMonth)}` : ''),
+        + (v.referenceMonth ? ` · reference month ${usMonth(v.referenceMonth)}` : ''),
   }));
 
   if (v.sampleLow != null && v.sampleHigh != null) {
@@ -1281,18 +1276,17 @@ export function renderPropertyPanel(streetId) {
       h('h3', { class: 'll-h', text: 'Cited transaction' }),
       h('p', {
         class: 'll-note',
-        text: 'No residential sale is recorded on this square in the Price Paid '
-            + 'Data for the window, so there is no transaction record to cite. '
-            + 'The figure above comes from the index instead, and its basis says so.',
+        text: 'No residential sale is recorded on this square in the window, so '
+            + 'there is no transaction record to cite. The figure above comes '
+            + 'from the index instead, and its basis says so.',
       }),
     ]));
   }
 
   /* ══ source block: footnote first, then the source, each on its own line ══
      The footnote states the sample in the same words for every square, so a
-     reader moving between cards can see at a glance that Bond Street's figure
-     rests on sixteen transactions of every kind and Whitehall's on sixty-seven
-     ordinary sales. */
+     reader moving between cards can see at a glance that a square's figure
+     rests on Zillow's ZHVI or a single sale. */
   root.appendChild(sourceBlock({
     footnote: basisFootnote(v),
     sources: [v.dataset],
@@ -1313,7 +1307,7 @@ function indexOfStreet(id) {
  * is won on the largest annual rent roll NET of debt service, not on the
  * largest rent roll and not on the largest pile of cash. Before the interest
  * was charged against the score, a critic proved that gearing was strictly
- * dominant: it bought two and a half times the rent per pound of the player's
+ * dominant: it bought two and a half times the rent per dollar of the player's
  * own money, and its only cost was paid in a currency nobody was scored on. A
  * card that showed this square's rent and this square's borrowing capacity
  * side by side, with no cost between them, was describing exactly that
@@ -1373,7 +1367,7 @@ function scoreSection(st, where) {
     h('p', {
       class: 'll-note',
       text: `Debt costs ${a.debtInterestPct}% a year and the assumed yield is `
-          + `${a.grossYieldPct}%, so a borrowed pound buys slightly less rent `
+          + `${a.grossYieldPct}%, so a borrowed dollar buys slightly less rent `
           + 'than it costs to service: gearing lowers what this square alone '
           + 'contributes. What it buys instead is reach. The same cash takes '
           + 'more squares, and it is holding every square in a colour group '
@@ -1385,17 +1379,17 @@ function scoreSection(st, where) {
   ]);
 }
 
-/** The cited HM Land Registry record, with its transaction URI as a real link. */
+/** The cited transaction record, with its URI as a real link. */
 function citedRecord(streetId, rec, where) {
   const i = indexOfStreet(streetId);
   const sec = h('section', { class: 'll-sec' }, [
     h('h3', { class: 'll-h', text: 'Cited transaction' }),
     /* The address is copied verbatim from the register. Its house numbers and
-       postcode digits are not facts-file amounts, so the line is declared. */
+       ZIP codes are not facts-file amounts, so the line is declared. */
     h('p', { class: 'll-basis', text: rec.address, attrs: { 'data-numeral-ok': '' } }),
     h('p', {
       class: 'll-meta',
-      text: `${ukDate(rec.date)} · ${rec.tenure} · Price Paid Data category ${rec.ppdCategory}`,
+      text: `${usDate(rec.date)} · ${rec.tenure}`,
     }),
     h('p', {
       class: 'll-figure ll-figure--then',
@@ -1411,12 +1405,11 @@ function citedRecord(streetId, rec, where) {
       href: rec.transactionUri,
       rel: 'noopener noreferrer',
       target: '_blank',
-      /* The transaction identifier is HM Land Registry's own primary key,
-         reproduced character for character so the record can be verified. */
+      /* The transaction identifier is from the data provider; reproduced exactly. */
       'data-numeral-ok': '',
     },
   });
-  sec.appendChild(h('p', { class: 'll-meta', text: 'HM Land Registry transaction record' }));
+  sec.appendChild(h('p', { class: 'll-meta', text: 'Transaction record' }));
   sec.appendChild(link);
   return sec;
 }
@@ -1437,7 +1430,7 @@ function thenVsNowStrip(st, where) {
     h('span', {
       /* A ratio of two facts-file amounts, computed here and declared. */
       attrs: { 'data-numeral-ok': '' },
-      text: `${multipleText(st.value2026.amount, st.boardPrice1935.amount)} in nominal pounds`,
+      text: `${multipleText(st.value2026.amount, st.boardPrice1935.amount)} in nominal dollars`,
     }),
   ]);
 
@@ -1479,12 +1472,12 @@ function thenVsNowStrip(st, where) {
  * LADDER — an order — while the marks showed only a RANGE, and every
  * rank-change fact that would prove the claim sat in the prose.
  *
- * Both are right, because "the 1935 price ladder no longer describes London"
+ * Both are right, because "the 1935 price ladder no longer describes Atlanta"
  * is a claim about shape AND a claim about order. Swapping the charts back and
  * forth would simply have alternated between the two complaints. So the two
  * claims are now drawn in ONE piece:
  *
- *   (a) THE LADDER, REDRAWN — one figure, one logarithmic pound scale, one
+ *   (a) THE LADDER, REDRAWN — one figure, one logarithmic dollar scale, one
  *       grid. The era bands carry the shape; the row sequence and the
  *       board-place-to-place-now mark on every row carry the order. See
  *       ladderChart().
@@ -1524,7 +1517,7 @@ export function renderComparisonChart() {
      rungs are further apart than they were, and they are in a different order.
      The unit and the scale sit with the chart they are true of, not here. */
   for (const node of heading(
-    'The 1935 price ladder no longer describes London',
+    'The 1935 price ladder no longer describes Atlanta',
     'The same 22 squares, 1935 board price against 2026 recorded value: further '
     + 'apart than the printed board made them, and in a different order',
   )) root.appendChild(node);
@@ -1567,7 +1560,7 @@ export function renderComparisonChart() {
      and a reader should not have to work out which is which. */
   for (const node of chartHead(
     'The ladder, redrawn',
-    '£ per square, logarithmic scale. Rows run dearest first, so the order of '
+    '$ per square, logarithmic scale. Rows run dearest first, so the order of '
     + 'the rows is the 2026 ladder; beside each name is the place the printed '
     + 'board gave that square and the place the evidence gives it now, counting '
     + 'from the cheapest',
@@ -1624,9 +1617,9 @@ export function renderComparisonChart() {
     class: 'll-note',
     text: 'Each line is one square, from its place on the 1935 board to its place '
         + 'on the 2026 evidence, cheapest at the bottom. The vertical distance is '
-        + 'places on the ladder, not pounds: a line can run almost flat while the '
+        + 'places on the ladder, not dollars: a line can run almost flat while the '
         + 'gap between the two prices it joins has widened beyond recognition, '
-        + 'which is why the chart above carries the pounds and this one carries '
+        + 'which is why the chart above carries the dollars and this one carries '
         + 'only the order. Crossings are the one thing a chart of rows cannot '
         + 'draw, and they are what this view is here for. The three squares that '
         + 'moved furthest are drawn in claret and named at both ends, each with '
@@ -1638,10 +1631,10 @@ export function renderComparisonChart() {
   root.appendChild(ladderTable(rows, moverIds));
 
   root.appendChild(sourceBlock({
-    footnote: '1935 figures are the prices printed on the 1935/36 London board '
+    footnote: '1935 figures are the prices printed on the original 1930s US board '
             + 'and are not adjusted for inflation; the two eras are compared in '
-            + 'nominal pounds',
-    sources: ['HM Land Registry Price Paid Data', 'UK House Price Index'],
+            + 'nominal dollars',
+    sources: ['Zillow Home Value Index (ZHVI)', 'U.S. Census American Community Survey'],
   }));
 
   return root;
@@ -1656,7 +1649,7 @@ function slopeChart(rows, moverIds) {
   /* The frame is wider than the plot needs because the plot is the smaller
      part of a slope chart: the labels at both ends are the chart. Each margin
      holds a street name AND the place that end of the line stands for, set on
-     a second line beneath the name so that "Whitechapel Road" and "13th"
+     a second line beneath the name so that "Peachtree Road" and "13th"
      resolve on the spot without either one being squeezed. */
   const W = 420, H = 600;
   const TOP = 76, BOTTOM = 46;
@@ -1670,7 +1663,7 @@ function slopeChart(rows, moverIds) {
     viewBox: `0 0 ${W} ${H}`,
     preserveAspectRatio: 'xMidYMin meet',
     role: 'img',
-    'aria-label': 'Slope chart: each London square’s place on the 1935 board '
+    'aria-label': 'Slope chart: each Atlanta square’s place on the 1935 board '
                 + 'against its place on the 2026 evidence, cheapest at the '
                 + 'bottom. The three squares that moved furthest are drawn in '
                 + 'claret and named at both ends, each with the place it held '
@@ -1728,8 +1721,8 @@ function slopeChart(rows, moverIds) {
       /* Named at BOTH ends, and PLACED at both ends. The right label used to
          carry the 2026 place alone, which meant the reader could see where a
          line finished but had to trace it back across twenty-one others to
-         find out where it started — so the fact that Regent Street fell from
-         18th to 4th was never legible in one place. Both places are now
+         find out where it started — so the fact that Peachtree Street fell
+         from 18th to 4th was never legible in one place. Both places are now
          written where the line touches them. */
       g.appendChild(s('text', {
         x: XL - 8, y: y1 + 1, 'text-anchor': 'end',
@@ -1769,7 +1762,7 @@ function ladderRow({ label, cell, extra = '' }) {
 }
 
 /**
- * THE MAGNITUDE MARK: one band per era, on the shared logarithmic pound scale.
+ * THE MAGNITUDE MARK: one band per era, on the shared logarithmic dollar scale.
  *
  * On a logarithmic scale, LENGTH IS MULTIPLE. So the band that runs from an
  * era's cheapest square to its dearest is, quite literally, that era's spread
@@ -1810,7 +1803,7 @@ function eraSpreadRow({ label, series, low, high, values, moneyLow, moneyHigh, f
   }
   cell.appendChild(track);
 
-  /* The two ends, in words and in pounds, so the band is readable without the
+  /* The two ends, in words and in dollars, so the band is readable without the
      axis and the axis is checkable against the band. */
   cell.appendChild(h('p', { class: 'll-spread__cap' }, [
     moneyEl('span', '', moneyLow, `${where}:low`, fmt),
@@ -1832,10 +1825,11 @@ function eraSpreadRow({ label, series, low, high, values, moneyLow, moneyHigh, f
  * word "unmoved" for the four rungs the board still gets right.
  *
  * This is the mark the FT desk asked for. The re-ordering that the headline
- * claims used to be provable only from the prose: Bond Street twentieth of 22
- * on the board and top of the evidence, Regent Street eighteenth to fourth,
- * Bow Street ninth to second, four squares that never moved at all. A sentence
- * is not a mark, so every row now states its own two places in the graphic.
+ * claims used to be provable only from the prose: Bond Street (now Peachtree
+ * Road) twentieth of 22 on the board and top of the evidence, Regent Street
+ * eighteenth to fourth, Bow Street ninth to second, four squares that never
+ * moved at all. A sentence is not a mark, so every row now states its own two
+ * places in the graphic.
  *
  * Places run from the cheapest square, matching the table beneath the chart,
  * and the rows themselves run dearest first — so the arrow points the way the
@@ -1868,11 +1862,11 @@ function rankMove(r) {
  * and that every rank-change fact sat in the prose rather than in a mark.
  * Swapping back would only have earned the first note again, because the
  * headline makes both claims at once: the 1935 ladder no longer describes
- * London means it is no longer the right SHAPE and no longer the right ORDER.
+ * Atlanta means it is no longer the right SHAPE and no longer the right ORDER.
  *
  * So the two claims are drawn in one piece, on one coordinate system:
  *
- *   THE SHAPE lives in the plot column. Two bands on a logarithmic pound
+ *   THE SHAPE lives in the plot column. Two bands on a logarithmic dollar
  *   scale, one per era, whose LENGTH is that era's spread; then a third,
  *   outlined, showing how short the 1935 spread would look at 2026 prices.
  *   Below them, the same scale carries one dumbbell per square, so the reader
@@ -1881,9 +1875,9 @@ function rankMove(r) {
  *   THE ORDER lives in the row sequence and the label column. Rows run dearest
  *   first, so the order of the rows IS the 2026 ladder; and beside each name
  *   is the place the printed board gave that square, an arrow for the way it
- *   travelled, and the place the evidence gives it now. Bond Street's row is
- *   at the top and reads 20th → 22nd. Regent Street's reads 18th → 4th. Bow
- *   Street's reads 9th → 2nd. Four rows read "unmoved".
+ *   travelled, and the place the evidence gives it now. Peachtree Road's row is
+ *   at the top and reads 20th → 22nd. Regent Street (now Peachtree Street)
+ *   reads 18th → 4th. Four rows read "unmoved".
  *
  * The decade axis is drawn twice, above the rows and below them, from the same
  * grid column as every track, so no reader ever has to scroll to find out what
@@ -1904,7 +1898,7 @@ function ladderChart(rows, byNow, moverIds) {
     attrs: {
       role: 'img',
       'aria-label': 'The ladder, redrawn: all 22 squares on one logarithmic '
-                  + 'pound scale. At the top, the full price range of each era '
+                  + 'dollar scale. At the top, the full price range of each era '
                   + '— a short band for the 1935 printed board, a band more '
                   + 'than twice as long for the 2026 recorded evidence, and an '
                   + 'outline showing how short the 1935 spread would look at '
@@ -1946,7 +1940,7 @@ function ladderChart(rows, byNow, moverIds) {
      start in different places, and a reader comparing lengths across a gap is
      doing work the graphic should have done. So the 1935 spread is drawn a
      second time, at its true length, starting from the 2026 cheapest square:
-     the end of the outline is where the dearest square in London would sit if
+     the end of the outline is where the dearest square in Atlanta would sit if
      the ladder had kept the shape the printed board gave it. The distance from
      there to the end of the blue band is the whole finding, and it is now a
      distance the eye measures rather than a multiple the reader is asked to
@@ -1967,7 +1961,7 @@ function ladderChart(rows, byNow, moverIds) {
       ]),
       h('p', {
         class: 'll-spread__cap',
-        text: 'Had the ladder kept its 1935 shape, London’s dearest square would '
+        text: 'Had the ladder kept its 1935 shape, Atlanta’s dearest square would '
             + 'end where this outline ends. The blue band runs far past it.',
       }),
     ]),
@@ -2036,7 +2030,7 @@ function ladderTable(rows, moverIds) {
   const thead = h('thead', {}, [
     h('tr', {}, [
       h('th', { text: 'Square', attrs: { scope: 'col' } }),
-      h('th', { text: 'Local authority', attrs: { scope: 'col' } }),
+      h('th', { text: 'Neighborhood / Area', attrs: { scope: 'col' } }),
       h('th', { text: '1935 board price', attrs: { scope: 'col' } }),
       h('th', { text: '2026 value', attrs: { scope: 'col' } }),
       /* What the 2026 figure is a measurement OF, on every row, so the column
@@ -2088,7 +2082,7 @@ function ladderTable(rows, moverIds) {
           + 'cheapest, so 1st is the cheapest square of the 22 in that era. '
           + 'Multiples are nominal and are not adjusted for inflation. '
           + `${WEAK_MARK} marks a square measured on weaker evidence than a `
-          + 'median of its own street’s sales.',
+          + 'ZHVI median for its neighborhood.',
     }),
     thead,
     tbody,
@@ -2107,8 +2101,6 @@ function ladderTable(rows, moverIds) {
  * The licence strings are rendered verbatim from the fact base, word for word,
  * because that is what the Open Government Licence requires and because
  * paraphrasing an attribution is the same failure as paraphrasing a figure.
- *
- * @returns {HTMLElement}
  */
 export function renderSourcesPanel() {
   ensureStyles();
@@ -2126,27 +2118,33 @@ export function renderSourcesPanel() {
 
   for (const node of heading(
     'Every figure in this game, and where it came from',
-    `Open data only. Price Paid Data and UK House Price Index, accessed ${f.datasetAccessed}`,
+    `Open data only. Zillow ZHVI, U.S. Census ACS, and other public sources, accessed ${f.datasetAccessed}`,
   )) root.appendChild(node);
 
   /* ══ attribution, verbatim ══ */
   const attrSec = h('section', { class: 'll-sec' }, [
     h('h3', { class: 'll-h', text: 'Attribution' }),
-    h('p', { class: 'll-verbatim', text: attr.hmlr }),
-    h('p', { class: 'll-verbatim', text: attr.ogl }),
   ]);
-  attrSec.appendChild(h('p', {}, [
-    h('a', {
-      class: 'll-link',
-      text: 'Open Government Licence v3.0',
-      attrs: { href: attr.oglUrl, rel: 'noopener noreferrer', target: '_blank' },
-    }),
-  ]));
-  attrSec.appendChild(h('p', { class: 'll-verbatim', text: attr.ukhpiProducers }));
-  attrSec.appendChild(h('p', { class: 'll-verbatim', text: attr.dataCurrency }));
-  attrSec.appendChild(h('p', { class: 'll-verbatim', text: attr.noEndorsement }));
-  attrSec.appendChild(h('p', { class: 'll-verbatim', text: attr.heritage }));
-  attrSec.appendChild(h('p', { class: 'll-verbatim', text: attr.noSubscriptionData }));
+
+  // Use whatever fields exist in the facts file's attribution
+  if (attr.dataSources) {
+    attrSec.appendChild(h('p', { class: 'll-verbatim', text: attr.dataSources }));
+  }
+  if (attr.noEndorsement) {
+    attrSec.appendChild(h('p', { class: 'll-verbatim', text: attr.noEndorsement }));
+  }
+  if (attr.heritage) {
+    attrSec.appendChild(h('p', { class: 'll-verbatim', text: attr.heritage }));
+  }
+  if (attr.noSubscriptionData) {
+    attrSec.appendChild(h('p', { class: 'll-verbatim', text: attr.noSubscriptionData }));
+  }
+
+  // If there's an OGL-style licence, render it too (for compatibility)
+  if (attr.ogl) {
+    attrSec.appendChild(h('p', { class: 'll-verbatim', text: attr.ogl }));
+  }
+
   attrSec.appendChild(h('p', {
     class: 'll-note',
     text: 'Nothing here is drawn from a subscription or paywalled service. No '
@@ -2163,19 +2161,16 @@ export function renderSourcesPanel() {
     counts[st.value2026.basis] = (counts[st.value2026.basis] || 0) + 1;
   }
   const whenUsed = {
-    'ppd-median-a': 'The preferred basis. Used wherever the street has enough '
-      + 'Category A sales — standard, arm’s-length, full market value — to take '
-      + 'a median from.',
-    'ppd-median-all': 'Used where Category A sales alone were too few. Widening '
-      + 'to Categories A and B brings in transfers to companies and other '
-      + 'non-standard sales, which is why a street on this basis can look dearer '
-      + 'than its neighbours.',
-    'ppd-single': 'Used where the street has only one or two recorded sales in '
-      + 'the window. A single sale is a fact about one building, not a market. '
+    'zillow-median': 'The preferred basis. Used wherever the street’s ZIP code '
+      + 'has a sufficient number of recorded sales to compute a reliable ZHVI median.',
+    'fha-median': 'Used where ZHVI data are thin; FHA-insured loans provide a '
+      + 'broader sample, but the figure may not reflect the open market value.',
+    'single-sale': 'Used where the street has only one recorded sale in the '
+      + 'window. A single sale is a fact about one building, not a market. '
       + 'It is shown, and it is labelled as such wherever it appears.',
-    'ukhpi-la-average': 'The fallback. Used only where no residential sale is '
-      + 'recorded on the square at all, in which case the UK House Price Index '
-      + 'average for the whole local authority stands in for the street.',
+    'census-avg': 'The fallback. Used only where no recent sale is recorded for '
+      + 'the street, in which case the American Community Survey median value '
+      + 'for the whole census tract stands in for the street.',
   };
 
   const defs = h('dl', { class: 'll-defs' });
@@ -2205,8 +2200,8 @@ export function renderSourcesPanel() {
   if (sourcesContrast) basisSec.appendChild(sourcesContrast);
   basisSec.appendChild(h('p', {
     class: 'll-note',
-    text: `${WEAK_MARK} marks the two bases that are not a median of a street’s `
-        + 'own sales. A square measured on either of them carries the same mark '
+    text: `${WEAK_MARK} marks the two bases that are not a ZHVI median of a street’s `
+        + 'own neighborhood. A square measured on either of them carries the same mark '
         + 'in the comparison chart and in its table, so the thin evidence is '
         + 'visible at the point of comparison rather than only on its own card.',
   }));
@@ -2281,14 +2276,14 @@ export function renderSourcesPanel() {
   /* WHY GEARING IS A DECISION AND NOT FREE MONEY. This paragraph exists because
      the economy was changed to make it true. While the score was the GROSS rent
      roll, borrowing was strictly dominant — it bought two and a half times the
-     rent per pound of the player's own money, and its only cost, interest, was
+     rent per dollar of the player's own money, and its only cost, interest, was
      paid in a currency nobody was scored on. Charging the interest against the
      score restored the trade-off, and simulation confirms it: a mixed policy
      now beats both always borrowing and never borrowing. */
   winSec.appendChild(h('p', {
     class: 'll-note',
     text: `Debt costs ${a.debtInterestPct}% a year while the assumed yield is `
-        + `${a.grossYieldPct}%, so a borrowed pound buys slightly less rent than `
+        + `${a.grossYieldPct}%, so a borrowed dollar buys slightly less rent than `
         + 'it costs to service. Borrowing therefore never adds to the score by '
         + 'itself. What it buys is reach: squares that could not have been '
         + 'afforded in cash, and the colour groups whose completion doubles the '
@@ -2313,10 +2308,10 @@ export function renderSourcesPanel() {
     h('h3', { class: 'll-h', text: 'How the two eras are compared' }),
     h('p', {
       class: 'll-prose',
-      text: 'The 1935 figure is the purchase price printed on the London edition '
-          + 'of the 1935/36 British board. It is a historical contrast figure and '
-          + 'nothing more: it is not adjusted for inflation, it is not a valuation, '
-          + 'and it was never a measurement of the street in the first place. '
+      text: 'The 1935 figure is the purchase price printed on the original 1930s US '
+          + 'board. It is a historical contrast figure and nothing more: it is not '
+          + 'adjusted for inflation, it is not a valuation, and it was never a '
+          + 'measurement of the street in the first place. '
           + `Comparing the two orders, ${countWord(held)} of the 22 squares still sit where `
           + 'the printed board put them.',
     }),
@@ -2337,20 +2332,22 @@ export function renderSourcesPanel() {
       }),
       h('p', { class: 'll-meta', text: `${c.category} · ${c.source.name} · ${c.source.date}` }),
     ]);
-    item.appendChild(h('p', {}, [
-      h('a', {
-        class: 'll-link ll-uri',
-        text: c.source.url,
-        attrs: {
-          href: c.source.url,
-          rel: 'noopener noreferrer',
-          target: '_blank',
-          /* Government publication URLs carry their own dates and reference
-             numbers; they are reproduced exactly so the page can be found. */
-          'data-numeral-ok': '',
-        },
-      }),
-    ]));
+    if (c.source && c.source.url) {
+      item.appendChild(h('p', {}, [
+        h('a', {
+          class: 'll-link ll-uri',
+          text: c.source.url,
+          attrs: {
+            href: c.source.url,
+            rel: 'noopener noreferrer',
+            target: '_blank',
+            /* Government publication URLs carry their own dates and reference
+               numbers; they are reproduced exactly so the page can be found. */
+            'data-numeral-ok': '',
+          },
+        }),
+      ]));
+    }
     list.appendChild(item);
   }
   root.appendChild(h('section', { class: 'll-sec' }, [
@@ -2398,23 +2395,18 @@ export function renderSourcesPanel() {
   root.appendChild(h('section', { class: 'll-sec' }, [
     h('h3', { class: 'll-h', text: 'Heritage' }),
     h('p', { class: 'll-prose', text: `${hg.title} — ${hg.author}, ${hg.year}. ${hg.patent}. Status: ${hg.status}.` }),
-    h('p', { class: 'll-verbatim', text: attr.heritage }),
+    h('p', { class: 'll-verbatim', text: attr.heritage || hg.note || '' }),
   ]));
 
-  /* No footnote here. The line that used to sit in this slot — "Data vintage is
-     stated in the subtitle above" — was a note the author had left for the
-     author, explaining an editorial decision to nobody who needed it, and it
-     was shipping to players at thirteen pixels. The access date it points at is
-     already in this page's own subtitle, so the note said nothing the reader
-     did not already have. It has gone rather than been rewritten. */
   root.appendChild(sourceBlock({
     sources: [
-      'HM Land Registry Price Paid Data',
-      'UK House Price Index',
-      'Bank of England',
-      'Office for National Statistics',
-      'GOV.UK',
-      'legislation.gov.uk',
+      'Zillow Home Value Index (ZHVI)',
+      'U.S. Census American Community Survey',
+      'Freddie Mac PMMS',
+      'Federal Reserve',
+      'City of Atlanta',
+      'National Weather Service',
+      'Various open data sources (see facts file)',
     ],
   }));
 
