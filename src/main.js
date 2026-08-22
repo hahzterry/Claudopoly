@@ -74,24 +74,44 @@ function escapeHtml(s) {
 
 /* ----------------------------------------------------------------- footer */
 
+/**
+ * Render the attribution strip – works with both London (OGL/HMLR) and Atlanta
+ * (dataSources) fact files. Displays whatever fields are present, and skips
+ * missing ones.
+ */
 function renderFooter() {
   const a = attribution();
   const h = heritage();
   const el = document.getElementById('attribution');
-  el.innerHTML = `
-    <div class="attr-inner">
-      <p>${escapeHtml(a.hmlr).replace(
-        'Open Government Licence v3.0',
-        `<a href="${a.oglUrl}" rel="license noopener" target="_blank">Open Government Licence v3.0</a>`)}</p>
-      <p>${escapeHtml(a.ogl)}</p>
-      <p>${escapeHtml(a.ukhpiProducers)}</p>
-      <p>${escapeHtml(a.dataCurrency)}</p>
-      <p>${escapeHtml(a.noSubscriptionData)}</p>
-      <p>${escapeHtml(a.heritage)}</p>
-      <p class="attr-quiet">${escapeHtml(a.noEndorsement)}</p>
-      <p class="attr-quiet">After ${escapeHtml(h.title)} by ${escapeHtml(h.author)}, ${h.year}
-        (${escapeHtml(h.patent)}), ${escapeHtml(h.status)}.</p>
-    </div>`;
+  const parts = [];
+
+  // London-style attribution (OGL / HM Land Registry)
+  if (a.hmlr) {
+    const withLink = a.hmlr.replace(
+      'Open Government Licence v3.0',
+      `<a href="${a.oglUrl || 'https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/'}" rel="license noopener" target="_blank">Open Government Licence v3.0</a>`
+    );
+    parts.push(`<p>${escapeHtml(withLink)}</p>`);
+  }
+  if (a.ogl) parts.push(`<p>${escapeHtml(a.ogl)}</p>`);
+  if (a.ukhpiProducers) parts.push(`<p>${escapeHtml(a.ukhpiProducers)}</p>`);
+  if (a.dataCurrency) parts.push(`<p>${escapeHtml(a.dataCurrency)}</p>`);
+
+  // Atlanta-style attribution (dataSources)
+  if (a.dataSources) {
+    parts.push(`<p>${escapeHtml(a.dataSources)}</p>`);
+  }
+
+  // Common fields
+  if (a.noSubscriptionData) parts.push(`<p>${escapeHtml(a.noSubscriptionData)}</p>`);
+  if (a.heritage) parts.push(`<p>${escapeHtml(a.heritage)}</p>`);
+  if (a.noEndorsement) parts.push(`<p class="attr-quiet">${escapeHtml(a.noEndorsement)}</p>`);
+
+  // Heritage (always present)
+  parts.push(`<p class="attr-quiet">After ${escapeHtml(h.title)} by ${escapeHtml(h.author)}, ${h.year}
+    (${escapeHtml(h.patent)}), ${escapeHtml(h.status)}.</p>`);
+
+  el.innerHTML = `<div class="attr-inner">${parts.join('')}</div>`;
 }
 
 /* ------------------------------------------------------------------- boot */
