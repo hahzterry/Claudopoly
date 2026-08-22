@@ -51,11 +51,7 @@ export const BANNED_TRADE_DRESS = [
 ];
 
 /** Words that would be false positives if we banned the substring naively. */
-const BANNED_WORD_EXCEPTIONS = [
-  // "chance" appears legitimately in statistical copy; we still ban the bare
-  // card-deck sense, so the exception list is deliberately empty. Kept for
-  // documentation: any future exception must be justified in writing here.
-];
+const BANNED_WORD_EXCEPTIONS = [];
 
 /* ------------------------------------------------------------ fact indexing */
 
@@ -96,16 +92,16 @@ export function resolveFactPath(index, path) {
 
 /* -------------------------------------------------------- text extraction */
 
-// £33,575,353 / £33.6m / £325k / −£1,083
-const CURRENCY_RE = /[−-]?\s?£\s?\d[\d,]*(?:\.\d+)?\s?(?:bn|mn|k|m)?/gi;
+// $33,575,353 / $33.6m / $325k / −$1,083
+const CURRENCY_RE = /[−-]?\s?\$\s?\d[\d,]*(?:\.\d+)?\s?(?:bn|mn|k|m)?/gi;
 // bare numerals not already part of a currency token
-const NUMERAL_RE = /(?<![£\d.,])\d[\d,]*(?:\.\d+)?(?![\d,]*\s?(?:k|m|bn)?\d)/gi;
+const NUMERAL_RE = /(?<![$\d.,])\d[\d,]*(?:\.\d+)?(?![\d,]*\s?(?:k|m|bn)?\d)/gi;
 
-/** "£33.6m" -> 33600000 ; "£325k" -> 325000 ; "£1,083" -> 1083 */
+/** "$33.6m" -> 33600000 ; "$325k" -> 325000 ; "$1,083" -> 1083 */
 export function parseCurrency(token) {
   const t = token.replace(/\s/g, '').replace(/^[−-]/, '');
   const neg = /^[−-]/.test(token.trim());
-  const m = /^£([\d,.]+)(bn|mn|k|m)?$/i.exec(t);
+  const m = /^\$([\d,.]+)(bn|mn|k|m)?$/i.exec(t);
   if (!m) return null;
   let n = parseFloat(m[1].replace(/,/g, ''));
   const suffix = (m[2] || '').toLowerCase();
@@ -167,7 +163,7 @@ function pushV(list, kind, detail, where) {
 }
 
 /**
- * Tolerance for compact rendering: "£33.6m" is a rounded view of 33,575,353,
+ * Tolerance for compact rendering: "$33.6m" is a rounded view of 33,575,353,
  * so a displayed compact token matches a fact if it round-trips to the same
  * compact string. Exact tokens must match exactly.
  */
@@ -177,10 +173,10 @@ function currencyMatchesAnyFact(token, index) {
   const abs = Math.abs(parsed);
   if (index.amounts.has(abs) || index.amounts.has(Math.round(abs))) return true;
 
-  // A compact token such as "£4.1mn" is a ROUNDED view of the underlying
+  // A compact token such as "$4.1mn" is a ROUNDED view of the underlying
   // figure. Comparing formatted strings makes the gate hostage to whichever
-  // rounding a formatter happens to use — £4,050,000 renders as "£4.0m" under
-  // toFixed and "£4.1mn" under half-up, and the gate then rejects a perfectly
+  // rounding a formatter happens to use — $4,050,000 renders as "$4.0m" under
+  // toFixed and "$4.1mn" under half-up, and the gate then rejects a perfectly
   // real figure. So instead: derive the band of values that would round to
   // exactly this token at the precision shown, and accept only if a real fact
   // falls inside it. That is strictly stronger than string matching, because
@@ -197,7 +193,7 @@ function currencyMatchesAnyFact(token, index) {
 /** The half-open interval of values that display as `token`. */
 export function compactBand(token) {
   const t = token.replace(/\s/g, '').replace(/^[−-]/, '');
-  const m = /^£([\d,]*)(?:\.(\d+))?(bn|mn|k|m)?$/i.exec(t);
+  const m = /^\$([\d,]*)(?:\.(\d+))?(bn|mn|k|m)?$/i.exec(t);
   if (!m) return null;
   const suffix = (m[3] || '').toLowerCase();
   const unit = suffix === 'k' ? 1_000
@@ -213,10 +209,10 @@ function compactOf(n) {
   const v = Math.abs(Math.round(n));
   if (v >= 1_000_000) {
     const m = v / 1_000_000;
-    return '£' + (m >= 100 ? m.toFixed(0) : m.toFixed(1)) + 'm';
+    return '$' + (m >= 100 ? m.toFixed(0) : m.toFixed(1)) + 'm';
   }
-  if (v >= 1_000) return '£' + Math.round(v / 1_000).toLocaleString('en-GB') + 'k';
-  return '£' + v.toLocaleString('en-GB');
+  if (v >= 1_000) return '$' + Math.round(v / 1_000).toLocaleString('en-US') + 'k';
+  return '$' + v.toLocaleString('en-US');
 }
 
 /**
@@ -331,11 +327,11 @@ export function runGate({ facts, root = document.body, canvasLabels = [] } = {})
 
   /* -- 5. the facts file must carry its own attribution ---------------- */
   const attr = facts.attribution || {};
-  for (const required of ['hmlr', 'ogl', 'oglUrl']) {
-    if (!attr[required]) {
-      pushV(violations, 'missing-attribution',
-        `landlord-facts.json is missing attribution.${required}`, 'facts');
-    }
+  // Check for dataSources (Atlanta) OR the original required fields (London)
+  const hasRequired = attr.dataSources || (attr.hmlr && attr.ogl && attr.oglUrl);
+  if (!hasRequired) {
+    pushV(violations, 'missing-attribution',
+      'landlord-facts.json is missing attribution.dataSources (or attribution.hmlr/ogl/oglUrl for London)', 'facts');
   }
 
   return {
