@@ -1,5 +1,5 @@
 /**
- * hud.js — the entire 2D heads-up display for LANDLORD: LONDON 2026, built as
+ * hud.js — the entire 2D heads-up display for LANDLORD: ATLANTA 2026, built as
  * DOM plates sitting over the WebGL canvas.
  *
  * DESIGN CONTRACT (bench/round0/bench-teardown.json, measured from Catan
@@ -1355,7 +1355,7 @@ const CSS = `
 }
 `;
 
-/* ═══════════════════════════════════════════════════════ money and numerals */
+/* ═══════════════════════════════════════════════════════════ money and numerals */
 
 const reduceMotion = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -1393,7 +1393,7 @@ function debtServiceOf(p, game) {
 }
 
 /**
- * Every colour group, with how much of it this player holds. `remaining` is
+ * Every colour group, with how much of this player holds. `remaining` is
  * what it would still take to assemble the group and double its rent — the
  * fact the panel never admitted and the reason nobody ever assembled one.
  */
@@ -2326,7 +2326,7 @@ export function createHud(opts = {}) {
   function showOffer(pending, street) {
     if (!pending || !street) return;
     const p = g.player;
-    const grp = F.groupOf(street.group) || { name: 'London', colour: '#7A6A5E' };
+    const grp = F.groupOf(street.group) || { name: 'Atlanta', colour: '#7A6A5E' };
     const { card, body } = cardShell(grp.name, grp.colour, { closable: false });
 
     const priceEl = h('div', { class: 'll-hero-v' });
@@ -2509,7 +2509,7 @@ export function createHud(opts = {}) {
     const { card, body } = cardShell('The Gazette', '#3A4A5C');
 
     body.append(
-      h('div', { class: 'll-kicker', text: cardData.category || 'London' }),
+      h('div', { class: 'll-kicker', text: cardData.category || 'Atlanta' }),
       /* Card titles are quoted from the fact base and some of them carry a
          currency figure, so the element declares its origin. */
       h('h2', {
@@ -2603,7 +2603,7 @@ export function createHud(opts = {}) {
          vintage stays out of it — that belongs in the subtitle. */
       factProse('ll-ft-src', F.assumptions().winCondition, 'assumptions.winCondition'),
       h('p', { class: 'll-ft-src', 'data-numeral-ok': true, text: result.reason }),
-      h('p', { class: 'll-ft-src', text: 'Source: HM Land Registry Price Paid Data' }),
+      h('p', { class: 'll-ft-src', text: 'Source: Zillow Home Value Index (ZHVI) & U.S. Census' }),
       factProse('ll-ft-src', F.attribution().hmlr, 'attribution.hmlr'),
       h('p', { class: 'll-ft-src', text: 'Graphic: Teddy James Advisory' }),
     );
@@ -2821,7 +2821,7 @@ export function createHud(opts = {}) {
       h('div', { class: 'll-hero' },
         h('div', { class: 'll-kicker', text: 'The Gazette and the Registry' }),
         h('p', { class: 'll-body-t', text:
-          'The Gazette deals a real, sourced London headline: one at the start of every '
+          'The Gazette deals a real, sourced Atlanta headline: one at the start of every '
           + 'round, and one more whenever a player lands on a Gazette square. The '
           + 'Registry is a safe square — nothing is charged there.' })),
       h('div', { class: 'll-hero' },
