@@ -1,5 +1,5 @@
 /**
- * scene.js — the 3D presentation layer for LANDLORD: LONDON 2026.
+ * scene.js — the 3D presentation layer for LANDLORD: ATLANTA 2026.
  *
  * The visual contract is bench/round0/bench-teardown.json (measured from real
  * screenshots of two premium board games) and bench/round0/touch.json (the
@@ -15,7 +15,7 @@
  *   base plate     the board's own bevelled carcass
  *   28 slabs       extruded tiles with real side walls, bevelled rims and gaps
  *   centre plate   the crest, with its copy baked into the material
- *   tokens         two original London silhouettes in moulded plastic
+ *   tokens         two original Atlanta silhouettes in moulded plastic
  *   markers        ownership posts, instanced
  *   vignette       a screen-space darkening quad drawn after the main pass
  *
@@ -808,7 +808,7 @@ function paintCentre(size) {
 
   ctx.fillStyle = '#D8B26C';
   ctx.font = `700 8px ${UI_FONT}`;
-  tracked(ctx, bake('LONDON 2026', where), 50, 56, 2.6);
+  tracked(ctx, bake('ATLANTA 2026', where), 50, 56, 2.6);
 
   ctx.fillStyle = 'rgba(216,178,108,0.45)';
   ctx.fillRect(35, 61.5, 30, 0.5);
@@ -819,8 +819,8 @@ function paintCentre(size) {
 
   ctx.fillStyle = 'rgba(243,230,206,0.40)';
   ctx.font = `600 3.4px ${UI_FONT}`;
-  ctx.fillText(bake('HM Land Registry Price Paid Data', where), 50, 78);
-  ctx.fillText(bake('Open Government Licence', where), 50, 82.6);
+  ctx.fillText(bake('Zillow ZHVI & U.S. Census', where), 50, 78);
+  ctx.fillText(bake('Open Data Sources', where), 50, 82.6);
 
   const texture = new THREE.CanvasTexture(canvas);
   texture.colorSpace = THREE.SRGBColorSpace;
@@ -1133,9 +1133,9 @@ function place(x, y, z, ry = 0, sx = 1, sy = 1, sz = 1) {
 /* ───────────────────────────────────────────────────── player token shapes */
 
 /*
- * Original London silhouettes. Nothing here is drawn from any modern commercial
+ * Original Atlanta silhouettes. Nothing here is drawn from any modern commercial
  * board: these are a scaffold tower, a chimney stack and a street bollard —
- * three things you actually trip over walking round the streets on this board.
+ * three things you actually see walking around the streets of Atlanta.
  *
  * Player one is faceted and player two is round, so identity survives greyscale
  * and colour-blindness without relying on the colour at all.
