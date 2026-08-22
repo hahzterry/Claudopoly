@@ -1,5 +1,5 @@
 /**
- * money.js — every monetary quantity in LANDLORD: LONDON 2026 is a Money
+ * money.js — every monetary quantity in LANDLORD: ATLANTA 2026 is a Money
  * object that carries its own provenance back to data/landlord-facts.json.
  *
  * The rule the brief imposes is stronger than "the numbers are right": no value
@@ -25,7 +25,7 @@ let SEQ = 0;
 
 export class Money {
   /**
-   * @param {number} amount whole GBP
+   * @param {number} amount whole USD
    * @param {string} op one of OPS
    * @param {object} meta {factPath?, parents?, rate?, rateFactPath?, note?}
    */
@@ -125,15 +125,15 @@ export class Money {
 
 /* ------------------------------------------------------------------ format */
 
-/** Full precision, grouped. £33,575,353 */
+/** Full precision, grouped. $33,575,353 */
 export function fmtPlain(amount) {
   const n = Math.round(Math.abs(amount));
-  const s = '£' + n.toLocaleString('en-GB');
+  const s = '$' + n.toLocaleString('en-US');
   return amount < 0 ? '−' + s : s;
 }
 
 /**
- * Compact, for tight 3D labels and small chips. £33.6m / £325k / £940
+ * Compact, for tight 3D labels and small chips. $33.6m / $325k / $940
  * FT house style: one decimal on millions, none on thousands.
  */
 export function fmtCompact(amount) {
@@ -142,16 +142,16 @@ export function fmtCompact(amount) {
   let s;
   if (n >= 1_000_000) {
     const m = n / 1_000_000;
-    s = '£' + (m >= 100 ? m.toFixed(0) : m.toFixed(1)) + 'm';
+    s = '$' + (m >= 100 ? m.toFixed(0) : m.toFixed(1)) + 'm';
   } else if (n >= 1_000) {
-    s = '£' + Math.round(n / 1_000).toLocaleString('en-GB') + 'k';
+    s = '$' + Math.round(n / 1_000).toLocaleString('en-US') + 'k';
   } else {
-    s = '£' + n.toLocaleString('en-GB');
+    s = '$' + n.toLocaleString('en-US');
   }
   return neg ? '−' + s : s;
 }
 
-/** 1935 board prices are plain pounds and never abbreviated. */
+/** 1935 board prices are plain dollars and never abbreviated. */
 export function fmt1935(amount) {
-  return '£' + Math.round(amount).toLocaleString('en-GB');
+  return '$' + Math.round(amount).toLocaleString('en-US');
 }
